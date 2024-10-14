@@ -7,4 +7,5 @@ CSE310 Resources
 
 
 Animation Resourses:
-[animate() decumentation](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate)
+
+[animate() documentation](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate)
