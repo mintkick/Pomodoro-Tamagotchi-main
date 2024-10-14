@@ -20,6 +20,7 @@ JavaScript-based, HTML & CSS for the website
 * [ ] Pomodoro
 * [ ] Virtual Pet (Tamagotchi)
 * * [ ] states/animations
+  * [ ] a different pet for each course?
 * [ ] Reward System (Shop?)
 * [x] English Language Support
 * [ ] Different Tasks are Ascribed Different Values
