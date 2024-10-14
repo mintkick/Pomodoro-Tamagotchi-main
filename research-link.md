@@ -8,5 +8,6 @@ CSE310 Resources
 
 Animation Resourses:
 
-[animate() documentation](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate)
-[animation example](https://codepen.io/rachelnabors/pen/rxpmJL/?editors=0110)
+- [animate() documentation](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate)
+
+- [animation example](https://codepen.io/rachelnabors/pen/rxpmJL/?editors=0110)
