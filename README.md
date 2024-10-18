@@ -7,6 +7,7 @@ Fateialenofoaiga Patane, Emma Shurtliff, Savanna Whittaker, Adam Whittaker
 
 ## Software Description
 Web application used in tandem with Canvas that incentivizes productivity through raising a pet via accomplishing assignments.
+The MVP is create a website that uses the Pomodoro method in tandem with a virtual pet. 
 
 ## Architecture
 JavaScript-based, HTML & CSS for the website
