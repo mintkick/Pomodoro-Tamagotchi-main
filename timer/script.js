@@ -16,7 +16,7 @@ function updateTimer() {
         timeLeft--;
         timerDisplay.textContent = formatTime(timeLeft);
     } else {
-        clearInterval(timerInterval); // Stop the timer when it reaches 0
+        clearInterval(timerInterval); 
         timerDisplay.textContent = "Time's up!";
     }
 }
