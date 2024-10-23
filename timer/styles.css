@@ -9,6 +9,9 @@ body {
 }
 
 .timer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:20px;    
     text-align: center;
     width: 100%;
     background-color: #99daf4;
@@ -17,11 +20,15 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
+.timer ul{
+    color:#1f93bd;
+}
+
 #timer-display {
-    text-align: left;
-    font-size: 10px;
+    text-align: center;
     font-weight: 900;
     color: #1f93bd;
+    font-size: 40px;
 }
 
 h1  {
