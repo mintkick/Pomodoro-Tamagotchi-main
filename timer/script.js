@@ -10,9 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function getWorkTimeInSeconds() {
-        const workMinutes = parseInt(document.getElementById('work-options').value, 10);
-        alert(workMinutes);
-        return workMinutes * 60; 
+        const workMinutes = parseInt(document.getElementById('work-options').value, 10); //gets time from the form
+        return workMinutes * 60; //converts minutes to seconds
     }
 
     let timerInterval;
