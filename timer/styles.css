@@ -66,6 +66,20 @@ button{
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-#s-break-options{
+.sessions{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    justify-self: center;
+    text-align: center;
+    border-radius: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #1f93bd;
+    background-color: #99daf4;
+    padding:15px;
 
+}
+
+.sessions p {
+    font-size: 34px;
 }

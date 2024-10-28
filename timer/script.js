@@ -27,6 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
     let timerInterval;
     let timeLeft;
     let workSessions = 0;
+    let pomoSessions = 0;
+
+    const sessCompleted = document.getElementById('sessions-completed');
+    sessCompleted.textContent = workSessions;
+    const pomoCompleted = document.getElementById('pomo-sessions-completed');
+    sessCompleted.textContent = workSessions;
 
     //Changes time displayed on timer for work sessions
     function startTimer(){
@@ -40,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 clearInterval(timerInterval);
                 workSessions++;
+                console.log(workSessions);
+                sessCompleted.textContent = workSessions;
                 if (workSessions % 4 === 0)
                 {
                     startLongBreak();
@@ -63,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 timerDisplay.textContent = formatTime(timeLeft)
             }
             else {
+                pomoSessions++;
+                pomoCompleted.textContent = pomoSessions;
                 startTimer();
             }
         }
@@ -79,6 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 timerDisplay.textContent = formatTime(timeLeft)
             }
             else {
+                pomoSessions++;
+                pomoCompleted.textContent = pomoSessions;
                 startTimer()
             }
         }
@@ -86,8 +98,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // TODO allow user to exit timer
+    const exitButton = document.getElementById('exit-button');
+    exitButton.addEventListener('click', function() {
+        timeLeft = 0;});
     // TODO allow user to reset timer
+    const resetButton = document.getElementById('reset-button');
+    resetButton.addEventListener('click', function() {
+        startTimer();});
     // TODO display how many work sessions have been completed
+    
     // TODO display how many full Pomo-sessions have been completed?
 
     document.getElementById("start-button").addEventListener("click", startTimer);

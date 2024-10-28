@@ -21,6 +21,16 @@
             </ul>
         </div>
     </div>
+    <div class="sessions">
+        <div id=work-sessions>
+            <h3>Work Sessions Completed:</h3>
+            <p id="sessions-completed">0</p>
+        </div>
+        <div id="pomo-sessions">
+            <h3>Full Pomodoro Sessions:</h3>
+            <p id="pomo-sessions-completed">0</p>
+        </div>
+    </div>
     <div class="form">
         <form>
             <label class="label" id="work" for="work">Work session:</label>
@@ -46,7 +56,9 @@
                 <option value="25">25 minutes</option>
                 <option value="30">30 minutes</option>
             </select>
-            <button type="button" id="start-button">Select</button>
+            <button type="button" id="start-button">Start</button>
+            <button type="button" id="reset-button">Reset</button>
+            <button type="button" id="exit-button">Finished!</button>
         </form>
     </div>
     <script src="script.js"></script>
