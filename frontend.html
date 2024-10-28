@@ -32,6 +32,22 @@
           <button onclick="showSection('tasks')">Tasks</button>
         </div>
 
+          <!-- Section for daily tasks -->
+          <div id="daily-section" class="section">
+            <h3>Daily Tasks</h3>
+            <ul id="daily-tasks">
+            </ul>
+            <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
+            
+          </div>
+          <!-- Tasks with due date -->
+          <div id="tasks-section" class="section" style="display: none;">
+            <h3>Tasks</h3>
+            <ul id="tasks-list">
+                <!-- Each task will display with a specific due date -->
+            </ul>
+            
+        </section>
         <!-- Section for daily tasks -->
         <div id="daily-section" class="section">
           <h3>Daily Tasks</h3>

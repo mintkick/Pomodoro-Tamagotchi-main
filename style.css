@@ -60,7 +60,40 @@ main {
     color: #777;
 }
 
+
 /* Task Section */
+
+button {
+    background-color: #C1E1C1;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #C1E1C1;
+}
+
+h3, h4 {
+    margin:0;
+    padding-bottom: 5px;
+}
+
+
+.tabs{
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
+    background-color: red;
+    margin-bottom: 10px;
+    
+}
+
+
+
+
 .task-section {
     background-color: #fff;
     border-radius: 10px;
@@ -104,6 +137,8 @@ main {
     width: 80%;
     height: auto;
 }
+
+
 
 /* Responsive Design (Tablet and Desktop) */
 @media(min-width: 600px) {
