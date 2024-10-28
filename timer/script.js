@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // TODO allow user to reset timer
     const resetButton = document.getElementById('reset-button');
     resetButton.addEventListener('click', function() {
+        flow = "⬤";
         startTimer();});
     // TODO display how many work sessions have been completed
     
