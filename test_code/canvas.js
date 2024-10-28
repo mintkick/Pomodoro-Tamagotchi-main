@@ -61,13 +61,14 @@ function animate() {
 
 const spriteSheet = new Image();
 spriteSheet.src = "pet/duck.png";
+// spriteSheet.src = "test_code/pet/duck.png";
 
-let frameX = 0;
+let frameX = 0; // what frame/sprite/section of img we're pulling from--the X position of the img source
 let frameWidth = 14;
 let frameHeight = 14;
-const totalFrames = 4; // Number of frames in the sprite sheet
+const totalFrames = 4; // Number of frames to use in the sprite sheet
 const frameSpeed = 50;
-const edgeOffset = 1; // pixels from left edge of img to sprite
+const edgeOffset = 2; // pixels from left edge of img to sprite
 let betweenOffset = 1; // pixels between sprite frames
 let frameCount = 0;
 
