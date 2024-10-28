@@ -18,14 +18,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let timeLeft;
     let workSessions = 0;
     let pomoSessions = 0;
-
+    let flow = "⬤";
     const sessCompleted = document.getElementById('sessions-completed');
     sessCompleted.textContent = workSessions;
     const pomoCompleted = document.getElementById('pomo-sessions-completed');
-    sessCompleted.textContent = workSessions;
+    pomoCompleted.textContent = pomoSessions;
+    const flowCounter = document.getElementById('flow');
+    flowCounter.textContent=flow;
 
     //Changes time displayed on timer for work sessions
     function startTimer(){
+        console.log(flow);
         clearInterval(timerInterval);
         timeLeft = getTimeInSeconds('work-options');
         timerDisplay.textContent = formatTime(timeLeft);
@@ -50,10 +53,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 if (workSessions % 4 === 0)
                 {
+                    flow += "⬤";
+                    flowCounter.textContent = flow;
                     startLongBreak();
                 }
                 else
                 {
+                    flow += "⬤";
+                    flowCounter.textContent = flow
                     startShortBreak();
                 }
             }
@@ -64,13 +71,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function startShortBreak() {
         timeLeft = getTimeInSeconds('short')
         timerDisplay.textContent = formatTime(timeLeft);
-
         function updateTimer() {
             if (timeLeft > 0) {
                 timeLeft--;
                 timerDisplay.textContent = formatTime(timeLeft)
             }
             else {
+                flow += "⬤";
+                flowCounter.textContent = flow
                 startTimer();
             }
         }
@@ -80,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function startLongBreak() {
         timeLeft = getTimeInSeconds('long');
         timerDisplay.textContent = formatTime(timeLeft);
+        flowCounter.textContent = flow;
 
         function updateTimer() {
             if (timeLeft > 0) {
@@ -89,6 +98,9 @@ document.addEventListener("DOMContentLoaded", function () {
             else {
                 pomoSessions++;
                 pomoCompleted.textContent = pomoSessions;
+                flow = "You just completed one session!";
+                flowCounter.textContent = flow;
+                flow - "⬤";
                 startTimer()
             }
         }
