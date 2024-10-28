@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tamadoro</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <!-- Header Section -->
     <header>
-        <h1>Tamadoro</h1>
+      <h1>Tamadoro</h1>
     </header>
 
     <!-- Main Container -->
     <main>
-        <!-- Pet Section -->
-        <section class="pet-section">
-            <img src="img/tama-pet.webp" alt="Tama Pet" class="pet-image">
-            <p class="pet-name"><strong>Tama's Name</strong></p>
-            <p class="pet-stats">Tamadoro stats</p>
-        </section>
+      <!-- Pet Section -->
+      <!-- Adam and Teia's Zone -->
+      <section class="pet-section">
+        <!-- <img src="img/tama-pet.webp" alt="Tama Pet" class="pet-image"> -->
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <script src="test_code/canvas.js"></script>
 
-        <!-- Task List Section -->
-        <section class="task-section">
-          <div class="tabs">
-            <button onclick="showSection('daily')">Daily</button>
-            <button onclick="showSection('tasks')">Tasks</button>
-          </div>
+        <p class="pet-name"><strong>Tama's Name</strong></p>
+        <p class="pet-stats">Tamadoro stats</p>
+      </section>
+
+      <!-- Task List Section -->
+      <section class="task-section">
+        <div class="tabs">
+          <button onclick="showSection('daily')">Daily</button>
+          <button onclick="showSection('tasks')">Tasks</button>
+        </div>
 
           <!-- Section for daily tasks -->
           <div id="daily-section" class="section">
@@ -44,14 +48,33 @@
             </ul>
             
         </section>
+        <!-- Section for daily tasks -->
+        <div id="daily-section" class="section">
+          <h3>Daily Tasks</h3>
+          <ul id="daily-tasks"></ul>
+          <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
+        </div>
+        <!-- Tasks with due date -->
+        <div id="tasks-section" class="section" style="display: none">
+          <h3>Tasks</h3>
+          <div id="due-today">
+            <h4>Due Today</h4>
+            <ul id="today-tasks"></ul>
+          </div>
+          <div id="due-tomorrow">
+            <h4>Due Tomorrow</h4>
+            <ul id="tomorrow-tasks"></ul>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
-        <a href="#"><img src="img/inbox-icon.png" alt="Inbox"></a>
-        <a href="#"><img src="img/search-icon.png" alt="Search"></a>
-        <a href="#"><img src="img/clock-icon.png" alt="Clock"></a>
-        <a href="#"><img src="img/inbox-icon.png" alt="Settings"></a>
+      <a href="#"><img src="img/inbox-icon.png" alt="Inbox" /></a>
+      <a href="#"><img src="img/search-icon.png" alt="Search" /></a>
+      <a href="#"><img src="img/clock-icon.png" alt="Clock" /></a>
+      <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
     </nav>
-</body>
+  </body>
 </html>
