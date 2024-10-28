@@ -1,0 +1,139 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+/* Header Section */
+header {
+    text-align: center;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Main Content */
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+/* Pet Section */
+.pet-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pet-image {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.pet-name {
+    font-size: 1.2em;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.pet-stats {
+    font-size: 1em;
+    color: #777;
+}
+
+/* Task Section */
+.task-section {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task-list li {
+    font-size: 1em;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 5px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.sidebar a {
+    text-decoration: none;
+}
+
+.sidebar img {
+    width: 80%;
+    height: auto;
+}
+
+/* Responsive Design (Tablet and Desktop) */
+@media(min-width: 600px) {
+    main {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .pet-section {
+        flex: 1;
+    }
+
+    .task-section {
+        flex: 2;
+        margin-left: 20px;
+    }
+
+    /* Sidebar vertical for larger screens */
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 60px;
+        height: 100vh;
+        flex-direction: column;
+        padding: 20px 0;
+    }
+
+    .sidebar a {
+        margin-bottom: 20px;
+    }
+}

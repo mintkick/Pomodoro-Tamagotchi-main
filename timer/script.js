@@ -9,19 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
-    function getWorkTimeInSeconds() {
-        const workMinutes = parseInt(document.getElementById('work-options').value, 10); //gets time from the form
-        return workMinutes * 60; //converts minutes to seconds
-    }
-
-    function getShortBreakTimeInSeconds() {
-        const shortBreakMinutes = parseInt(document.getElementById('short').value, 10); //gets time from the form
-        return shortBreakMinutes * 60; //converts minutes to seconds
-    }
-    
-    function getLongBreakTimeInSeconds() {
-        const longBreakMinutes = parseInt(document.getElementById('long').value, 10); //gets time from the form
-        return longBreakMinutes * 60; //converts minutes to seconds
+    function getTimeInSeconds(id) {
+        const minutes = parseInt(document.getElementById(id).value, 10);
+        return minutes * 60;
     }
 
     let timerInterval;
@@ -37,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Changes time displayed on timer for work sessions
     function startTimer(){
         clearInterval(timerInterval);
-        timeLeft = getWorkTimeInSeconds();
+        timeLeft = getTimeInSeconds('work-options');
         timerDisplay.textContent = formatTime(timeLeft);
         const counter = document.getElementById('sessions');
         const form1 = document.getElementsByClassName('form');
@@ -72,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startShortBreak() {
-        timeLeft = getShortBreakTimeInSeconds();
+        timeLeft = getTimeInSeconds('short')
         timerDisplay.textContent = formatTime(timeLeft);
 
         function updateTimer() {
@@ -88,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startLongBreak() {
-        timeLeft = getLongBreakTimeInSeconds();
+        timeLeft = getTimeInSeconds('long');
         timerDisplay.textContent = formatTime(timeLeft);
 
         function updateTimer() {
