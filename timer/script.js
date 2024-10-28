@@ -9,19 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
-    function getWorkTimeInSeconds() {
-        const workMinutes = parseInt(document.getElementById('work-options').value, 10); //gets time from the form
-        return workMinutes * 60; //converts minutes to seconds
-    }
-
-    function getShortBreakTimeInSeconds() {
-        const shortBreakMinutes = parseInt(document.getElementById('short').value, 10); //gets time from the form
-        return shortBreakMinutes * 60; //converts minutes to seconds
-    }
-    
-    function getLongBreakTimeInSeconds() {
-        const longBreakMinutes = parseInt(document.getElementById('long').value, 10); //gets time from the form
-        return longBreakMinutes * 60; //converts minutes to seconds
+    function getTimeInSeconds(id) {
+        const minutes = parseInt(document.getElementById(id).value, 10);
+        return minutes * 60;
     }
 
     let timerInterval;
@@ -37,8 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
     //Changes time displayed on timer for work sessions
     function startTimer(){
         clearInterval(timerInterval);
-        timeLeft = getWorkTimeInSeconds();
+        timeLeft = getTimeInSeconds('work-options');
         timerDisplay.textContent = formatTime(timeLeft);
+        const counter = document.getElementById('sessions');
+        const form1 = document.getElementsByClassName('form');
+        if (counter && form1) {
+            counter.style.display = 'none';
+            form1[0].style.display = 'none';
+        }
         function updateTimer() {
             if (timeLeft > 0) { 
                 timeLeft--; //subtract the amount of time every second
@@ -48,6 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 workSessions++;
                 console.log(workSessions);
                 sessCompleted.textContent = workSessions;
+                if (counter && form1) {
+                    counter.style.display = 'block';
+                    form1[0].style.display = 'block';
+                }
                 if (workSessions % 4 === 0)
                 {
                     startLongBreak();
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startShortBreak() {
-        timeLeft = getShortBreakTimeInSeconds();
+        timeLeft = getTimeInSeconds('short')
         timerDisplay.textContent = formatTime(timeLeft);
 
         function updateTimer() {
@@ -71,8 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 timerDisplay.textContent = formatTime(timeLeft)
             }
             else {
-                pomoSessions++;
-                pomoCompleted.textContent = pomoSessions;
                 startTimer();
             }
         }
@@ -80,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startLongBreak() {
-        timeLeft = getLongBreakTimeInSeconds();
+        timeLeft = getTimeInSeconds('long');
         timerDisplay.textContent = formatTime(timeLeft);
 
         function updateTimer() {

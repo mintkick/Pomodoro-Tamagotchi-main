@@ -1,0 +1,99 @@
+/* animate within this css file */
+
+#pet {
+  width: 100px;
+  height: 100px;
+  background-image: url("pet/cropped_LCD Handhelds - Tamagotchi Original P1 P2 - Hashizoutchi.png");
+  background-size: contain;
+  position: relative;
+  /* other styling */
+}
+
+.idle {
+  animation: idleAnimation 1.5s infinite alternate;
+}
+
+/* maybe this doesn't work because it doesn't know that it's an image */
+@keyframes idleAnimation {
+  0% {
+    transform: scaleX(-1);
+    transform: translateX(40px);
+  }
+  100% {
+    transform: rotateY(180deg);
+    /* transform: scaleX(-1); */
+    transform: translateX(0);
+  }
+}
+
+.happy {
+  animation: happyAnimation 1s infinite alternate;
+}
+
+@keyframes happyAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.sad {
+  animation: sadAnimation 1s infinite alternate;
+}
+
+@keyframes sadAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+/* Define other animations similarly */
+
+img:hover {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
