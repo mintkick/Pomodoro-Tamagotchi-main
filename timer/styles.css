@@ -11,9 +11,11 @@ body {
 .timer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap:10px;    
+    gap:10px;
+    width: calc(100%-10px);
+    max-width: 100%;
     text-align: center;
-    width: 100%;
+    place-items: center;
     background-color: #99daf4;
     padding: 20px;
     border-radius: 10px;
@@ -42,4 +44,28 @@ form {
     gap:10px;
     text-align: center;
     justify-content: center;
+}
+button{
+    background-color:#99daf4 ;
+    border-color: #1f93bd;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:#1f93bd;
+    height:25px;
+    width: 100px;
+    border-radius: 15px;
+    text-shadow:0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+#work-options, #short, #long {
+    background-color: #99daf4;
+    border-radius: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 100px;
+    text-align: center;
+    color: #1f93bd;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+#s-break-options{
+
 }
