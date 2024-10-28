@@ -23,18 +23,31 @@
 
         <!-- Task List Section -->
         <section class="task-section">
-            <div class="clock-icon">
-                <img src="img/search-icon.png" alt="Clock Icon">
-            </div>
-            <ul class="task-list">
-                <li>Stuff <span>5</span></li>
-                <li>More Stuff <span>10</span></li>
-                <li>Harder Stuff</li>
-                <li>Tasks</li>
-                <li>Chores</li>
-                <li>Daily Duties</li>
-                <!-- Add more tasks as needed -->
+          <div class="tabs">
+            <button onclick="showSection('daily')">Daily</button>
+            <button onclick="showSection('tasks')">Tasks</button>
+          </div>
+
+          <!-- Section for daily tasks -->
+          <div id="daily-section" class="section">
+            <h3>Daily Tasks</h3>
+            <ul id="daily-tasks">
             </ul>
+            <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
+
+          </div>
+          <!-- Tasks with due date -->
+          <div id="tasks-section" class="section" style="display: none;">
+            <h3>Tasks</h3>
+            <div id="due-today">
+                <h4>Due Today</h4>
+                <ul id="today-tasks"></ul>
+            </div>
+            <div id="due-tomorrow">
+                <h4>Due Tomorrow</h4>
+                <ul id="tomorrow-tasks"></ul>
+            </div>
+           </div>
         </section>
     </main>
 
