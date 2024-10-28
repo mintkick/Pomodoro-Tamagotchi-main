@@ -36,3 +36,9 @@ try {
     loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
 }
 });
+
+// Opening Task section JavaScript
+
+
+
+// Closing Task section JavaScript
