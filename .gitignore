@@ -1,0 +1,11 @@
+# Ignore directories
+images/
+
+# Ignore all .log files
+# *.log
+
+# Ignore specific files
+index.hmtl
+index1.hmtl
+# styles.css
+# styles1.css
