@@ -14,7 +14,13 @@
 - [ ] Sorts: due date, grade weight...
 
 ## Play
+* [ ] Only check on pet during break time?
 
 ### Rewards/Unlockables
 - [ ] Unlock different palettes [requires specific setup of graphics. Might be out of scope.]
 - [ ] Different frames/skins
+
+
+## Names
+- Tamadoro
+- Taro (like the drink)

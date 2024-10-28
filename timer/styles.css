@@ -1,0 +1,85 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: grid;
+    justify-content: left;
+    align-items: center;
+    height: 100vh;
+    background-color: #1f93bd;
+    margin: 0;
+}
+
+.timer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
+    width: calc(100%-10px);
+    max-width: 100%;
+    text-align: center;
+    place-items: center;
+    background-color: #99daf4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.timer ul{
+    color:#1f93bd;
+}
+
+#timer-display {
+    text-align: center;
+    font-weight: 900;
+    color: #1f93bd;
+    font-size: 40px;
+}
+
+h1  {
+    color: #1f93bd;
+}
+
+form {
+    display: flex;
+    color: #99daf4;
+    position: relative;
+    gap:10px;
+    text-align: center;
+    justify-content: center;
+}
+button{
+    background-color:#99daf4 ;
+    border-color: #1f93bd;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:#1f93bd;
+    height:25px;
+    width: 100px;
+    border-radius: 15px;
+    text-shadow:0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+#work-options, #short, #long {
+    background-color: #99daf4;
+    border-radius: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 100px;
+    text-align: center;
+    color: #1f93bd;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.sessions{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    justify-self: center;
+    text-align: center;
+    border-radius: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #1f93bd;
+    background-color: #99daf4;
+    padding:15px;
+
+}
+
+.sessions p {
+    font-size: 34px;
+}
