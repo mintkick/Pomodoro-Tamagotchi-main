@@ -5,7 +5,7 @@ images/
 # *.log
 
 # Ignore specific files
-index.hmtl
-index1.hmtl
+test_code/index.hmtl
+test_code/index1.hmtl
 # styles.css
 # styles1.css
