@@ -39,6 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
         clearInterval(timerInterval);
         timeLeft = getWorkTimeInSeconds();
         timerDisplay.textContent = formatTime(timeLeft);
+        const counter = document.getElementById('sessions');
+        const form1 = document.getElementsByClassName('form');
+        if (counter && form1) {
+            counter.style.display = 'none';
+            form1[0].style.display = 'none';
+        }
         function updateTimer() {
             if (timeLeft > 0) { 
                 timeLeft--; //subtract the amount of time every second
@@ -48,6 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 workSessions++;
                 console.log(workSessions);
                 sessCompleted.textContent = workSessions;
+                if (counter && form1) {
+                    counter.style.display = 'block';
+                    form1[0].style.display = 'block';
+                }
                 if (workSessions % 4 === 0)
                 {
                     startLongBreak();
@@ -71,8 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 timerDisplay.textContent = formatTime(timeLeft)
             }
             else {
-                pomoSessions++;
-                pomoCompleted.textContent = pomoSessions;
                 startTimer();
             }
         }
