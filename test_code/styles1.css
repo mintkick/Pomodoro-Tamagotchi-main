@@ -1,0 +1,26 @@
+/* uses a javascript file 'script.js' to animate */
+
+#pet {
+  width: 100px;
+  height: 100px;
+  background-image: url("pet/cropped_LCD Handhelds - Tamagotchi Original P1 P2 - Hashizoutchi.png"); /* Your pet image */
+  /* background-image: url("pet/LCD Handhelds - Tamagotchi 4U4U - 1996 Mametchi.png"); Your pet image */
+  background-size: cover;
+  position: relative;
+  transition: transform 0.5s; /* Smooth animation */
+}
+
+.image-container {
+  width: 300px; /* Desired width */
+  height: 200px; /* Desired height */
+  overflow: hidden; /* Hide overflow */
+  position: relative;
+}
+
+.image-container img {
+  position: absolute;
+  top: -50px; /* Adjust to select the part */
+  left: -100px; /* Adjust to select the part */
+  width: auto; /* or set to a specific value */
+  height: auto; /* or set to a specific value */
+}
