@@ -55,8 +55,24 @@ let isDailyTask = true;
 // Show the selected section
 function showSection(section) {
     document.getElementById("daily-section").style.display = section === 'daily' ? 'block' : 'none';
+    
     document.getElementById("tasks-section").style.display = section === 'tasks' ? 'block' : 'none';
+    updateTab(section)
 }
+
+function updateTab(section){
+    const dailyTab = document.getElementById("daily-tab");
+    const taskTab = document.getElementById("task-tab");
+    taskTab.setAttribute('class', 'clicked');
+    console.log(taskTab.id)
+    // if (section == 'daily'){
+    //     dailyTab.setAttribute('id', 'clicked');
+    //     if (taskTab.id)
+    //     taskTab.removeAttribute('clicked');
+    //     console.log()
+    // }
+}
+
 
 // Load daily tasks into the daily tasks list
 function loadDailyTasks() {
