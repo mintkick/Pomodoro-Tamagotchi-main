@@ -69,10 +69,18 @@ button {
     padding: 5px 10px;
     border: none;
     cursor: pointer;
+    width: 50%
+}
+
+.single-tab:hover{
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
 }
 
 button:hover {
-    background-color: #C1E1C1;
+    background-color: #a5c2a5;
+    border: 2px solid #6e806e;
+    /* Make a javascript action to make this setting permanent when selected */
 }
 
 h3, h4 {
@@ -86,7 +94,7 @@ h3, h4 {
     justify-content: space-evenly;
     height: 60px;
     width: 100%;
-    background-color: red;
+    background-color: #C1E1C1;
     margin-bottom: 10px;
     
 }
@@ -116,6 +124,16 @@ h3, h4 {
     border-bottom: 1px dotted #ccc;
     padding-bottom: 5px;
 }
+
+#task-list {
+    width: 100%;
+    background-color: purple;
+    height: 30px;
+}
+
+
+
+
 
 /* Sidebar */
 .sidebar {

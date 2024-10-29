@@ -28,26 +28,28 @@
       <!-- Task List Section -->
       <section class="task-section">
         <div class="tabs">
-          <button onclick="showSection('daily')">Daily</button>
-          <button onclick="showSection('tasks')">Tasks</button>
+          <button class="single-tab" onclick="showSection('daily')">Daily</button>
+          <button class="single-tab" onclick="showSection('tasks')">Tasks</button>
         </div>
 
           <!-- Section for daily tasks -->
-          <div id="daily-section" class="section">
-            <h3>Daily Tasks</h3>
-            <ul id="daily-tasks">
-            </ul>
-            <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
-            
-          </div>
+        <div id="daily-section" class="section">
+          <!-- <h3>Daily Tasks</h3> -->
+          <ul id="tasks-list">
+          </ul>
+          <!-- <button onclick="resetDailyTasks()">Reset Daily Tasks</button> -->
+          
+        </div>
           <!-- Tasks with due date -->
-          <div id="tasks-section" class="section" style="display: none;">
-            <h3>Tasks</h3>
-            <ul id="tasks-list">
-                <!-- Each task will display with a specific due date -->
-            </ul>
+        <div id="tasks-section" class="section" style="display: none;">
+          <h3>Tasks</h3>
+          <ul id="tasks-list">
+            <li>Task One</li>
+              <!-- Each task will display with a specific due date -->
+          </ul>
+        </div>
             
-        </section>
+        <!-- </section> -->
         <!-- Section for daily tasks -->
         <div id="daily-section" class="section">
           <h3>Daily Tasks</h3>
