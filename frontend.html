@@ -29,7 +29,7 @@
       <section class="task-section">
         <!-- Tabs for Daily and Task sections -->
         <div class="tabs">
-          <button class="single-tab" id="daily-tab" onclick="showSection('Daily')">Daily</button>
+          <button class="single-tab" id="daily-tab" onclick="showSection('daily')">Daily</button>
           <button class="single-tab" id="task-tab" onclick="showSection('tasks')">Tasks</button>
         </div>
     
@@ -71,7 +71,7 @@
         <div id="task-modal" class="modal">
             <div class="modal-content">
                 <span class="close-button" onclick="closeModal()">&times;</span>
-                <!-- <h3 id="modal-title">Add Task</h3> -->
+                <h3 id="modal-title">Add Task</h3>
                 <input type="text" id="task-input" placeholder="Enter task" />
                 <input type="date" id="task-date-input" style="display: none;" />
                 <button onclick="submitTask()">Add Task</button>
