@@ -96,6 +96,8 @@ h3, h4 {
     width: 100%;
     background-color: #C1E1C1;
     margin-bottom: 10px;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
     
 }
 
@@ -106,9 +108,11 @@ h3, h4 {
     background-color: #fff;
     border-radius: 10px;
     padding: 15px;
+    margin-bottom: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
+    
     
 }
 
@@ -127,15 +131,32 @@ h3, h4 {
     padding-bottom: 5px;
 }
 
+#clicked-tab {
+    background-color: #a5c2a5;
+    border: 2px solid #6e806e;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
+}
+
+
+
 #task-list {
     width: 100%;
     background-color: purple;
     height: 30px;
 }
 
-#list-section{
+#daily-section{
     width: 100%;
-    margin-left: 20px;
+    padding: 10px 20px;
+    background-color: red;
+    height: 40px;
+}
+
+#daily-section ul {
+    text-decoration: none;
+    margin: 5px, 10px;
+    
 }
 
 

@@ -28,40 +28,43 @@
       <!-- Task List Section -->
       <section class="task-section">
         <div class="tabs">
-          <button class="single-tab" onclick="showSection('Daily')">Daily</button>
-          <button class="single-tab" onclick="showSection('tasks')">Tasks</button>
+          <button class="single-tab" id="daily-tab" onclick="showSection('Daily')">Daily</button>
+          <button class="single-tab" id="task-tab" onclick="showSection('tasks')">Tasks</button>
         </div>
 
           <!-- Section for daily tasks -->
         <div id="daily-section" class="section">
           <!-- <h3>Daily Tasks</h3> -->
-          <div id="list section">
-            <ul id="tasks-list">
-              <li>Task One</li>
-            </ul>
-          </div>
-          <!-- <button onclick="resetDailyTasks()">Reset Daily Tasks</button> -->
+          
+          <ul id="tasks-list">
+            <li>Task One</li>
+
+
+          </ul>
+    
           
         </div>
+        <button onclick="resetDailyTasks()">Reset Daily Tasks</button>  
+
           <!-- Tasks with due date -->
-        <div id="tasks-section" class="section" style="display: none;">
+        <!-- <div id="tasks-section" class="section" style="display: none;">
           <h3>Tasks</h3>
-          <!-- <ul id="tasks-list">
+           <ul id="tasks-list">
             <li>Task One</li>
                Each task will display with a specific due date 
-          </ul> -->
-        </div>
+          </ul> 
+        </div> -->
             
         <!-- </section> -->
         <!-- Section for daily tasks -->
-        <div id="daily-section" class="section">
+        <!-- <div id="daily-section" class="section">
           <h3>Daily Tasks</h3>
-          <!-- <ul id="daily-tasks">
+           <ul id="daily-tasks">
             <li>Task one</li>
           </ul> -->
-          <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
-        </div>
-        <!-- Tasks with due date -->
+          <!-- <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
+        </div> -->
+        <!-- Tasks with due date 
         <div id="tasks-section" class="section" style="display: none">
           <h3>Tasks</h3>
           <div id="due-today">
@@ -72,7 +75,7 @@
             <h4>Due Tomorrow</h4>
             <ul id="tomorrow-tasks"></ul>
           </div>
-        </div>
+        </div> -->
       </section>
     </main>
 
@@ -83,5 +86,7 @@
       <a href="#"><img src="img/clock-icon.png" alt="Clock" /></a>
       <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
     </nav>
+    <script src="index.js"></script>
+  
   </body>
 </html>

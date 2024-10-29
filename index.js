@@ -1,7 +1,7 @@
 
-document.addEventListener('DOMContentLoaded', function() {
-const loadEl = document.querySelector('#load');
-console.log('The js is connected')
+// document.addEventListener('DOMContentLoaded', function() {
+// const loadEl = document.querySelector('#load');
+// console.log('The js is connected')
 // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 // // The Firebase SDK is initialized and available here!
 //
@@ -17,39 +17,58 @@ console.log('The js is connected')
 //
 // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-try {
-    let app = firebase.app();
-    let features = [
-    'auth', 
-    'database', 
-    'firestore',
-    'functions',
-    'messaging', 
-    'storage', 
-    'analytics', 
-    'remoteConfig',
-    'performance',
-    ].filter(feature => typeof app[feature] === 'function');
-    loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-} catch (e) {
-    console.error(e);
-    loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-}
-});
+// try {
+//     let app = firebase.app();
+//     let features = [
+//     'auth', 
+//     'database', 
+//     'firestore',
+//     'functions',
+//     'messaging', 
+//     'storage', 
+//     'analytics', 
+//     'remoteConfig',
+//     'performance',
+//     ].filter(feature => typeof app[feature] === 'function');
+//     loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+// } catch (e) {
+//     console.error(e);
+//     loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+// }
+// );
+
+
 
 // Opening Task section JavaScript
 
 function showSection(section){
-    const selectedButton = document.getElementsByClassName("single-tab");
-    selectedButton.style.backgroundColor = '#a5c2a5';
-    if (section == 'Daily'){
-
+    // add css id, remove the id from the other tab
+    const tabs = document.getElementsByClassName('single-tab')
+    console.log(tabs)
+    const clickedId = event.target.id;
+    const selectedButton = document.getElementById(clickedId)
+    console.log(selectedButton.innerHTML)
+    selectedButton.setAttribute('id', 'clicked-tab')
+    
+    for (tab in tabs){
+        if (tab != selectedButton){
+            console.log(tab)
+        }
     }
-    else if (section == 'Tasks'){
 
-    }
+    // if (section == 'Daily'){
+        
+
+    // }
+    // else if (section == 'Tasks'){
+
+    // }
 }
 
+
+function resetDailyTasks(){
+    
+}
 
 
 // Closing Task section JavaScript
