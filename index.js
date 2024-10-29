@@ -42,7 +42,7 @@
 // Opening Task section JavaScript
 
 // Variables to store tasks
-let dailyTasks = [
+let  dailyTasks = [
     { id: 1, text: "Task One", frequency: "daily" }
 ];
 let tasks = [
@@ -63,8 +63,9 @@ function showSection(section) {
 function updateTab(section){
     const dailyTab = document.getElementById("daily-tab");
     const taskTab = document.getElementById("task-tab");
-    taskTab.setAttribute('class', 'clicked');
-    console.log(taskTab.id)
+    console.log(taskTab.className)
+    taskTab.classList.add('clicked');
+    console.log(taskTab.className)
     // if (section == 'daily'){
     //     dailyTab.setAttribute('id', 'clicked');
     //     if (taskTab.id)
@@ -188,7 +189,7 @@ window.onclick = function(event) {
 
 //     // }
 // }
-}
+
 
 // Initial load of tasks when the page is ready
 document.addEventListener("DOMContentLoaded", function() {
