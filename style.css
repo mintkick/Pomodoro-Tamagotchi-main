@@ -88,6 +88,12 @@ h3, h4 {
     padding-bottom: 5px;
 }
 
+.section{
+    width: 100%;
+    padding: 10px 20px;
+    background-color: red;
+    height: 40px;
+}
 
 .tabs{
     display: flex;
@@ -146,12 +152,6 @@ h3, h4 {
     height: 30px;
 }
 
-#daily-section{
-    width: 100%;
-    padding: 10px 20px;
-    background-color: red;
-    height: 40px;
-}
 
 #daily-section ul {
     text-decoration: none;

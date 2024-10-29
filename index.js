@@ -146,29 +146,32 @@ window.onclick = function(event) {
     if (event.target === modal) {
         closeModal();
     }
-function showSection(section){
-    // add css id, remove the id from the other tab
-    const tabs = document.getElementsByClassName('single-tab')
-    console.log(tabs)
-    const clickedId = event.target.id;
-    const selectedButton = document.getElementById(clickedId)
-    console.log(selectedButton.innerHTML)
-    selectedButton.setAttribute('id', 'clicked-tab')
-    
-    for (tab in tabs){
-        if (tab != selectedButton){
-            console.log(tab)
-        }
-    }
+}
 
-    // if (section == 'Daily'){
+
+// function showSection(section){
+//     // add css id, remove the id from the other tab
+//     const tabs = document.getElementsByClassName('single-tab')
+//     console.log(tabs)
+//     const clickedId = event.target.id;
+//     const selectedButton = document.getElementById(clickedId)
+//     console.log(selectedButton.innerHTML)
+//     selectedButton.setAttribute('id', 'clicked-tab')
+    
+//     for (tab in tabs){
+//         if (tab != selectedButton){
+//             console.log(tab)
+//         }
+//     }
+
+//     // if (section == 'Daily'){
         
 
-    // }
-    // else if (section == 'Tasks'){
+//     // }
+//     // else if (section == 'Tasks'){
 
-    // }
-}
+//     // }
+// }
 
 // Initial load of tasks when the page is ready
 document.addEventListener("DOMContentLoaded", function() {

@@ -39,8 +39,11 @@
             <ul id="daily-tasks-list">
                 <li>Task One</li>
             </ul>
-            <button onclick="openModal('daily')">Add Daily Task</button>
-            <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
+
+            <div class="edit-buttons">
+              <button onclick="openModal('daily')">Add Daily Task</button>
+              <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
+            </div>
           <!-- <h3>Daily Tasks</h3> -->
           
           <ul id="tasks-list">
@@ -58,14 +61,17 @@
             <ul id="tasks-list">
                 <li>Task One - Due Date</li>
             </ul>
-            <button onclick="openModal('task')">Add Task</button>
+            <div class="edit-buttons">
+              <button onclick="openModal('task')">Add Task</button>
+
+            </div>
         </div>
     
         <!-- Modal for Adding Tasks -->
         <div id="task-modal" class="modal">
             <div class="modal-content">
                 <span class="close-button" onclick="closeModal()">&times;</span>
-                <h3 id="modal-title">Add Task</h3>
+                <!-- <h3 id="modal-title">Add Task</h3> -->
                 <input type="text" id="task-input" placeholder="Enter task" />
                 <input type="date" id="task-date-input" style="display: none;" />
                 <button onclick="submitTask()">Add Task</button>
