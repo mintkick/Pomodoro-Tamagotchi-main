@@ -27,13 +27,20 @@
 
       <!-- Task List Section -->
       <section class="task-section">
+        <!-- Tabs for Daily and Task sections -->
         <div class="tabs">
           <button class="single-tab" id="daily-tab" onclick="showSection('Daily')">Daily</button>
           <button class="single-tab" id="task-tab" onclick="showSection('tasks')">Tasks</button>
         </div>
-
-          <!-- Section for daily tasks -->
+    
+        <!-- Section for Daily Tasks -->
         <div id="daily-section" class="section">
+            <h3>Daily Tasks</h3>
+            <ul id="daily-tasks-list">
+                <li>Task One</li>
+            </ul>
+            <button onclick="openModal('daily')">Add Daily Task</button>
+            <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
           <!-- <h3>Daily Tasks</h3> -->
           
           <ul id="tasks-list">
@@ -44,39 +51,28 @@
     
           
         </div>
-        <button onclick="resetDailyTasks()">Reset Daily Tasks</button>  
-
-          <!-- Tasks with due date -->
-        <!-- <div id="tasks-section" class="section" style="display: none;">
-          <h3>Tasks</h3>
-           <ul id="tasks-list">
-            <li>Task One</li>
-               Each task will display with a specific due date 
-          </ul> 
-        </div> -->
-            
-        <!-- </section> -->
-        <!-- Section for daily tasks -->
-        <!-- <div id="daily-section" class="section">
-          <h3>Daily Tasks</h3>
-           <ul id="daily-tasks">
-            <li>Task one</li>
-          </ul> -->
-          <!-- <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
-        </div> -->
-        <!-- Tasks with due date 
-        <div id="tasks-section" class="section" style="display: none">
-          <h3>Tasks</h3>
-          <div id="due-today">
-            <h4>Due Today</h4>
-            <ul id="today-tasks"></ul>
-          </div>
-          <div id="due-tomorrow">
-            <h4>Due Tomorrow</h4>
-            <ul id="tomorrow-tasks"></ul>
-          </div>
-        </div> -->
-      </section>
+    
+        <!-- Section for Tasks with Due Dates -->
+        <div id="tasks-section" class="section" style="display: none;">
+            <h3>Tasks</h3>
+            <ul id="tasks-list">
+                <li>Task One - Due Date</li>
+            </ul>
+            <button onclick="openModal('task')">Add Task</button>
+        </div>
+    
+        <!-- Modal for Adding Tasks -->
+        <div id="task-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal()">&times;</span>
+                <h3 id="modal-title">Add Task</h3>
+                <input type="text" id="task-input" placeholder="Enter task" />
+                <input type="date" id="task-date-input" style="display: none;" />
+                <button onclick="submitTask()">Add Task</button>
+            </div>
+        </div>
+    </section>
+    
     </main>
 
     <!-- Sidebar Navigation -->
@@ -85,6 +81,9 @@
       <a href="#"><img src="img/search-icon.png" alt="Search" /></a>
       <a href="#"><img src="img/clock-icon.png" alt="Clock" /></a>
       <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
+
+    <!-- Link to your JavaScript file -->
+    <script src="index.js"></script>
     </nav>
     <script src="index.js"></script>
   
