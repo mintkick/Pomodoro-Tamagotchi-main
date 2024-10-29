@@ -39,6 +39,17 @@ try {
 
 // Opening Task section JavaScript
 
+function showSection(section){
+    const selectedButton = document.getElementsByClassName("single-tab");
+    selectedButton.style.backgroundColor = '#a5c2a5';
+    if (section == 'Daily'){
+
+    }
+    else if (section == 'Tasks'){
+
+    }
+}
+
 
 
 // Closing Task section JavaScript

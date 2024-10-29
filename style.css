@@ -109,7 +109,9 @@ h3, h4 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+    
 }
+
 
 .task-list {
     list-style-type: none;
@@ -131,7 +133,10 @@ h3, h4 {
     height: 30px;
 }
 
-
+#list-section{
+    width: 100%;
+    margin-left: 20px;
+}
 
 
 
