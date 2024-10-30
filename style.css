@@ -152,7 +152,7 @@ span.close-button:hover {
 }
 
 .list-area ul li:hover {
-    background-color: lightgrey;
+    background-color: #aec6cf;
 }
 
 
@@ -168,7 +168,7 @@ span.close-button:hover {
 }
 
 .list-area ul li input[type="checkbox"]:checked {
-    background-color: #6e806e;
+    background-color: #fadadd;
 }
 
 .list-area ul li input[type="checkbox"]:checked::before {
