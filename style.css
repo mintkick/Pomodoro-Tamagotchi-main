@@ -65,7 +65,7 @@ main {
 
 button {
     background-color: #C1E1C1;
-    color: white;
+    color: gray;
     padding: 5px 10px;
     border: none;
     cursor: pointer;
@@ -74,6 +74,7 @@ button {
 button:hover {
     background-color: #a5c2a5;
     border: 2px solid #6e806e;
+    color: white;
     /* Make a javascript action to make this setting permanent when selected */
 }
 
@@ -86,14 +87,26 @@ span.close-button {
     size: 200px;
 }
 
+span.close-button:hover {
+    cursor: pointer;
+} 
+
+
+.edit-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+}
+
+.edit-buttons button{
+    height: 40px;
+    margin: 10px;
+}
+
 .modal{
     display: none;
 }
 
-.single-tab:hover{
-    border-top-left-radius: 25%;
-    border-top-right-radius: 25%;
-}
 
 
 
@@ -102,33 +115,59 @@ span.close-button {
     border: 2px solid #6e806e;
     border-top-left-radius: 25%;
     border-top-right-radius: 25%;
+    color:white;
 }
 
 .section{
     width: 100%;
-    padding: 10px 20px;
-    background-color: red;
-    height: 400px;
+    padding: 15px 20px 15px 20px;
+    /* background-color: grey; */
+    min-height: 300px;
+    border: 2px solid #6e806e;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
-.section ul {
-    text-decoration: none;
-    margin: 5px, 10px;
+.list-area {
+    width: 100%;
+    min-height: 200px;
+    padding: 15px 20px 15px 20px;
     
 }
+
+.list-area ul {
+    text-decoration: none;
+    margin: 5px, 10px;
+    list-style:none;
+    
+}
+
+.list-area ul li {
+    margin: 10px 0px;
+}
+
+.list-area ul li:hover {
+    background-color: lightgrey;
+}
+
+
 .tabs{
     display: flex;
     justify-content: space-evenly;
     height: 60px;
     width: 100%;
     background-color: #C1E1C1;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     border-top-left-radius: 25%;
     border-top-right-radius: 25%;
     
 }
 
 
+.single-tab:hover{
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
+}
 
 
 .task-section {

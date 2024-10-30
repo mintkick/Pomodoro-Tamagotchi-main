@@ -25,46 +25,46 @@
         <p class="pet-stats">Tamadoro stats</p>
       </section>
 
+
+
+
+
       <!-- Task List Section -->
       <section class="task-section">
         <!-- Tabs for Daily and Task sections -->
         <div class="tabs">
-          <button class="single-tab" id="daily-tab" onclick="showSection('daily')">Daily</button>
+          <button class="single-tab  clicked" id="daily-tab" onclick="showSection('daily')">Daily</button>
           <button class="single-tab" id="task-tab" onclick="showSection('tasks')">Tasks</button>
         </div>
     
         <!-- Section for Daily Tasks -->
         <div id="daily-section" class="section">
-            <h3>Daily Tasks</h3>
+          <div class="list-area">
+            <!-- <h3>Daily Tasks</h3> -->
             <ul id="daily-tasks-list">
-                <!-- <li>Task One</li> -->
+                <li>Task One</li>
             </ul>
 
-            <div class="edit-buttons">
-              <button onclick="openModal('daily')">Add Daily Task</button>
-              <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
-            </div>
-          <!-- <h3>Daily Tasks</h3> -->
-          
-          <ul id="tasks-list">
-            <li>Task One</li>
-
-
-          </ul>
-    
-          
+          </div>
+            
+          <div class="edit-buttons">
+            <button onclick="openModal('daily')">Add Daily Task</button>
+            <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
+          </div>
         </div>
     
         <!-- Section for Tasks with Due Dates -->
         <div id="tasks-section" class="section" style="display: none;">
-            <h3>Tasks</h3>
+          <div class="list-area">
+            <h4>Tasks</h4>
             <ul id="tasks-list">
-                <li>Task One - Due Date</li>
+                <!-- <li>Task One - Due Date</li> -->
             </ul>
-            <div class="edit-buttons">
-              <button onclick="openModal('task')">Add Task</button>
+          </div>
+          <div class="edit-buttons">
+            <button onclick="openModal('task')">Add Task</button>
 
-            </div>
+          </div>
         </div>
     
         <!-- Modal for Adding Tasks -->
