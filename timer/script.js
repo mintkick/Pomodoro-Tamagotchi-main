@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 pomoCompleted.textContent = pomoSessions;
                 flow = "You just completed one session!";
                 flowCounter.textContent = flow;
-                flow - "⬤";
+                flow = "⬤";
                 startTimer()
             }
         }
