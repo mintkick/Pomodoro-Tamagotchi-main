@@ -11,3 +11,14 @@ Animation Resourses:
 - [animate() documentation](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate)
 
 - [animation example](https://codepen.io/rachelnabors/pen/rxpmJL/?editors=0110)
+
+
+
+
+
+
+
+Website Resources:
+- [How to - Remove a Class](https://www.w3schools.com/howto/howto_js_remove_class.asp)
+- [Stack overflow: How can I check on whihc element the event was triggered?](https://stackoverflow.com/questions/10648768/how-can-i-check-on-which-element-the-event-was-triggered
+)

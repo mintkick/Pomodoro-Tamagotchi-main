@@ -85,7 +85,12 @@ button{
 }
 
 #buttons{
+    gap: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-self: center;
+}
+#flow{
+    color: #1f93bd;
+    font-size: 24px;
 }
