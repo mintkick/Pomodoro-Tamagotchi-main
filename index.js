@@ -65,13 +65,30 @@ function updateTab(section){
     const taskTab = document.getElementById("task-tab");
     console.log(taskTab.className)
     taskTab.classList.add('clicked');
-    console.log(taskTab.className)
-    // if (section == 'daily'){
-    //     dailyTab.setAttribute('id', 'clicked');
-    //     if (taskTab.id)
-    //     taskTab.removeAttribute('clicked');
-    //     console.log()
-    // }
+    if (taskTab.className.includes('clicked')){
+
+        console.log('yes')
+    }
+
+    if (section == 'daily'){
+        if (!dailyTab.className.includes('clicked')){
+            dailyTab.classList.add('clicked');
+
+        }
+        if (taskTab.className.includes('clicked')){
+            taskTab.classList.remove('clicked');
+
+        }
+
+    }else if (section == 'tasks'){
+        if (!dailyTab.className.includes('clicked')){
+            taskTab.classList.add('id', 'clicked');
+        }
+        if (dailyTab.className.includes('clicked')){
+            dailyTab.classList.remove('clicked');
+
+        }
+    }
 }
 
 

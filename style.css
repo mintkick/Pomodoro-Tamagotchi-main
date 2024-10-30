@@ -71,12 +71,6 @@ button {
     cursor: pointer;
     width: 50%
 }
-
-.single-tab:hover{
-    border-top-left-radius: 25%;
-    border-top-right-radius: 25%;
-}
-
 button:hover {
     background-color: #a5c2a5;
     border: 2px solid #6e806e;
@@ -87,6 +81,21 @@ h3, h4 {
     margin:0;
     padding-bottom: 5px;
 }
+
+span.close-button {
+    size: 200px;
+}
+
+.modal{
+    display: none;
+}
+
+.single-tab:hover{
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
+}
+
+
 
 .clicked {
     background-color: #a5c2a5;
@@ -99,9 +108,14 @@ h3, h4 {
     width: 100%;
     padding: 10px 20px;
     background-color: red;
-    height: 40px;
+    height: 400px;
 }
 
+.section ul {
+    text-decoration: none;
+    margin: 5px, 10px;
+    
+}
 .tabs{
     display: flex;
     justify-content: space-evenly;
@@ -154,11 +168,6 @@ h3, h4 {
 }
 
 
-#daily-section ul {
-    text-decoration: none;
-    margin: 5px, 10px;
-    
-}
 
 
 
