@@ -99,7 +99,16 @@ function loadDailyTasks() {
 
     dailyTasks.forEach(task => {
         const li = document.createElement("li");
-        li.textContent = task.text;
+        const p = document.createElement("p");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = `item ${task.id}`;
+
+        p.textContent = task.text;
+        li.appendChild(checkbox);
+        li.appendChild(p);
+
         dailyList.appendChild(li);
     });
 }

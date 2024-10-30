@@ -144,11 +144,37 @@ span.close-button:hover {
 
 .list-area ul li {
     margin: 10px 0px;
+    display: flex;
 }
 
 .list-area ul li:hover {
     background-color: lightgrey;
 }
+
+
+.list-area ul li input[type="checkbox"] {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1.5px solid black;
+    margin-right: 5px; 
+    
+}
+
+.list-area ul li input[type="checkbox"]:checked {
+    background-color: #6e806e;
+}
+
+.list-area ul li input[type="checkbox"]:checked::before {
+    content: "✓";
+    display: block;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+  }
 
 
 .tabs{
