@@ -135,6 +135,10 @@ span.close-button:hover {
     
 }
 
+.list-area h3 {
+    font-style: italic;
+}
+
 .list-area ul {
     text-decoration: none;
     margin: 5px, 10px;
