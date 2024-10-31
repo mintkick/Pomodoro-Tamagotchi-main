@@ -60,25 +60,27 @@ function animate() {
 // }
 
 const spriteSheet = new Image();
-spriteSheet.src = "pet/duck.png";
+spriteSheet.src = "pet/000.png";
 // spriteSheet.src = "test_code/pet/duck.png";
+context.imageSmoothingEnabled = false;
 
 let frameX = 0; // what frame/sprite/section of img we're pulling from--the X position of the img source
-let frameWidth = 14;
-let frameHeight = 14;
+let frameWidth = 16;
+let frameHeight = 16;
 const totalFrames = 4; // Number of frames to use in the sprite sheet
-const frameSpeed = 50; // larger number = slower speed
-const edgeOffset = 2; // pixels from left edge of img to sprite
-let betweenOffset = 1; // pixels between sprite frames
+const frameSpeed = 20; // larger number = slower speed
+const edgeOffset = 0; // pixels from left edge of img to sprite
+let betweenOffset = 0; // pixels between sprite frames
 let frameCount = 0;
 
+// stripped down to use a much simpler sprite sheet
 function animate() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.drawImage(
     // (image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) s-OURCE d-ESTINATION
     spriteSheet,
-    edgeOffset + frameWidth * frameX, // pix from img + sprWidth * animFrame
-    3,
+    frameX, // pix from img + sprWidth * animFrame
+    0,
     frameWidth, // inside/source
     frameHeight,
     0,
@@ -86,14 +88,13 @@ function animate() {
     frameWidth * 16, // outside/destination
     frameHeight * 16
   );
-  // betweenOffset += 1;
+  //   betweenOffset += 1;
   if (frameCount++ > frameSpeed) {
-    // frameX = ((frameX + 1) % totalFrames) + betweenOffset;
-    frameX = ((frameX + 1) % (totalFrames * frameWidth)) + betweenOffset;
-    frameCount = 0;
-    betweenOffset %= totalFrames; // ?
+    frameX = (frameX + frameWidth) % (totalFrames * frameWidth); // + betweenOffset;
+    frameCount %= totalFrames; // frameCount = 0;
+    // betweenOffset %= totalFrames; // ?
   }
-  betweenOffset %= totalFrames; // ?
+  //   betweenOffset %= totalFrames; // ?
   //   frameX = (frameX + 15 / frameSpeed) % totalFrames;
   //   frameX = (1 * frameWidth) % frameSpeed;
   requestAnimationFrame(animate);

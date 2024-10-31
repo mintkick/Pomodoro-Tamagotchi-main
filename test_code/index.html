@@ -5,12 +5,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Canvas API</title>
+    <style>
+      img {
+        /* not needed, not using an img */
+        image-rendering: crisp-edges; /* Keep the image sharp */
+        /*width: 200px; /* Desired width */
+        /*height: auto; /* Maintain aspect ratio */
+      }
+      canvas {
+        border: 1px solid #f0f; /* Optional: to visualize the canvas */
+      }
+    </style>
     <!-- <link rel="stylesheet" href="styles.css" /> -->
   </head>
   <body>
     <canvas id="gameCanvas" width="800" height="600"></canvas>
 
-    <script src="canvas.js"></script>
+    <!-- Make sure the canvas element has the correct size set in pixels, not just in CSS. This prevents the browser from scaling it. -->
+
+    <script src="canvas2.js"></script>
   </body>
 </html>
