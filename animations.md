@@ -1,6 +1,12 @@
 ### Language Options:
 
 JavaScript
+
+- canvas API
+- one sprite sheet
+- multiple separate sprite files
+- one gif per animation
+
 C++
 
 ### Storing/Hosting Sprite Pictures
