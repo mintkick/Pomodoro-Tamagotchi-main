@@ -5,12 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tamadoro</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      canvas {
+        border: 1px solid #f0f; /* Optional: to visualize the canvas */
+      }
+    </style>
   </head>
   <body>
     <!-- Header Section -->
     <header>
-      <div id="timer-demo" style="background-color: aquamarine;width:100px;display: flex;margin-left:100px; text-align:center;justify-self: center;border-radius: 10px;margin-top: 20px;margin-bottom: -20px; padding: 10px; ">
-        <a href="timer\timer.html" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:20px;color:black;font-weight: bold;">Timer Demo</a>
+      <div
+        id="timer-demo"
+        style="
+          background-color: aquamarine;
+          width: 100px;
+          display: flex;
+          margin-left: 100px;
+          text-align: center;
+          justify-self: center;
+          border-radius: 10px;
+          margin-top: 20px;
+          margin-bottom: -20px;
+          padding: 10px;
+        "
+      >
+        <a
+          href="timer\timer.html"
+          style="
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+              sans-serif;
+            font-size: 20px;
+            color: black;
+            font-weight: bold;
+          "
+          >Timer Demo</a
+        >
       </div>
       <h1>Tamadoro</h1>
     </header>
@@ -26,89 +55,105 @@
 
         <p class="pet-name"><strong>Tama's Name</strong></p>
         <p class="pet-stats">Tamadoro stats</p>
-        <button style="border-radius: 10px;width:100px; font-weight:bold;color:black;box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">Feed</button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+        >
+          Feed
+        </button>
 
         <!-- Unnote this to try a different animation.-->
         <div id="animation">
-          <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300">
+          <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
+          <canvas id="gameCanvas" width="800" height="600"></canvas>
+          <script src="test_code/canvas2.js"></script>
         </div>
-  
-        <script src="test_code/script2.js"></script> 
 
+        <!-- <script src="test_code/script2.js"></script> -->
       </section>
-
-
-
-
-
-
 
       <!-- Task List Section -->
       <section class="task-section">
         <!-- Tabs for Daily and Task sections -->
         <div class="tabs">
-          <button class="single-tab  clicked" id="daily-tab" onclick="showSection('daily')">Daily</button>
-          <button class="single-tab" id="task-tab" onclick="showSection('tasks')">Tasks</button>
+          <button
+            class="single-tab clicked"
+            id="daily-tab"
+            onclick="showSection('daily')"
+          >
+            Daily
+          </button>
+          <button
+            class="single-tab"
+            id="task-tab"
+            onclick="showSection('tasks')"
+          >
+            Tasks
+          </button>
         </div>
-    
+
         <!-- Section for Daily Tasks -->
         <div id="daily-section" class="section">
           <div class="list-area">
             <h3>Do Daily:</h3>
             <ul id="daily-tasks-list">
               <li>
-                <input type="checkbox">
-                <p>Task One<p>
+                <input type="checkbox" />
+                <p>Task One</p>
+                <p></p>
               </li>
             </ul>
-
           </div>
-            
+
           <div class="edit-buttons">
             <button onclick="openModal('daily')">Add Daily Task</button>
             <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
           </div>
         </div>
-    
+
         <!-- Section for Tasks with Due Dates -->
-        <div id="tasks-section" class="section" style="display: none;">
+        <div id="tasks-section" class="section" style="display: none">
           <div class="list-area">
             <h3>Due 2024-11-01</h3>
             <ul id="tasks-list">
-                <!-- <li>Task One - Due Date</li> -->
+              <!-- <li>Task One - Due Date</li> -->
             </ul>
           </div>
           <div class="edit-buttons">
             <button onclick="openModal('task')">Add Task</button>
-
           </div>
         </div>
-    
+
         <!-- Modal for Adding Tasks -->
         <div id="task-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button" onclick="closeModal()">&times;</span>
-                <h3 id="modal-title">Add Task</h3>
-                <input type="text" id="task-input" placeholder="Enter task" />
-                <input type="date" id="task-date-input" style="display: none;" />
-                <button onclick="submitTask()">Add Task</button>
-            </div>
+          <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Add Task</h3>
+            <input type="text" id="task-input" placeholder="Enter task" />
+            <input type="date" id="task-date-input" style="display: none" />
+            <button onclick="submitTask()">Add Task</button>
+          </div>
         </div>
-    </section>
-    
+      </section>
     </main>
 
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
       <a href="#"><img src="img/inbox-icon.png" alt="Inbox" /></a>
       <a href="#"><img src="img/search-icon.png" alt="Search" /></a>
-      <a href="timer/timer.html"><img src="img/clock-icon.png" alt="Clock" /></a>
+      <a href="timer/timer.html"
+        ><img src="img/clock-icon.png" alt="Clock"
+      /></a>
       <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
 
-    <!-- Link to your JavaScript file -->
-    <script src="index.js"></script>
+      <!-- Link to your JavaScript file -->
+      <script src="index.js"></script>
     </nav>
     <script src="index.js"></script>
-  
   </body>
 </html>

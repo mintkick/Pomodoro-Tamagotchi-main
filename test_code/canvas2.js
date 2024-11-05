@@ -13,6 +13,8 @@ spriteImage.src = "pet/duck.png";
 // Clear the canvas
 context.clearRect(0, 0, canvas.width, canvas.height);
 
+////////////// If you see these shapes, the JS is running, but the sprite images are in a different directory.
+
 // Draw a rectangle
 context.fillStyle = "blue";
 context.fillRect(50, 50, 200, 100); // (x, y, width, height)
@@ -60,7 +62,7 @@ function animate() {
 // }
 
 const spriteSheet = new Image();
-spriteSheet.src = "pet/000.png";
+spriteSheet.src = "test_code/pet/000.png";
 // spriteSheet.src = "test_code/pet/duck.png";
 context.imageSmoothingEnabled = false;
 
@@ -83,7 +85,7 @@ function animate() {
     0,
     frameWidth, // inside/source
     frameHeight,
-    0,
+    canvas.width / 2, // relative to the position of the whole canvas element itself, which could be positioned using CSS
     0,
     frameWidth * 16, // outside/destination
     frameHeight * 16
