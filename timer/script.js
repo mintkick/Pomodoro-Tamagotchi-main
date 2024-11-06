@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     //Returns a string with the time formated like a digital clock
     function formatTime(seconds) {
         const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
+        const minutes = Math.floor((seconds % 3600) / 60)+hours*60;
         const secs = seconds % 60;
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
     function getTimeInSeconds(id) {
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let timeLeft;
     let workSessions = 0;
     let pomoSessions = 0;
-    let flow = "⬤";
+    let flow = "";
     const sessCompleted = document.getElementById('sessions-completed');
     sessCompleted.textContent = workSessions;
     const pomoCompleted = document.getElementById('pomo-sessions-completed');
@@ -107,18 +107,15 @@ document.addEventListener("DOMContentLoaded", function () {
         timerInterval = setInterval(updateTimer, 1000)
     }
 
-    // TODO allow user to exit timer
+    // Allow user to exit timer
     const exitButton = document.getElementById('exit-button');
     exitButton.addEventListener('click', function() {
         timeLeft = 0;});
-    // TODO allow user to reset timer
+    // Allow user to reset timer
     const resetButton = document.getElementById('reset-button');
     resetButton.addEventListener('click', function() {
         flow = "⬤";
         startTimer();});
-    // TODO display how many work sessions have been completed
-    
-    // TODO display how many full Pomo-sessions have been completed?
 
     document.getElementById("start-button").addEventListener("click", startTimer);
 });
