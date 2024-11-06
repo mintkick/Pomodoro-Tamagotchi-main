@@ -295,3 +295,41 @@ span.close-button:hover {
         margin-bottom: 20px;
     }
 }
+
+/* Pet Section Styling */
+
+
+        /* Textured Box styling */
+        .box {
+            display: grid;
+            /* two equal columns */
+            grid-template-columns: 1fr 1fr; 
+            /* wider spacing between columns */
+            gap: 40px; 
+            padding: 20px;
+            width: 80%;
+            max-width: 700px;
+            background-color: #ffffff;
+            /* Thin black border */
+            border: 2px solid black; 
+            border-radius: 8px;
+            /* Textured background */
+            /* background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');  */
+            background-size: cover;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            /* I pray this works for centering */
+            margin: 0 auto;
+        }
+
+        /* Content Column styling */
+        .column p {
+            margin: 10px 0;
+        }
+
+        .health-bar {
+            font-family: monospace;
+            font-size: 24px;
+            color: #ff4d4d; /* Red color for health */
+            text-align: center;
+            margin-top: 20px;
+        }

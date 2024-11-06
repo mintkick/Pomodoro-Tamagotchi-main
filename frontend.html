@@ -54,25 +54,62 @@
         <!-- <script src="test_code/canvas.js"></script> -->
 
         <p class="pet-name"><strong>Tama's Name</strong></p>
-        <p class="pet-stats">Tamadoro stats</p>
         <button
-          style="
+        style="
             border-radius: 10px;
             width: 100px;
             font-weight: bold;
             color: black;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
+            "
         >
-          Feed
-        </button>
-
-        <!-- Unnote this to try a different animation.-->
-        <div id="animation">
-          <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
-          <canvas id="gameCanvas" width="800" height="600"></canvas>
-          <script src="test_code/canvas2.js"></script>
+        Feed
+      </button>
+      
+      <!-- Unnote this to try a different animation.-->
+      <div id="animation">
+        <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <script src="test_code/canvas2.js"></script>
+      </div>
+      
+      <div class="box">
+        <div class="column">
+            <p>----- Health -----</p>
+            <p>----- Happiness -----</p>
+            <p>----- Level -----</p>
         </div>
+        <div class="column">
+            <p>----- # of Pats Given -----</p>
+            <p>----- # of Food Capsules -----</p>
+            <p>----- Experience -----</p>
+        </div>
+      </div>
+
+
+      <!-- WORK IN PROGRESS HEALTH BAR -->
+
+      <div class="health-bar" id="healthBar"></div>
+
+      <script>
+          const maxHealth = 20; // Maximum health represented by the bar length
+          let currentHealth = 15; // Change this to set current health level
+
+          function renderHealthBar(health, max) {
+              const fullChar = 'X'; 
+              const emptyChar = '0';
+
+              // Calculate the health bar segments
+              const filled = fullChar.repeat(health);
+              const empty = emptyChar.repeat(max - health);
+
+              // Display the health bar
+              document.getElementById('healthBar').textContent = `[${filled}${empty}] ${health}/${max}`;
+          }
+
+          // Initial rendering of the health bar
+          renderHealthBar(currentHealth, maxHealth);
+      </script>
 
         <!-- <script src="test_code/script2.js"></script> -->
       </section>
