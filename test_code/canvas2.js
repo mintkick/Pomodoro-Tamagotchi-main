@@ -61,11 +61,34 @@ function animate() {
 //     requestAnimationFrame(animate);
 // }
 
+// IMAGE, SPRITE SOURCE
 const spriteSheet = new Image();
 spriteSheet.src = "test_code/pet/000.png";
 // spriteSheet.src = "test_code/pet/duck.png";
 context.imageSmoothingEnabled = false;
 
+// Animation State Table
+// Key: emotion
+// Value: sprite source
+let emoTable = {};
+emoTable["idle"] = 0;
+emoTable["happy"] = 1;
+emoTable["sad"] = 2;
+emoTable["sleepy"] = 3;
+
+// EMOTION STAT (SAMPLE)
+// let emotion = "sleepy";
+let emotion = "idle";
+
+function getEmotion() {
+  return emoTable[emotion];
+}
+
+function setEmotion(emotionAssign) {
+  emotion = emotionAssign;
+}
+
+// FRAMES
 let frameX = 0; // what frame/sprite/section of img we're pulling from--the X position of the img source
 let frameWidth = 16;
 let frameHeight = 16;
@@ -82,7 +105,7 @@ function animate() {
     // (image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) s-OURCE d-ESTINATION
     spriteSheet,
     frameX, // pix from img + sprWidth * animFrame
-    0,
+    getEmotion() * frameHeight, //emoTable[emotion] * frameHeight,
     frameWidth, // inside/source
     frameHeight,
     canvas.width / 2, // relative to the position of the whole canvas element itself, which could be positioned using CSS
