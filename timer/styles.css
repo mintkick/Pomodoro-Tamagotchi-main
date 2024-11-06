@@ -1,11 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext);
 body {
+    font-family: Arial, sans-serif;
     display: grid;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     margin: 0;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 9000;
 }
 
 .timer {
@@ -16,31 +14,21 @@ body {
     max-width: 100%;
     text-align: center;
     place-items: center;
-    background-color: #f7ac3b;
+    background-color: #ffb74d;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-    
 }
 
 .timer ul, h1 {
     color: #f0f0f0;
 }
 
-.timer li {
-    margin: 10px;
-}
-
 #timer-display {
-    
     text-align: center;
     font-weight: 900;
     color: #f0f0f0;
     font-size: 40px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
 }
 
 form {
@@ -98,9 +86,4 @@ button {
 #flow {
     color: #1f93bd;
     font-size: 24px;
-}
-
-h1, h2, h3{
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
 }
