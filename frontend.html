@@ -55,61 +55,114 @@
 
         <p class="pet-name"><strong>Tama's Name</strong></p>
         <button
-        style="
+          style="
             border-radius: 10px;
             width: 100px;
             font-weight: bold;
             color: black;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            "
+          "
         >
-        Feed
-      </button>
-      
-      <!-- Unnote this to try a different animation.-->
-      <div id="animation">
-        <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
-        <canvas id="gameCanvas" width="800" height="600"></canvas>
-        <script src="test_code/canvas2.js"></script>
-      </div>
-      
-      <div class="box">
-        <div class="column">
+          Feed
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('idle')"
+        >
+          Idle
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('happy')"
+        >
+          Happy
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('sad')"
+        >
+          Sad
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('sleepy')"
+        >
+          Sleepy
+        </button>
+
+        <!-- Unnote this to try a different animation.-->
+        <div id="animation">
+          <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
+          <canvas id="gameCanvas" width="800" height="600"></canvas>
+          <script src="test_code/canvas2.js"></script>
+        </div>
+
+        <div class="box">
+          <div class="column">
             <p>----- Health -----</p>
             <p>----- Happiness -----</p>
             <p>----- Level -----</p>
-        </div>
-        <div class="column">
+          </div>
+          <div class="column">
             <p>----- # of Pats Given -----</p>
             <p>----- # of Food Capsules -----</p>
             <p>----- Experience -----</p>
+          </div>
         </div>
-      </div>
 
+        <!-- WORK IN PROGRESS HEALTH BAR -->
 
-      <!-- WORK IN PROGRESS HEALTH BAR -->
+        <div class="health-bar" id="healthBar"></div>
 
-      <div class="health-bar" id="healthBar"></div>
-
-      <script>
+        <script>
           const maxHealth = 20; // Maximum health represented by the bar length
           let currentHealth = 15; // Change this to set current health level
 
           function renderHealthBar(health, max) {
-              const fullChar = 'X'; 
-              const emptyChar = '0';
+            const fullChar = "X";
+            const emptyChar = "0";
 
-              // Calculate the health bar segments
-              const filled = fullChar.repeat(health);
-              const empty = emptyChar.repeat(max - health);
+            // Calculate the health bar segments
+            const filled = fullChar.repeat(health);
+            const empty = emptyChar.repeat(max - health);
 
-              // Display the health bar
-              document.getElementById('healthBar').textContent = `[${filled}${empty}] ${health}/${max}`;
+            // Display the health bar
+            document.getElementById(
+              "healthBar"
+            ).textContent = `[${filled}${empty}] ${health}/${max}`;
           }
 
           // Initial rendering of the health bar
           renderHealthBar(currentHealth, maxHealth);
-      </script>
+        </script>
 
         <!-- <script src="test_code/script2.js"></script> -->
       </section>
