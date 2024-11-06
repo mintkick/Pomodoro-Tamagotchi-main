@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let timeLeft;
     let workSessions = 0;
     let pomoSessions = 0;
-    let flow = "⬤";
+    let flow = "";
     const sessCompleted = document.getElementById('sessions-completed');
     sessCompleted.textContent = workSessions;
     const pomoCompleted = document.getElementById('pomo-sessions-completed');

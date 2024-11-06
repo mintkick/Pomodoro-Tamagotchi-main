@@ -109,3 +109,23 @@ h1, h2, h3{
 header h1 {
     color: black;
 }
+
+@media (max-width: 768px){
+    .timer{
+        grid-template-columns: auto ;
+        width: 300px;
+        justify-self: center;
+        
+    }
+
+    #sessions{
+        grid-template-columns: auto ;
+        width: 300px;
+        justify-self: center;
+    }
+
+    form{
+        width: 300px;
+        justify-self: center;
+    }
+}
