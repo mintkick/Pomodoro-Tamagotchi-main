@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
         const secs = seconds % 60;
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
     function getTimeInSeconds(id) {
@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(workSessions);
                 sessCompleted.textContent = workSessions;
                 if (counter && form1) {
-                    counter.style.display = 'block';
-                    form1[0].style.display = 'block';
+                    counter.style.display = 'grid';
+                    form1[0].style.display = 'grid';
                 }
                 if (workSessions % 4 === 0)
                 {
@@ -77,8 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 timerDisplay.textContent = formatTime(timeLeft)
             }
             else {
-                flow += "⬤";
-                flowCounter.textContent = flow
                 startTimer();
             }
         }
