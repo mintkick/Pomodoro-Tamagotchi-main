@@ -1,10 +1,8 @@
 body {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     display: grid;
     justify-content: left;
     align-items: center;
-    height: 100vh;
-    background-color: #1f93bd;
     margin: 0;
 }
 
@@ -16,39 +14,35 @@ body {
     max-width: 100%;
     text-align: center;
     place-items: center;
-    background-color: #99daf4;
+    background-color: #ffb74d;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-.timer ul{
-    color:#1f93bd;
+.timer ul, h1 {
+    color: #f0f0f0;
 }
 
 #timer-display {
     text-align: center;
     font-weight: 900;
-    color: #1f93bd;
+    color: #f0f0f0;
     font-size: 40px;
-}
-
-h1  {
-    color: #1f93bd;
 }
 
 form {
     display: flex;
-    color: #99daf4;
+    color: #49a149;
     position: relative;
     gap:10px;
     text-align: center;
     justify-content: center;
 }
-button{
+
+button {
     background-color:#99daf4 ;
     border-color: #1f93bd;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color:#1f93bd;
     height:25px;
     width: 100px;
@@ -57,12 +51,11 @@ button{
 }
 
 #work-options, #short, #long {
-    background-color: #99daf4;
+    background-color: #c1e1c1;
     border-radius: 5px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 100px;
     text-align: center;
-    color: #1f93bd;
+    color: #49a149;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -73,10 +66,9 @@ button{
     justify-self: center;
     text-align: center;
     border-radius: 15px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #1f93bd;
     background-color: #99daf4;
-    padding:15px;
+    padding: 15px;
 
 }
 
@@ -84,13 +76,14 @@ button{
     font-size: 34px;
 }
 
-#buttons{
+#buttons {
     gap: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-self: center;
 }
-#flow{
+
+#flow {
     color: #1f93bd;
     font-size: 24px;
 }

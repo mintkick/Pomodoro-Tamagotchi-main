@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown Timer</title>
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="timer">
         <div class="tasks">
-            <h1>Countdown Timer</h1>
+            <h1>Pomodoro Timer</h1>
             <p id="timer-display">00:00:00</p>
             <p id="flow"></p>
         </div>
@@ -34,7 +35,7 @@
     </div>
     <div class="form">
         <form>
-            <label class="label" id="work" for="work">Work session:</label>
+            <label class="label" id="work">Work session:</label>
             <select id="work-options" name="work-options">
                 <option value=15>15 minutes</option>
                 <option value=20>20 minutes</option>
@@ -45,12 +46,12 @@
                 <option value=60>60 minutes</option>
                 <option value=90>90 minutes</option>
             </select><br>
-            <label class="label" for="s-break">Short break:</label>
+            <label class="label">Short break:</label>
             <select id="short" name="short">
                 <option value="5">5 minutes</option>
                 <option value="10">10 minutes</option>
             </select><br>
-            <label class="label" for="l-break">Long break:</label>
+            <label class="label">Long break:</label>
             <select id="long" name="long">
                 <option value="15">15 minutes</option>
                 <option value="20">20 minutes</option>
