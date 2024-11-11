@@ -4,7 +4,7 @@
 // console.log('The js is connected')
 // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 // // The Firebase SDK is initialized and available here!
-//
+
 // firebase.auth().onAuthStateChanged(user => { });
 // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
 // firebase.firestore().doc('/foo/bar').get().then(() => { });
@@ -14,7 +14,7 @@
 // firebase.analytics(); // call to activate
 // firebase.analytics().logEvent('tutorial_completed');
 // firebase.performance(); // call to activate
-//
+
 // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
 // try {
@@ -35,7 +35,10 @@
 //     console.error(e);
 //     loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
 // }
-// );
+// });
+
+// authentification section 
+
 
 
 
