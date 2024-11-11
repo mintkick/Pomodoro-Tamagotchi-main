@@ -1,5 +1,6 @@
 # Ignore directories
 images/
+env/
 
 # Ignore all .log files
 # *.log
