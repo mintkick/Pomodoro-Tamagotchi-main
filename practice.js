@@ -1,6 +1,9 @@
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
-const db = getFirestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// const db = getFirestore();
 
 const docRef = await addDoc(collection(db, 'cities'), {
   name: 'Los Angeles',
