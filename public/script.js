@@ -12,7 +12,7 @@ console.log('The js is connected')
 
 // firebase.initializeApp(firebaseConfig)
 
-// firebase.auth().onAuthStateChanged(user => { });
+firebase.auth().onAuthStateChanged(user => { });
 firebase.database().ref('/path/to/ref').on('value', snapshot => { });
 firebase.firestore().doc('/foo/bar').get().then(() => { });
 firebase.functions().httpsCallable('yourFunction')().then(() => { });
@@ -57,10 +57,21 @@ async function getCollections() {
 
 
     return collectionIds;
+
+
     
 }
 
 
+// console.log("I made it")
+// getCollections()
+// .then((collectionIds) => {
+//     console.log("This function has been entered")
+//     console.log("Collections: ", collectionIds);
+// })
+// .catch((error) => {
+//     console.error("Error getting collections: ", error);
+// })
 
 
 
@@ -91,18 +102,6 @@ function showSection(section) {
 }
 
 function updateTab(section){
-
-    console.log("I made it")
-    getCollections()
-    .then((collectionIds) => {
-        console.log("This function has been entered")
-        console.log("Collections: ", collectionIds);
-    })
-    .catch((error) => {
-        console.error("Error getting collections: ", error);
-    })
-
-
 
 
     const dailyTab = document.getElementById("daily-tab");
