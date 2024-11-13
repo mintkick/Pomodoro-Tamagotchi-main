@@ -1,6 +1,6 @@
 
 // import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js';
-import firebaseConfig from 'key.js'
+// import firebaseConfig from 'config.js'
 import firebase from 'firebase/app';
 document.addEventListener('DOMContentLoaded', function() {
 const loadEl = document.querySelector('#load');
