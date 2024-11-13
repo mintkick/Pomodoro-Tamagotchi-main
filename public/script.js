@@ -1,6 +1,8 @@
 
 // import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js';
-// import firebaseConfig from 'config.js'
+import firebaseConfig from 'config.js'
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import firebase from 'firebase/app';
 document.addEventListener('DOMContentLoaded', function() {
 const loadEl = document.querySelector('#load');
@@ -42,6 +44,24 @@ try {
 }
 });
 
+async function getCollections() {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const collections = collectionGroup(db, "");
+    console.log(collections)
+
+    const querySnapshot = await getDocs(collections);
+
+    const collectionIds = querySnapshot.docs.map((doc) => doc.ref.parent.id);
+
+
+    return collectionIds;
+    
+}
+
+
+
 
 
 
@@ -57,6 +77,8 @@ let tasks = [
     { id: 1, text: "Task One", dueDate: "2024-11-01" }
 ];
 
+
+
 // Track if the modal is for a daily or due date task
 let isDailyTask = true;
 
@@ -69,6 +91,20 @@ function showSection(section) {
 }
 
 function updateTab(section){
+
+    console.log("I made it")
+    getCollections()
+    .then((collectionIds) => {
+        console.log("This function has been entered")
+        console.log("Collections: ", collectionIds);
+    })
+    .catch((error) => {
+        console.error("Error getting collections: ", error);
+    })
+
+
+
+
     const dailyTab = document.getElementById("daily-tab");
     const taskTab = document.getElementById("task-tab");
     console.log(taskTab.className)
