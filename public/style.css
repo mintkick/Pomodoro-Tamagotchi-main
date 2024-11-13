@@ -21,12 +21,64 @@ header {
     padding: 10px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* display: grid;
+    margin-top: auto;
+    grid-template-columns: 30% auto; */
 }
 
 h1 {
     font-size: 1.8em;
     font-weight: bold;
 }
+
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+
+}
+
+nav h1 {
+    text-align: center;
+    justify-self: center;
+}
+
+.google-button {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+
+
+#timer-demo {
+    background-color: aquamarine;
+        width: 100px;
+        display: flex;
+        margin-left: 100px;
+        text-align: center;
+        justify-self: center;
+        border-radius: 10px;
+        /* margin-top: 20px;
+        margin-bottom: -20px; */
+        padding: 10px;
+}
+
+
+#timer-demo a {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+
+}
+
+
 
 /* Main Content */
 main {

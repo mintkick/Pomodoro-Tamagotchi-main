@@ -14,57 +14,37 @@
     </style>
   </head>
   <header>
-    <div id="login-logout">
-      <div class="input">
-        <button id="google-login-btn" class="google-button" style="display: block;">
-                <i class="fab fa-google"></i> Google Login
-              </button>
-            </div>
-            <div class="input">
+    <nav>
+
+      <div id="user-details">
+        <div id="login-logout">
+          <div class="input">
+            <button id="google-login-btn" class="google-button" style="display: block;">
+              <i class="fab fa-google"></i> Google Login
+            </button>
+          </div>
+          <div class="input">
             <button id="google-logout-btn" class="google-button" style="display: none;">
-                <i class="fab fa-google"></i> Google Logout
-              </button>
-        </div>
-        <div>
+              <i class="fab fa-google"></i> Google Logout
+            </button>
+          </div>
+          <div>
             <img id="userProfilePicture" alt="profile pic from Google" style="display: none;">
           </div>
-    </div>
-    <div class="input">
-      <span id="userName"></span> <!-- This will display the user's name -->
-    </div>
-
-    
-    <div
-      id="timer-demo"
-      style="
-        background-color: aquamarine;
-        width: 100px;
-        display: flex;
-        margin-left: 100px;
-        text-align: center;
-        justify-self: center;
-        border-radius: 10px;
-        margin-top: 20px;
-        margin-bottom: -20px;
-        padding: 10px;
-      "
-    >
-      <a
-      href="timer\timer.html"
-        style="
-          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
-            sans-serif;
-          font-size: 20px;
-          color: black;
-          font-weight: bold;
-          "
-        >Timer Demo</a
-      >
-    </div>
-    <h1>Tamadoro</h1>
+        </div>
+        <div class="input">
+          <span id="userName"></span> <!-- This will display the user's name -->
+        </div>
+      </div>
+      <h1>Tamadoro</h1>
+      
+      
+      <div id="timer-demo">
+        <a href="timer\timer.html">Timer Demo</a>
+      </div>
+    </nav>
   </header>
   <body>
-    
     <!-- Main Container -->
     <main>
       <!-- Pet Section -->
@@ -87,20 +67,20 @@
           Feed
         </button>
         <button
-        style="
+          style="
             border-radius: 10px;
             width: 100px;
             font-weight: bold;
             color: black;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            "
+          "
           id="emoButton"
           onclick="setEmotion('idle')"
-          >
+        >
           Idle
         </button>
         <button
-        style="
+          style="
             border-radius: 10px;
             width: 100px;
             font-weight: bold;
@@ -143,7 +123,7 @@
         <div id="animation">
           <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
           <canvas id="gameCanvas" width="800" height="600"></canvas>
-          <script src="test_code/canvas2.js"></script>
+          <script src="canvas2.js"></script>
         </div>
 
         <div class="box">
@@ -166,7 +146,7 @@
         <script>
           const maxHealth = 20; // Maximum health represented by the bar length
           let currentHealth = 15; // Change this to set current health level
-          
+
           function renderHealthBar(health, max) {
             const fullChar = "X";
             const emptyChar = "0";
@@ -174,7 +154,7 @@
             // Calculate the health bar segments
             const filled = fullChar.repeat(health);
             const empty = emptyChar.repeat(max - health);
-            
+
             // Display the health bar
             document.getElementById(
               "healthBar"
@@ -183,7 +163,7 @@
 
           // Initial rendering of the health bar
           renderHealthBar(currentHealth, maxHealth);
-          </script>
+        </script>
 
         <!-- <script src="test_code/script2.js"></script> -->
       </section>
@@ -197,13 +177,13 @@
             id="daily-tab"
             onclick="showSection('daily')"
           >
-          Daily
+            Daily
           </button>
           <button
             class="single-tab"
             id="task-tab"
             onclick="showSection('tasks')"
-            >
+          >
             Tasks
           </button>
         </div>
@@ -220,7 +200,7 @@
               </li>
             </ul>
           </div>
-          
+
           <div class="edit-buttons">
             <button onclick="openModal('daily')">Add Daily Task</button>
             <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
@@ -259,11 +239,12 @@
       <a href="#"><img src="img/search-icon.png" alt="Search" /></a>
       <a href="timer/timer.html"
         ><img src="img/clock-icon.png" alt="Clock"
-        /></a>
+      /></a>
       <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
-      
+
       <!-- Link to your JavaScript file -->
-      <script src="script.js"></script>
     </nav>
+    <script src="tasks.js"></script>
+    <script src="script.js"></script>
   </body>
-  </html>
+</html>

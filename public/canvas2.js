@@ -63,7 +63,7 @@ function animate() {
 
 // IMAGE, SPRITE SOURCE
 const spriteSheet = new Image();
-spriteSheet.src = "test_code/pet/000.png";
+spriteSheet.src = "pet/000.png";
 // spriteSheet.src = "test_code/pet/duck.png";
 context.imageSmoothingEnabled = false;
 

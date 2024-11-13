@@ -1,5 +1,6 @@
 # Ignore directories
 images/
+env/
 
 # Ignore all .log files
 # *.log
@@ -7,5 +8,6 @@ images/
 # Ignore specific files
 test_code/index.hmtl
 test_code/index1.hmtl
+config.js
 # styles.css
 # styles1.css
