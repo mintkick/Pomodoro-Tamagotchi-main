@@ -9,36 +9,47 @@
     <script src="auth.js" type="module" defer></script>
     <style>
       canvas {
-        border: 1px solid #f0f; /* Optional: to visualize the canvas */
+        border: 1px solid #f0f; /* Optional: to visualize the canvas borders */
       }
     </style>
   </head>
   <header>
     <nav>
-
       <div id="user-details">
         <div id="login-logout">
           <div class="input">
-            <button id="google-login-btn" class="google-button" style="display: block;">
+            <button
+              id="google-login-btn"
+              class="google-button"
+              style="display: block"
+            >
               <i class="fab fa-google"></i> Google Login
             </button>
           </div>
           <div class="input">
-            <button id="google-logout-btn" class="google-button" style="display: none;">
+            <button
+              id="google-logout-btn"
+              class="google-button"
+              style="display: none"
+            >
               <i class="fab fa-google"></i> Google Logout
             </button>
           </div>
           <div>
-            <img id="userProfilePicture" alt="profile pic from Google" style="display: none;">
+            <img
+              id="userProfilePicture"
+              alt="profile pic from Google"
+              style="display: none"
+            />
           </div>
         </div>
         <div class="input">
-          <span id="userName"></span> <!-- This will display the user's name -->
+          <span id="userName"></span>
+          <!-- This will display the user's name -->
         </div>
       </div>
       <h1>Tamadoro</h1>
-      
-      
+
       <div id="timer-demo">
         <a href="timer\timer.html">Timer Demo</a>
       </div>
