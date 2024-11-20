@@ -64,7 +64,6 @@ function animate() {
 // IMAGE, SPRITE SOURCE
 const spriteSheet = new Image();
 spriteSheet.src = "pet/000.png";
-// spriteSheet.src = "test_code/pet/duck.png";
 context.imageSmoothingEnabled = false;
 
 // Animation State Table
@@ -77,7 +76,6 @@ emoTable["sad"] = 2;
 emoTable["sleepy"] = 3;
 
 // EMOTION STAT (SAMPLE)
-// let emotion = "sleepy";
 let emotion = "idle";
 
 function getEmotion() {
@@ -108,8 +106,9 @@ function animate() {
     getEmotion() * frameHeight, //emoTable[emotion] * frameHeight,
     frameWidth, // inside/source
     frameHeight,
-    canvas.width / 2, // relative to the position of the whole canvas element itself, which could be positioned using CSS
-    0,
+    canvas.width / 2 - (spriteSheet.width / 2) * 4, // relative to the position of the whole canvas element itself, which could be positioned using CSS
+    canvas.height / 2 - spriteSheet.height * 2, // I'm not sure why *2 is the right number...
+    // canvas.height / 2 - (spriteSheet.height / 2) * 4,
     frameWidth * 16, // outside/destination
     frameHeight * 16
   );
