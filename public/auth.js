@@ -30,7 +30,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebas
                 document.getElementById('google-logout-btn').style.display = 'none';
                 document.getElementById('google-login-btn').style.display = 'block';
                 document.getElementById('userProfilePicture').style.display = 'none';
-                projectsList.innerHTML = '';
                 clearUserInfo();
                 displayLoginMessage();
                 console.log("No user signed in");
@@ -39,8 +38,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebas
         async function handleSignOut() {
             try {
                 await signOut(auth);
-                // Clear the projects list on sign out
-                projectsList.innerHTML = '';
+                
                 clearUserInfo();
                 displayLoginMessage();
                 signOutMessage.innerText = "You have been successfully signed out.";
@@ -48,10 +46,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebas
                 signOutMessage.innerText = "An error occurred during sign-out.";
                 console.error(error);
             }
-        }
-        function displayLoginMessage() {
-            // Display a message prompting the user to log in
-            signOutMessage.innerText = "Please log in to access your projects.";
         }
         function clearUserInfo() {
             // Clear user information
