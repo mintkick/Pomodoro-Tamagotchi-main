@@ -2,16 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebas
         //import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
         import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js';
         import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js';
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCRNxhiv2spiPeSE5el_7K2pYLJTsDTl7U",
-            authDomain: "tamadoro-bf4e0.firebaseapp.com",
-            projectId: "tamadoro-bf4e0",
-            storageBucket: "tamadoro-bf4e0.appspot.com",
-            messagingSenderId: "27920436070",
-            appId: "1:27920436070:web:7e4ad85969892eefcc16a7",
-            measurementId: "G-PWJP6SYKBJ"
-        };
+        import firebaseConfig from './config.js';
+       
          
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
