@@ -1,7 +1,9 @@
 import { initializeApp} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js';
 // import { getFirestore, collection, addDoc, getDocs, listCollections } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js%27';
-import firebaseConfig from './config.js';
+import firebaseConfig from 'node./config.js';
+// const firebaseConfig = require('./config.js');
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
