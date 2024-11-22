@@ -1,3 +1,4 @@
+import pet  from '../Pet.js'; 
 document.addEventListener("DOMContentLoaded", function () {
     const timerDisplay = document.getElementById("timer-display");
 
@@ -101,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 flow = "You just completed one session!";
                 flowCounter.textContent = flow;
                 flow = "⬤";
+                pet.addFood()
                 startTimer()
             }
         }

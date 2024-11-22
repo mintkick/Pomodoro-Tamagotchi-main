@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tamadoro</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="config.js" defer></script>
+    <!-- <script src="config.js" defer></script> -->
+     <!-- ^where is the config.js file? -->
     <script src="auth.js" type="module" defer></script>
     <style>
       canvas {
@@ -61,6 +62,18 @@
       <!-- Pet Section -->
       <!-- Adam and Teia's Zone -->
       <section class="pet-section">
+        <!--Testing for new Pet code-->
+        <h1>Play with <span id="pet-name">Loading...</span></h1>
+        <button id="feedBtn">Feed</button>
+        <button id="statusBtn">Show Status</button>
+        <button id="playBtn">Play</button>
+        <div id="status">Welcome!</div>
+        <script src="Pet.js" type="module"></script>
+        <script type="module">
+          import pet from './Pet.js';
+          document.getElementById('pet-name').textContent = pet.getName();
+        </script>
+        <!--/testing-->
         <!-- <img src="img/tama-pet.webp" alt="Tama Pet" class="pet-image"> -->
         <!-- <canvas id="gameCanvas" width="800" height="600"></canvas> -->
         <!-- <script src="test_code/canvas.js"></script> -->
@@ -256,6 +269,6 @@
       <!-- Link to your JavaScript file -->
     </nav>
     <script src="tasks.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js type="module"></script>
   </body>
 </html>
