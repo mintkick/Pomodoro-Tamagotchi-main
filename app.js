@@ -5,7 +5,7 @@ const Task = require('./models/Task'); // Updated path
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Change the port number to 3001
+const PORT = process.env.PORT || 3001; // Change the port number to 3001
 
 const config = {
   authRequired: false,
