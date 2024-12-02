@@ -54,27 +54,14 @@ function loadDailyTasks() {
 
 // Load tasks with due dates into the tasks list
 function loadTasks() {
-    fetch('/tasks')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch tasks');
-            }
-            return response.json();
-        })
-        .then(tasks => {
-            const tasksList = document.getElementById("tasks-list");
-            tasksList.innerHTML = ""; // Clear existing tasks
+    const tasksList = document.getElementById("tasks-list");
+    tasksList.innerHTML = ""; // Clear existing tasks
 
-            tasks.forEach(task => {
-                const li = document.createElement("li");
-                li.textContent = `${task.text} - Due: ${task.dueDate}`;
-                tasksList.appendChild(li);
-            });
-        })
-        .catch(error => {
-            console.error(error);
-            alert('Error loading tasks');
-        });
+    tasks.forEach(task => {
+        const li = document.createElement("li");
+        li.textContent = `${task.text} - Due: ${task.dueDate}`;
+        tasksList.appendChild(li);
+    });
 }
 
 // Open the modal for adding a task
@@ -102,6 +89,46 @@ function clearModalInputs() {
     document.getElementById("task-date-input").value = "";
 }
 
+// Load tasks from the server
+function loadTasksFromServer() {
+    fetch('/tasks')
+        .then(response => response.json())
+        .then(data => {
+            dailyTasks = data.filter(task => task.frequency === 'daily');
+            tasks = data.filter(task => task.dueDate);
+            loadDailyTasks();
+            loadTasks();
+        });
+}
+
+// Save task to the server
+function saveTaskToServer(task) {
+    fetch('/tasks', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(task)
+    }).then(response => response.json())
+      .then(data => {
+          if (!data.success) {
+              alert('Failed to save task');
+          }
+      });
+}
+
+// Delete task from the server
+function deleteTaskFromServer(taskId) {
+    fetch(`/tasks/${taskId}`, {
+        method: 'DELETE'
+    }).then(response => response.json())
+      .then(data => {
+          if (!data.success) {
+              alert('Failed to delete task');
+          }
+      });
+}
+
 // Add a new task from the modal
 function submitTask(index = null) {
     const taskInput = document.getElementById("task-input").value.trim();
@@ -109,25 +136,23 @@ function submitTask(index = null) {
 
     if (isDailyTask) {
         if (taskInput) {
-            if (index !== null) {
-                dailyTasks[index].text = taskInput;
-            } else {
-                dailyTasks.push({ id: Date.now(), text: taskInput, frequency: "daily" });
-            }
+            const task = index !== null ? dailyTasks[index] : { id: Date.now(), frequency: "daily" };
+            task.text = taskInput;
+            if (index === null) dailyTasks.push(task);
             loadDailyTasks();
+            saveTaskToServer(task);
         } else {
             alert("Please enter a daily task name.");
             return;
         }
     } else {
         if (taskInput && dateInput) {
-            if (index !== null) {
-                tasks[index].text = taskInput;
-                tasks[index].dueDate = dateInput;
-            } else {
-                tasks.push({ id: Date.now(), text: taskInput, dueDate: dateInput });
-            }
+            const task = index !== null ? tasks[index] : { id: Date.now() };
+            task.text = taskInput;
+            task.dueDate = dateInput;
+            if (index === null) tasks.push(task);
             loadTasks();
+            saveTaskToServer(task);
         } else {
             alert("Please enter a task name and due date.");
             return;
@@ -154,8 +179,7 @@ window.onclick = function(event) {
 
 // Initial load of tasks when the page is ready
 document.addEventListener("DOMContentLoaded", function() {
-    loadDailyTasks();
-    loadTasks();
+    loadTasksFromServer();
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -344,15 +368,15 @@ document.addEventListener('DOMContentLoaded', function() {
 // Edit an existing task
 function editTask(index, type) {
     const task = type === 'daily' ? dailyTasks[index] : tasks[index];
-    document.getElementById("task-input").value = task.text || task.name;
+    document.getElementById("task-input").value = task.text;
     if (type === 'daily') {
         document.getElementById("task-date-input").style.display = 'none';
     } else {
-        document.getElementById("task-date-input").value = task.dueDate || task.date;
+        document.getElementById("task-date-input").value = task.dueDate;
         document.getElementById("task-date-input").style.display = 'block';
     }
     isDailyTask = type === 'daily';
-    document.getElementById("modal-title").textContent = isDailyTask ? "Edit Daily Task" : "Edit Scheduled Task";
+    document.getElementById("modal-title").textContent = isDailyTask ? "Edit Daily Task" : "Edit Task";
     document.getElementById("task-modal").style.display = "block";
     document.getElementById("save-task-button").onclick = function() {
         submitTask(index);
@@ -361,6 +385,7 @@ function editTask(index, type) {
 
 // Delete an existing task
 function deleteTask(index, type) {
+    const taskId = type === 'daily' ? dailyTasks[index].id : tasks[index].id;
     if (type === 'daily') {
         dailyTasks.splice(index, 1);
         loadDailyTasks();
@@ -368,108 +393,7 @@ function deleteTask(index, type) {
         tasks.splice(index, 1);
         loadTasks();
     }
-}
-
-// Render Daily Tasks with Edit and Delete options
-function renderDailyTasks() {
-    const dailyTasksList = document.getElementById('daily-tasks-list');
-    dailyTasksList.innerHTML = '';
-    dailyTasks.forEach(function(task, index) {
-        const li = document.createElement('li');
-        li.textContent = task.text;
-
-        const buttonContainer = document.createElement('div');
-
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.onclick = function() {
-            editTask(index, 'daily');
-        };
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = function() {
-            deleteTask(index, 'daily');
-        };
-
-        buttonContainer.appendChild(editButton);
-        buttonContainer.appendChild(deleteButton);
-        li.appendChild(buttonContainer);
-        dailyTasksList.appendChild(li);
-    });
-}
-
-// Render Scheduled Tasks with Edit and Delete options
-function renderScheduledTasks() {
-    const scheduledTasksList = document.getElementById('scheduled-tasks-list');
-    scheduledTasksList.innerHTML = '';
-    tasks.forEach(function(task, index) {
-        const li = document.createElement('li');
-        li.textContent = `${task.text} - Due: ${task.dueDate}`;
-
-        const buttonContainer = document.createElement('div');
-
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.onclick = function() {
-            editTask(index, 'scheduled');
-        };
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = function() {
-            deleteTask(index, 'scheduled');
-        };
-
-        buttonContainer.appendChild(editButton);
-        buttonContainer.appendChild(deleteButton);
-        li.appendChild(buttonContainer);
-        scheduledTasksList.appendChild(li);
-    });
+    deleteTaskFromServer(taskId);
 }
 
 // Closing Task section JavaScript
-
-function deleteTask(id) {
-  fetch(`/tasks/${id}`, {
-    method: 'DELETE',
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to delete task');
-      }
-      return response.json();
-    })
-    .then(() => {
-      loadTasks(); // Reload tasks after deletion
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Error deleting task');
-    });
-}
-
-function updateTask(id, updatedData) {
-  fetch(`/tasks/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(updatedData),
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to update task');
-      }
-      return response.json();
-    })
-    .then(() => {
-      loadTasks(); // Reload tasks after update
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Error updating task');
-    });
-}
-
-// ...existing code...

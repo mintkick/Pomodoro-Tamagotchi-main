@@ -10,14 +10,9 @@ async function connectDB() {
     console.log('Connected to MongoDB');
   } catch (err) {
     console.error(err);
-    process.exit(1); // Exit process with failure
   }
 }
 
-// Remove automatic connection to allow controlled initialization
-// connectDB();
+connectDB();
 
-module.exports = {
-  client,
-  connectDB,
-};
+module.exports = client;

@@ -42,7 +42,6 @@ window.onload = () => {
         document.getElementById('userName').textContent = user.name;
         document.getElementById('userProfilePicture').src = user.picture;
         document.getElementById('userProfilePicture').style.display = 'block';
-        // Ensure tasks are loaded for any authenticated user
         loadTasks();
       } else {
         document.getElementById('login-btn').style.display = 'block';
@@ -55,24 +54,15 @@ window.onload = () => {
 
 function loadTasks() {
   fetch('/tasks')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to fetch tasks');
-      }
-      return response.json();
-    })
+    .then(response => response.json())
     .then(tasks => {
       const taskList = document.getElementById('task-list');
       taskList.innerHTML = '';
       tasks.forEach(task => {
         const taskItem = document.createElement('li');
-        taskItem.textContent = `${task.text} - Due: ${task.dueDate || 'No due date'}`;
+        taskItem.textContent = task.text;
         taskList.appendChild(taskItem);
       });
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Error loading tasks');
     });
 }
 
@@ -93,12 +83,7 @@ function submitTask() {
     },
     body: JSON.stringify({ text: taskText }),
   })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to add task');
-      }
-      return response.json();
-    })
+    .then(response => response.json())
     .then(task => {
       const taskList = document.getElementById('task-list');
       const taskItem = document.createElement('li');
@@ -106,9 +91,5 @@ function submitTask() {
       taskList.appendChild(taskItem);
       document.getElementById('task-input').value = '';
       closeModal();
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Error adding task');
     });
 }
