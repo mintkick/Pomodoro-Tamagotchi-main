@@ -7,6 +7,32 @@ document.getElementById('logout-btn').addEventListener('click', () => {
 });
 
 window.onload = () => {
+  fetch('/auth-status')
+    .then(response => response.json())
+    .then(data => {
+      const authDiv = document.getElementById('auth-button');
+      if (data.isAuthenticated) {
+        // User is logged in, show logout button
+        const logoutBtn = document.createElement('button');
+        logoutBtn.id = 'logout-btn';
+        logoutBtn.textContent = 'Logout';
+        logoutBtn.addEventListener('click', () => {
+          window.location.href = '/logout';
+        });
+        authDiv.appendChild(logoutBtn);
+      } else {
+        // User is not logged in, show login button
+        const loginBtn = document.createElement('button');
+        loginBtn.id = 'login-btn';
+        loginBtn.textContent = 'Login';
+        loginBtn.addEventListener('click', () => {
+          window.location.href = '/login';
+        });
+        authDiv.appendChild(loginBtn);
+      }
+    })
+    .catch(error => console.error('Error:', error));
+
   fetch('/user')
     .then(response => response.json())
     .then(user => {
