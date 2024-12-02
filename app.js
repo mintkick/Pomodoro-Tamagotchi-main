@@ -30,14 +30,6 @@ app.use(express.json()); // Add JSON parsing middleware
 
 db.connectDB(); // Initialize database connection
 
-// Middleware to check authentication
-function ensureAuthenticated(req, res, next) {
-  if (req.oidc.isAuthenticated()) {
-    return next();
-  }
-  res.status(401).json({ error: 'Unauthorized' });
-}
-
 // req.isAuthenticated is provided from the auth router
 app.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
@@ -53,7 +45,10 @@ app.get('/user', (req, res) => {
 });
 
 // CRUD Routes for Tasks
-app.get('/tasks', ensureAuthenticated, async (req, res) => {
+app.get('/tasks', async (req, res) => {
+  if (!req.oidc.isAuthenticated()) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
   try {
     const tasks = await Task.getTasks(req.oidc.user.sub);
     res.json(tasks);
@@ -62,7 +57,10 @@ app.get('/tasks', ensureAuthenticated, async (req, res) => {
   }
 });
 
-app.post('/tasks', ensureAuthenticated, async (req, res) => {
+app.post('/tasks', async (req, res) => {
+  if (!req.oidc.isAuthenticated()) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
   const { text, dueDate, frequency } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Task text is required' });
@@ -82,7 +80,10 @@ app.post('/tasks', ensureAuthenticated, async (req, res) => {
   }
 });
 
-app.delete('/tasks/:id', ensureAuthenticated, async (req, res) => {
+app.delete('/tasks/:id', async (req, res) => {
+  if (!req.oidc.isAuthenticated()) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
   try {
     const result = await Task.deleteTask(req.params.id, req.oidc.user.sub);
     if (result.deletedCount === 0) {
@@ -94,7 +95,10 @@ app.delete('/tasks/:id', ensureAuthenticated, async (req, res) => {
   }
 });
 
-app.put('/tasks/:id', ensureAuthenticated, async (req, res) => {
+app.put('/tasks/:id', async (req, res) => {
+  if (!req.oidc.isAuthenticated()) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
   const { text, completed, dueDate, frequency } = req.body;
   try {
     const updatedData = {};
