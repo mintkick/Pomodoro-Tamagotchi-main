@@ -18,20 +18,19 @@ const { ObjectId } = require('mongodb');
 const tasksCollection = db.db('tasks').collection('tasks');
 
 module.exports = {
-  getTasks: async (userId) => {
-    // Ensure userId is correctly used
-    return await tasksCollection.find({ userId }).toArray();
+  getTasks: async () => {
+    return await tasksCollection.find({}).toArray(); // Removed userId filter
   },
   createTask: async (task) => {
     const result = await tasksCollection.insertOne(task);
     return result.ops[0];
   },
-  deleteTask: async (id, userId) => {
-    return await tasksCollection.deleteOne({ _id: ObjectId(id), userId });
+  deleteTask: async (id) => {
+    return await tasksCollection.deleteOne({ _id: ObjectId(id) }); // Removed userId filter
   },
-  updateTask: async (id, userId, updatedData) => {
+  updateTask: async (id, updatedData) => {
     return await tasksCollection.findOneAndUpdate(
-      { _id: ObjectId(id), userId },
+      { _id: ObjectId(id) },
       { $set: updatedData },
       { returnOriginal: false }
     );

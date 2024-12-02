@@ -14,8 +14,7 @@ async function connectDB() {
   }
 }
 
-// Remove automatic connection to allow controlled initialization
-// connectDB();
+// ...existing code...
 
 module.exports = {
   client,

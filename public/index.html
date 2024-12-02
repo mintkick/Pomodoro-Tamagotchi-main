@@ -16,6 +16,7 @@
       <nav>
         <div id="user-details">
           <div id="login-logout">
+            <!-- 
             <div class="input">
               <button id="login-btn" class="auth-button" style="display: block;">
                 Log In
@@ -34,6 +35,7 @@
             <div>
               <img id="userProfilePicture" alt="Profile Picture" style="display: none;" />
             </div>
+            -->
           </div>
           <div class="input">
             <span id="userName"></span>
@@ -209,34 +211,17 @@
       <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
     </nav>
 
+    <!-- 
     <script src="auth.js" type="module"></script>
+    -->
     <script src="tasks.js"></script>
     <script>
       window.onload = () => {
-        fetch('/user')
-          .then(response => response.json())
-          .then(user => {
-            if (user) {
-              document.getElementById('login-btn').style.display = 'none';
-              document.getElementById('logout-btn').style.display = 'block';
-              document.getElementById('google-login-btn').style.display = 'none';
-              document.getElementById('userName').textContent = user.name;
-              document.getElementById('userProfilePicture').src = user.picture;
-              document.getElementById('userProfilePicture').style.display = 'block';
-              loadTasks();
-            } else {
-              document.getElementById('login-btn').style.display = 'block';
-              document.getElementById('google-login-btn').style.display = 'block';
-              document.getElementById('logout-btn').style.display = 'none';
-              document.getElementById('userName').textContent = '';
-              document.getElementById('userProfilePicture').style.display = 'none';
-            }
-          });
+        // Removed authentication fetch
+        loadTasks();
       };
 
-      document.getElementById('google-login-btn').addEventListener('click', () => {
-        window.location.href = '/login?connection=google-oauth2';
-      });
+      // Remove Google login button event listener if present
     </script>
   </body>
 </html>

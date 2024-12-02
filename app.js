@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth } = require('express-openid-connect');
+// const { auth } = require('express-openid-connect'); // Removed authentication
 const Task = require('./models/Task'); // Import Task model
 const db = require('./database'); // Import database.js
 require('dotenv').config();
@@ -7,21 +7,9 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  secret: process.env.SECRET,
-  baseURL: process.env.BASE_URL,
-  clientID: process.env.CLIENT_ID,
-  issuerBaseURL: process.env.ISSUER_BASE_URL,
-  authorizationParams: {
-    // Add the scope to include profile and email
-    scope: 'openid profile email',
-  },
-};
+// const config = { /* ... */ }; // Removed auth config
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
+// app.use(auth(config)); // Removed authentication middleware
 
 // Serve static files from the public directory
 app.use(express.static('public'));
@@ -30,27 +18,19 @@ app.use(express.json()); // Add JSON parsing middleware
 
 db.connectDB(); // Initialize database connection
 
-// req.isAuthenticated is provided from the auth router
+// Remove authentication checks in routes
 app.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+  res.send('Welcome');
 });
 
-// Route to fetch user information
 app.get('/user', (req, res) => {
-  if (req.oidc.isAuthenticated()) {
-    res.json(req.oidc.user);
-  } else {
-    res.json(null);
-  }
+  res.json(null);
 });
 
-// CRUD Routes for Tasks
+// CRUD Routes for Tasks without authentication
 app.get('/tasks', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
   try {
-    const tasks = await Task.getTasks(req.oidc.user.sub);
+    const tasks = await Task.getTasks(); // Modify Task.getTasks to not require userId
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -58,16 +38,12 @@ app.get('/tasks', async (req, res) => {
 });
 
 app.post('/tasks', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
   const { text, dueDate, frequency } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Task text is required' });
   }
   try {
     const newTask = {
-      userId: req.oidc.user.sub,
       text,
       dueDate: dueDate || null,
       frequency: frequency || 'daily',
@@ -81,11 +57,8 @@ app.post('/tasks', async (req, res) => {
 });
 
 app.delete('/tasks/:id', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
   try {
-    const result = await Task.deleteTask(req.params.id, req.oidc.user.sub);
+    const result = await Task.deleteTask(req.params.id);
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: 'Task not found' });
     }
@@ -96,9 +69,6 @@ app.delete('/tasks/:id', async (req, res) => {
 });
 
 app.put('/tasks/:id', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
   const { text, completed, dueDate, frequency } = req.body;
   try {
     const updatedData = {};
@@ -107,7 +77,7 @@ app.put('/tasks/:id', async (req, res) => {
     if (dueDate !== undefined) updatedData.dueDate = dueDate;
     if (frequency !== undefined) updatedData.frequency = frequency;
 
-    const updatedTask = await Task.updateTask(req.params.id, req.oidc.user.sub, updatedData);
+    const updatedTask = await Task.updateTask(req.params.id, updatedData);
     if (!updatedTask.value) {
       return res.status(404).json({ error: 'Task not found' });
     }

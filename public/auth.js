@@ -1,31 +1,32 @@
-document.getElementById('login-btn').addEventListener('click', () => {
-  window.location.href = '/login';
-});
+// document.getElementById('login-btn').addEventListener('click', () => {
+//   window.location.href = '/login';
+// });
 
-document.getElementById('logout-btn').addEventListener('click', () => {
-  window.location.href = '/logout';
-});
+// document.getElementById('logout-btn').addEventListener('click', () => {
+//   window.location.href = '/logout';
+// });
 
-window.onload = () => {
-  fetch('/user')
-    .then(response => response.json())
-    .then(user => {
-      if (user) {
-        document.getElementById('login-btn').style.display = 'none';
-        document.getElementById('logout-btn').style.display = 'block';
-        document.getElementById('userName').textContent = user.name;
-        document.getElementById('userProfilePicture').src = user.picture;
-        document.getElementById('userProfilePicture').style.display = 'block';
-        // Ensure tasks are loaded for any authenticated user
-        loadTasks();
-      } else {
-        document.getElementById('login-btn').style.display = 'block';
-        document.getElementById('logout-btn').style.display = 'none';
-        document.getElementById('userName').textContent = '';
-        document.getElementById('userProfilePicture').style.display = 'none';
-      }
-    });
-};
+// window.onload = () => {
+//   fetch('/user')
+//     .then(response => response.json())
+//     .then(user => {
+//       if (user) {
+//         document.getElementById('login-btn').style.display = 'none';
+//         document.getElementById('logout-btn').style.display = 'block';
+//         document.getElementById('google-login-btn').style.display = 'none';
+//         document.getElementById('userName').textContent = user.name;
+//         document.getElementById('userProfilePicture').src = user.picture;
+//         document.getElementById('userProfilePicture').style.display = 'block';
+//         loadTasks();
+//       } else {
+//         document.getElementById('login-btn').style.display = 'block';
+//         document.getElementById('google-login-btn').style.display = 'block';
+//         document.getElementById('logout-btn').style.display = 'none';
+//         document.getElementById('userName').textContent = '';
+//         document.getElementById('userProfilePicture').style.display = 'none';
+//       }
+//     });
+// };
 
 function loadTasks() {
   fetch('/tasks')
