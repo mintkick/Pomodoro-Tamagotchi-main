@@ -5,7 +5,7 @@ const db = require('./database'); // Import database.js
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Change the port number to 3001
 
 const config = {
   authRequired: false,

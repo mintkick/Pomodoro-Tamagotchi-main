@@ -1,5 +1,5 @@
 document.getElementById('login-btn').addEventListener('click', () => {
-  window.location.href = '/login';
+  window.location.href = 'https://YOUR_AUTH0_DOMAIN/authorize?response_type=token&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_CALLBACK_URL';
 });
 
 document.getElementById('logout-btn').addEventListener('click', () => {
@@ -26,7 +26,7 @@ window.onload = () => {
         loginBtn.id = 'login-btn';
         loginBtn.textContent = 'Login';
         loginBtn.addEventListener('click', () => {
-          window.location.href = '/login';
+          window.location.href = 'https://YOUR_AUTH0_DOMAIN/authorize?response_type=token&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_CALLBACK_URL';
         });
         authDiv.appendChild(loginBtn);
       }
