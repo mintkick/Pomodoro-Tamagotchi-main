@@ -1,7 +1,7 @@
-const express = require('express');
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const express = require('express'); // Import express
+const mongoose = require('mongoose'); // Import mongoose
 const { auth, requiresAuth } = require('express-openid-connect');
 const Task = require('./models/Task'); // Import Task model
 require('dotenv').config();
@@ -11,8 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // Add your connection options here
 }).then(() => console.log('MongoDB connected! ✌️'))
   .catch((err) => console.log(err));
 
