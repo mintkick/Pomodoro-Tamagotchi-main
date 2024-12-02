@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   .catch((err) => console.log(err));
 
 // Define Auth0 Configuration
-const authConfig = {
+const config = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.SECRET,
@@ -30,7 +30,7 @@ const authConfig = {
 app.use(cors());
 
 // Initialize Auth0 with authConfig
-app.use(auth(authConfig));
+app.use(auth(config));
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
@@ -84,7 +84,7 @@ app.get('/tasks', requiresAuth(), async (req, res) => {
 });
 
 app.post('/tasks', requiresAuth(), async (req, res) => {
-  const { text, dueDate, frequency } = req.body;
+  const { text, dueDate } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Task text is required' });
   }
@@ -94,7 +94,6 @@ app.post('/tasks', requiresAuth(), async (req, res) => {
       userId: req.oidc.user.sub,
       text,
       dueDate,
-      frequency,
       completed: false,
     };
     const task = new Task(newTask);
