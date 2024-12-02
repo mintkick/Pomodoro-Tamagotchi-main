@@ -1,122 +1,131 @@
 const express = require('express');
-const { auth } = require('express-openid-connect');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const { auth, requiresAuth } = require('express-openid-connect');
 const Task = require('./models/Task'); // Import Task model
-const db = require('./database'); // Import database.js
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const config = {
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => console.log('MongoDB connected! ✌️'))
+  .catch((err) => console.log(err));
+
+// Define Auth0 Configuration
+const authConfig = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.SECRET,
   baseURL: process.env.BASE_URL,
   clientID: process.env.CLIENT_ID,
-  issuerBaseURL: process.env.ISSUER_BASE_URL,
-  authorizationParams: {
-    // Add the scope to include profile and email
-    scope: 'openid profile email',
-  },
+  issuerBaseURL: process.env.ISSUER_BASE_URL
 };
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
+// Enable CORS for all routes
+app.use(cors());
 
-// Serve static files from the public directory
-app.use(express.static('public'));
+// Initialize Auth0 with authConfig
+app.use(auth(authConfig));
 
-app.use(express.json()); // Add JSON parsing middleware
+// Middleware to parse incoming JSON requests
+app.use(express.json());
 
-db.connectDB(); // Initialize database connection
-
-// req.isAuthenticated is provided from the auth router
+// Route to check authentication status
 app.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
 
-// Route to fetch user information
-app.get('/user', (req, res) => {
-  if (req.oidc.isAuthenticated()) {
-    res.json(req.oidc.user);
-  } else {
-    res.json(null);
-  }
+// Login route (Auth0 handles this automatically but we can customize)
+app.get('/login', (req, res) => {
+  res.oidc.login({
+    returnTo: '/',
+    authorizationParams: {
+      prompt: 'login'
+    }
+  });
 });
 
-// CRUD Routes for Tasks
-app.get('/tasks', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+// Logout route
+app.get('/logout', (req, res) => {
+  res.oidc.logout({
+    returnTo: process.env.BASE_URL
+  });
+});
+
+// Get user profile (protected route)
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.json(req.oidc.user);
+});
+
+// Check authentication status
+app.get('/auth-status', (req, res) => {
+  res.json({
+    isAuthenticated: req.oidc.isAuthenticated(),
+    user: req.oidc.user
+  });
+});
+
+// API Routes (Protected)
+app.get('/tasks', requiresAuth(), async (req, res) => {
+  const userId = req.oidc.user.sub;
+
   try {
-    const tasks = await Task.getTasks(req.oidc.user.sub);
+    const tasks = await Task.find({ userId });
     res.json(tasks);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.error('Error fetching tasks:', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.post('/tasks', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+app.post('/tasks', requiresAuth(), async (req, res) => {
   const { text, dueDate, frequency } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Task text is required' });
   }
+
   try {
     const newTask = {
       userId: req.oidc.user.sub,
       text,
-      dueDate: dueDate || null,
-      frequency: frequency || 'daily',
+      dueDate,
+      frequency,
       completed: false,
     };
-    const savedTask = await Task.createTask(newTask);
-    res.status(201).json(savedTask);
+    const task = new Task(newTask);
+    await task.save();
+    res.status(201).json(task);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.error('Error creating task:', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.delete('/tasks/:id', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+app.delete('/tasks/:id', requiresAuth(), async (req, res) => {
+  const userId = req.oidc.user.sub;
+  const taskId = req.params.id;
+
   try {
-    const result = await Task.deleteTask(req.params.id, req.oidc.user.sub);
-    if (result.deletedCount === 0) {
-      return res.status(404).json({ error: 'Task not found' });
-    }
-    res.json({ message: 'Task deleted' });
+    const result = await Task.deleteOne({ _id: taskId, userId });
+    res.json(result);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.error('Error deleting task:', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.put('/tasks/:id', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-  const { text, completed, dueDate, frequency } = req.body;
-  try {
-    const updatedData = {};
-    if (text !== undefined) updatedData.text = text;
-    if (completed !== undefined) updatedData.completed = completed;
-    if (dueDate !== undefined) updatedData.dueDate = dueDate;
-    if (frequency !== undefined) updatedData.frequency = frequency;
+// Serve static files after API routes
+app.use(express.static('public'));
 
-    const updatedTask = await Task.updateTask(req.params.id, req.oidc.user.sub, updatedData);
-    if (!updatedTask.value) {
-      return res.status(404).json({ error: 'Task not found' });
-    }
-    res.json(updatedTask.value);
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
-  }
+// Fallback route for undefined endpoints
+app.use((req, res) => {
+  res.status(404).send('404: Page not found');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Start the server
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
