@@ -11,3 +11,18 @@ test_code/index1.hmtl
 config.js
 # styles.css
 # styles1.css
+
+# Ignor all .env files
+.env
+
+# Ignore all .DS_Store files
+.DS_Store
+
+# Ignore all .gitignore files
+.gitignore
+
+# Ignore all .git files
+.git
+
+# ignore node_modules
+node_modules/
