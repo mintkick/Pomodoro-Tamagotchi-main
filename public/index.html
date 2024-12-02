@@ -238,5 +238,19 @@
         window.location.href = '/login?connection=google-oauth2';
       });
     </script>
+    <div id="user-info">
+      <img id="user-picture" src="" alt="User Picture" />
+      <span id="user-name"></span>
+      <a href="/logout">Logout</a>
+    </div>
+    <script>
+      fetch('/user')
+        .then(response => response.json())
+        .then(user => {
+          document.getElementById('user-picture').src = user.picture;
+          document.getElementById('user-name').textContent = user.name;
+        })
+        .catch(error => console.error('Error fetching user info:', error));
+    </script>
   </body>
 </html>
