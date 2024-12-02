@@ -12,7 +12,231 @@
     </style>
   </head>
   <body>
-    <div id="auth-button"></div>
-    <script src="auth.js"></script>
+    <header>
+      <nav>
+        <div id="user-details">
+          <div id="login-logout">
+            <div class="input">
+              <button id="login-btn" class="auth-button" style="display: block;">
+                Log In
+              </button>
+            </div>
+            <div class="input">
+              <button id="logout-btn" class="auth-button" style="display: none;">
+                Log Out
+              </button>
+            </div>
+            <div class="input">
+              <button id="google-login-btn" class="auth-button" style="display: none;">
+                Log In with Google
+              </button>
+            </div>
+            <div>
+              <img id="userProfilePicture" alt="Profile Picture" style="display: none;" />
+            </div>
+          </div>
+          <div class="input">
+            <span id="userName"></span>
+          </div>
+        </div>
+        <h1>Tamadoro</h1>
+        <div id="timer-demo">
+          <a href="timer/timer.html">Timer Demo</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <!-- Main Container -->
+      <!-- Pet Section -->
+      <!-- Adam and Teia's Zone -->
+      <section class="pet-section">
+        <!-- <img src="img/tama-pet.webp" alt="Tama Pet" class="pet-image"> -->
+        <!-- <canvas id="gameCanvas" width="800" height="600"></canvas> -->
+        <!-- <script src="test_code/canvas.js"></script> -->
+
+        <p class="pet-name"><strong>Tama's Name</strong></p>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+        >
+          Feed
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('idle')"
+        >
+          Idle
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('happy')"
+        >
+          Happy
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('sad')"
+        >
+          Sad
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('sleepy')"
+        >
+          Sleepy
+        </button>
+
+        <!-- Unnote this to try a different animation.-->
+        <div id="animation">
+          <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
+          <canvas id="gameCanvas" width="800" height="600"></canvas>
+          <script src="canvas2.js"></script>
+        </div>
+
+        <div class="box">
+          <div class="column">
+            <p>----- Health -----</p>
+            <p>----- Happiness -----</p>
+            <p>----- Level -----</p>
+          </div>
+          <div class="column">
+            <p>----- # of Pats Given -----</p>
+            <p>----- # of Food Capsules -----</p>
+            <p>----- Experience -----</p>
+          </div>
+        </div>
+
+        <!-- WORK IN PROGRESS HEALTH BAR -->
+
+        <div class="health-bar" id="healthBar"></div>
+
+        <script>
+          const maxHealth = 20; // Maximum health represented by the bar length
+          let currentHealth = 15; // Change this to set current health level
+
+          function renderHealthBar(health, max) {
+            const fullChar = "X";
+            const emptyChar = "0";
+
+            // Calculate the health bar segments
+            const filled = fullChar.repeat(health);
+            const empty = emptyChar.repeat(max - health);
+
+            // Display the health bar
+            document.getElementById(
+              "healthBar"
+            ).textContent = `[${filled}${empty}] ${health}/${max}`;
+          }
+
+          // Initial rendering of the health bar
+          renderHealthBar(currentHealth, maxHealth);
+        </script>
+
+        <!-- <script src="test_code/script2.js"></script> -->
+      </section>
+
+      <!-- New Tasks Section -->
+      <section class="tasks-section">
+        <h2>Tasks</h2>
+        <div class="task-tabs">
+          <button id="daily-tasks-tab" class="active-tab">Daily Tasks</button>
+          <button id="scheduled-tasks-tab">Scheduled Tasks</button>
+        </div>
+        <div id="daily-tasks-content" class="tasks-content">
+          <ul id="daily-tasks-list">
+            <!-- Daily tasks will be listed here -->
+          </ul>
+          <button id="add-daily-task-button">Add Daily Task</button>
+        </div>
+        <div id="scheduled-tasks-content" class="tasks-content" style="display: none;">
+          <ul id="scheduled-tasks-list">
+            <!-- Scheduled tasks will be listed here -->
+          </ul>
+          <button id="add-scheduled-task-button">Add Scheduled Task</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Task Modal -->
+    <div id="task-modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h3 id="modal-title">Add Task</h3>
+        <input type="text" id="task-name-input" placeholder="Task Name">
+        <input type="date" id="task-date-input" style="display: none;">
+        <button id="save-task-button">Save Task</button>
+      </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+      <a href="#"><img src="img/inbox-icon.png" alt="Inbox" /></a>
+      <a href="#"><img src="img/search-icon.png" alt="Search" /></a>
+      <a href="timer/timer.html"><img src="img/clock-icon.png" alt="Clock" /></a>
+      <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
+    </nav>
+
+    <script src="auth.js" type="module"></script>
+    <script src="tasks.js"></script>
+    <script>
+      window.onload = () => {
+        fetch('/user')
+          .then(response => response.json())
+          .then(user => {
+            if (user) {
+              document.getElementById('login-btn').style.display = 'none';
+              document.getElementById('logout-btn').style.display = 'block';
+              document.getElementById('google-login-btn').style.display = 'none';
+              document.getElementById('userName').textContent = user.name;
+              document.getElementById('userProfilePicture').src = user.picture;
+              document.getElementById('userProfilePicture').style.display = 'block';
+              loadTasks();
+            } else {
+              document.getElementById('login-btn').style.display = 'block';
+              document.getElementById('google-login-btn').style.display = 'block';
+              document.getElementById('logout-btn').style.display = 'none';
+              document.getElementById('userName').textContent = '';
+              document.getElementById('userProfilePicture').style.display = 'none';
+            }
+          });
+      };
+
+      document.getElementById('google-login-btn').addEventListener('click', () => {
+        window.location.href = '/login?connection=google-oauth2';
+      });
+    </script>
   </body>
 </html>
