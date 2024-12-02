@@ -24,3 +24,5 @@ window.onload = () => {
       }
     });
 };
+
+// Remove the loadTasks function and its call as it is already handled in tasks.js

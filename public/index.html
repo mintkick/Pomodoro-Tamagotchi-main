@@ -165,83 +165,47 @@
 
       <!-- Task List Section -->
       <section class="task-section">
-        <!-- Tabs for Daily and Task sections -->
         <div class="tabs">
-          <button
-            class="single-tab clicked"
-            id="daily-tab"
-            onclick="showSection('daily')"
-          >
-            Daily
-          </button>
-          <button
-            class="single-tab"
-            id="task-tab"
-            onclick="showSection('tasks')"
-          >
-            Tasks
-          </button>
+          <button id="daily-tab" class="single-tab" onclick="showSection('daily')">Daily Tasks</button>
+          <button id="task-tab" class="single-tab" onclick="showSection('tasks')">Tasks</button>
         </div>
-
-        <!-- Section for Daily Tasks -->
         <div id="daily-section" class="section">
+          <button onclick="openModal('daily')">Add Daily Task</button>
           <div class="list-area">
-            <h3>Do Daily:</h3>
-            <ul id="daily-tasks-list">
-              <li>
-                <input type="checkbox" />
-                <p>Task One</p>
-                <p></p>
-              </li>
-            </ul>
-          </div>
-
-          <div class="edit-buttons">
-            <button onclick="openModal('daily')">Add Daily Task</button>
-            <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
+            <h3>Daily Tasks</h3>
+            <ul id="daily-tasks-list"></ul>
           </div>
         </div>
-
-        <!-- Section for Tasks with Due Dates -->
-        <div id="tasks-section" class="section" style="display: none">
+        <div id="tasks-section" class="section" style="display: none;">
+          <button onclick="openModal('task')">Add Task</button>
           <div class="list-area">
-            <h3>Due 2024-11-01</h3>
-            <ul id="tasks-list">
-              <!-- <li>Task One - Due Date</li> -->
-            </ul>
-          </div>
-          <div class="edit-buttons">
-            <button onclick="openModal('task')">Add Task</button>
-          </div>
-        </div>
-
-        <!-- Modal for Adding Tasks -->
-        <div id="task-modal" class="modal">
-          <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
-            <h3 id="modal-title">Add Task</h3>
-            <input type="text" id="task-input" placeholder="Enter task" />
-            <input type="date" id="task-date-input" style="display: none" />
-            <button onclick="submitTask()">Add Task</button>
+            <h3>Tasks</h3>
+            <ul id="tasks-list"></ul>
           </div>
         </div>
       </section>
+
+      <!-- Modal for Adding Tasks -->
+      <div id="task-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeModal()">&times;</span>
+          <h3 id="modal-title">Add Task</h3>
+          <input type="text" id="task-input" placeholder="Enter task" />
+          <input type="date" id="task-date-input" style="display: none" />
+          <button onclick="submitTask()">Add Task</button>
+        </div>
+      </div>
     </main>
 
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
       <a href="#"><img src="img/inbox-icon.png" alt="Inbox" /></a>
       <a href="#"><img src="img/search-icon.png" alt="Search" /></a>
-      <a href="timer/timer.html"
-        ><img src="img/clock-icon.png" alt="Clock"
-      /></a>
+      <a href="timer/timer.html"><img src="img/clock-icon.png" alt="Clock" /></a>
       <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
-
-      <!-- Link to your JavaScript file -->
     </nav>
+
     <script src="auth.js" type="module"></script>
     <script type="module" src="tasks.js"></script>
-    <script type="module" src="script.js"></script>
-    <script type="module" src="my_practice.js"></script>
   </body>
 </html>

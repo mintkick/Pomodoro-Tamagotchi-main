@@ -1,14 +1,12 @@
 // Opening Task section JavaScript
 
 // Variables to store tasks
-let  dailyTasks = [
+let dailyTasks = [
     { id: 1, text: "Task One", frequency: "daily" }
 ];
 let tasks = [
     { id: 1, text: "Task One", dueDate: "2024-11-01" }
 ];
-
-
 
 // Track if the modal is for a daily or due date task
 let isDailyTask = true;
@@ -53,7 +51,6 @@ function updateTab(section){
         }
     }
 }
-
 
 // Load daily tasks into the daily tasks list
 function loadDailyTasks() {
@@ -154,39 +151,10 @@ window.onclick = function(event) {
     }
 }
 
-
-// function showSection(section){
-//     // add css id, remove the id from the other tab
-//     const tabs = document.getElementsByClassName('single-tab')
-//     console.log(tabs)
-//     const clickedId = event.target.id;
-//     const selectedButton = document.getElementById(clickedId)
-//     console.log(selectedButton.innerHTML)
-//     selectedButton.setAttribute('id', 'clicked-tab')
-    
-//     for (tab in tabs){
-//         if (tab != selectedButton){
-//             console.log(tab)
-//         }
-//     }
-
-//     // if (section == 'Daily'){
-        
-
-//     // }
-//     // else if (section == 'Tasks'){
-
-//     // }
-// }
-
-
 // Initial load of tasks when the page is ready
 document.addEventListener("DOMContentLoaded", function() {
     loadDailyTasks();
     loadTasks();
 });
-
-
-
 
 // Closing Task section JavaScript
