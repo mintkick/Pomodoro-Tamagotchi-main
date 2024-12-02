@@ -42,159 +42,20 @@
     </header>
     <main>
       <!-- Main Container -->
-      <!-- Pet Section -->
-      <!-- Adam and Teia's Zone -->
-      <section class="pet-section">
-        <!-- <img src="img/tama-pet.webp" alt="Tama Pet" class="pet-image"> -->
-        <!-- <canvas id="gameCanvas" width="800" height="600"></canvas> -->
-        <!-- <script src="test_code/canvas.js"></script> -->
-
-        <p class="pet-name"><strong>Tama's Name</strong></p>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-        >
-          Feed
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('idle')"
-        >
-          Idle
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('happy')"
-        >
-          Happy
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('sad')"
-        >
-          Sad
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('sleepy')"
-        >
-          Sleepy
-        </button>
-
-        <!-- Unnote this to try a different animation.-->
-        <div id="animation">
-          <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
-          <canvas id="gameCanvas" width="800" height="600"></canvas>
-          <script src="canvas2.js"></script>
-        </div>
-
-        <div class="box">
-          <div class="column">
-            <p>----- Health -----</p>
-            <p>----- Happiness -----</p>
-            <p>----- Level -----</p>
-          </div>
-          <div class="column">
-            <p>----- # of Pats Given -----</p>
-            <p>----- # of Food Capsules -----</p>
-            <p>----- Experience -----</p>
-          </div>
-        </div>
-
-        <!-- WORK IN PROGRESS HEALTH BAR -->
-
-        <div class="health-bar" id="healthBar"></div>
-
-        <script>
-          const maxHealth = 20; // Maximum health represented by the bar length
-          let currentHealth = 15; // Change this to set current health level
-
-          function renderHealthBar(health, max) {
-            const fullChar = "X";
-            const emptyChar = "0";
-
-            // Calculate the health bar segments
-            const filled = fullChar.repeat(health);
-            const empty = emptyChar.repeat(max - health);
-
-            // Display the health bar
-            document.getElementById(
-              "healthBar"
-            ).textContent = `[${filled}${empty}] ${health}/${max}`;
-          }
-
-          // Initial rendering of the health bar
-          renderHealthBar(currentHealth, maxHealth);
-        </script>
-
-        <!-- <script src="test_code/script2.js"></script> -->
-      </section>
-
-      <!-- Task List Section -->
       <section class="task-section">
-        <div class="tabs">
-          <button id="daily-tab" class="single-tab" onclick="showSection('daily')">Daily Tasks</button>
-          <button id="task-tab" class="single-tab" onclick="showSection('tasks')">Tasks</button>
-        </div>
-        <div id="daily-section" class="section">
-          <button onclick="openModal('daily')">Add Daily Task</button>
-          <div class="list-area">
-            <h3>Daily Tasks</h3>
-            <ul id="daily-tasks-list"></ul>
+        <button onclick="openModal('task')">Add Task</button>
+        <!-- Modal for Adding Tasks -->
+        <div id="task-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Add Task</h3>
+            <input type="text" id="task-input" placeholder="Enter task" />
+            <input type="date" id="task-date-input" style="display: none" />
+            <button onclick="submitTask()">Add Task</button>
           </div>
         </div>
-        <div id="tasks-section" class="section" style="display: none;">
-          <button onclick="openModal('task')">Add Task</button>
-          <div class="list-area">
-            <h3>Tasks</h3>
-            <ul id="tasks-list"></ul>
-          </div>
-        </div>
+        <ul id="task-list"></ul>
       </section>
-
-      <!-- Modal for Adding Tasks -->
-      <div id="task-modal" class="modal">
-        <div class="modal-content">
-          <span class="close-button" onclick="closeModal()">&times;</span>
-          <h3 id="modal-title">Add Task</h3>
-          <input type="text" id="task-input" placeholder="Enter task" />
-          <input type="date" id="task-date-input" style="display: none" />
-          <button onclick="submitTask()">Add Task</button>
-        </div>
-      </div>
     </main>
 
     <!-- Sidebar Navigation -->
@@ -206,6 +67,5 @@
     </nav>
 
     <script src="auth.js" type="module"></script>
-    <script type="module" src="tasks.js"></script>
   </body>
 </html>
