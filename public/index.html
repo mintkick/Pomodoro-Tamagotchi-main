@@ -5,13 +5,258 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tamadoro</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="config.js" defer></script>
+    <script src="auth.js" type="module" defer></script>
     <style>
       canvas {
         border: 1px solid #f0f; /* Optional: to visualize the canvas borders */
       }
     </style>
   </head>
+  <header>
+    <nav>
+      <div id="user-details">
+        <div id="login-logout">
+          <div class="input">
+            <button
+              id="login-btn" <!-- Add this id -->
+              class="google-button"
+              style="display: block"
+            >
+              <i class="fab fa-google"></i> Google Login
+            </button>
+          </div>
+          <div class="input">
+            <button
+              id="google-logout-btn"
+              class="google-button"
+              style="display: none"
+            >
+              <i class="fab fa-google"></i> Google Logout
+            </button>
+          </div>
+          <div>
+            <img
+              id="userProfilePicture"
+              alt="profile pic from Google"
+              style="display: none"
+            />
+          </div>
+        </div>
+        <div class="input">
+          <span id="userName"></span>
+          <!-- This will display the user's name -->
+        </div>
+      </div>
+      <h1>Tamadoro</h1>
+
+      <div id="timer-demo">
+        <a href="timer\timer.html">Timer Demo</a>
+      </div>
+    </nav>
+  </header>
   <body>
+    <!-- Main Container -->
+    <main>
+      <!-- Pet Section -->
+      <!-- Adam and Teia's Zone -->
+      <section class="pet-section">
+        <!-- <img src="img/tama-pet.webp" alt="Tama Pet" class="pet-image"> -->
+        <!-- <canvas id="gameCanvas" width="800" height="600"></canvas> -->
+        <!-- <script src="test_code/canvas.js"></script> -->
+
+        <p class="pet-name"><strong>Tama's Name</strong></p>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+        >
+          Feed
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('idle')"
+        >
+          Idle
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('happy')"
+        >
+          Happy
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('sad')"
+        >
+          Sad
+        </button>
+        <button
+          style="
+            border-radius: 10px;
+            width: 100px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          "
+          id="emoButton"
+          onclick="setEmotion('sleepy')"
+        >
+          Sleepy
+        </button>
+
+        <!-- Unnote this to try a different animation.-->
+        <div id="animation">
+          <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
+          <canvas id="gameCanvas" width="800" height="600"></canvas>
+          <script src="canvas2.js"></script>
+        </div>
+
+        <div class="box">
+          <div class="column">
+            <p>----- Health -----</p>
+            <p>----- Happiness -----</p>
+            <p>----- Level -----</p>
+          </div>
+          <div class="column">
+            <p>----- # of Pats Given -----</p>
+            <p>----- # of Food Capsules -----</p>
+            <p>----- Experience -----</p>
+          </div>
+        </div>
+
+        <!-- WORK IN PROGRESS HEALTH BAR -->
+
+        <div class="health-bar" id="healthBar"></div>
+
+        <script>
+          const maxHealth = 20; // Maximum health represented by the bar length
+          let currentHealth = 15; // Change this to set current health level
+
+          function renderHealthBar(health, max) {
+            const fullChar = "X";
+            const emptyChar = "0";
+
+            // Calculate the health bar segments
+            const filled = fullChar.repeat(health);
+            const empty = emptyChar.repeat(max - health);
+
+            // Display the health bar
+            document.getElementById(
+              "healthBar"
+            ).textContent = `[${filled}${empty}] ${health}/${max}`;
+          }
+
+          // Initial rendering of the health bar
+          renderHealthBar(currentHealth, maxHealth);
+        </script>
+
+        <!-- <script src="test_code/script2.js"></script> -->
+      </section>
+
+      <!-- Task List Section -->
+      <section class="task-section">
+        <!-- Tabs for Daily and Task sections -->
+        <div class="tabs">
+          <button
+            class="single-tab clicked"
+            id="daily-tab"
+            onclick="showSection('daily')"
+          >
+            Daily
+          </button>
+          <button
+            class="single-tab"
+            id="task-tab"
+            onclick="showSection('tasks')"
+          >
+            Tasks
+          </button>
+        </div>
+
+        <!-- Section for Daily Tasks -->
+        <div id="daily-section" class="section">
+          <div class="list-area">
+            <h3>Do Daily:</h3>
+            <ul id="daily-tasks-list">
+              <li>
+                <input type="checkbox" />
+                <p>Task One</p>
+                <p></p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="edit-buttons">
+            <button onclick="openModal('daily')">Add Daily Task</button>
+            <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
+          </div>
+        </div>
+
+        <!-- Section for Tasks with Due Dates -->
+        <div id="tasks-section" class="section" style="display: none">
+          <div class="list-area">
+            <h3>Due 2024-11-01</h3>
+            <ul id="tasks-list">
+              <!-- <li>Task One - Due Date</li> -->
+            </ul>
+          </div>
+          <div class="edit-buttons">
+            <button onclick="openModal('task')">Add Task</button>
+          </div>
+        </div>
+
+        <!-- Modal for Adding Tasks -->
+        <div id="task-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Add Task</h3>
+            <input type="text" id="task-input" placeholder="Enter task" />
+            <input type="date" id="task-date-input" style="display: none" />
+            <button onclick="submitTask()">Add Task</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+      <a href="#"><img src="img/inbox-icon.png" alt="Inbox" /></a>
+      <a href="#"><img src="img/search-icon.png" alt="Search" /></a>
+      <a href="timer/timer.html"
+        ><img src="img/clock-icon.png" alt="Clock"
+      /></a>
+      <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
+
+      <!-- Link to your JavaScript file -->
+    </nav>
+    <script src="tasks.js"></script>
+    <script src="script.js"></script>
     <header>
       <nav>
         <div id="user-details">
