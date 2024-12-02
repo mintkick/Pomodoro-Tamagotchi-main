@@ -54,27 +54,39 @@ function loadDailyTasks() {
 
 // Load tasks with due dates into the tasks list
 function loadTasks() {
-    fetch('/tasks')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch tasks');
-            }
-            return response.json();
-        })
-        .then(tasks => {
-            const tasksList = document.getElementById("tasks-list");
-            tasksList.innerHTML = ""; // Clear existing tasks
+  // Fetch daily tasks
+  fetch('/tasks?type=daily')
+    .then(response => response.json())
+    .then(tasks => {
+      const dailyTasksList = document.getElementById('daily-tasks-list');
+      dailyTasksList.innerHTML = '';
+      tasks.forEach(task => {
+        const taskItem = document.createElement('li');
+        taskItem.textContent = `${task.text}`;
+        dailyTasksList.appendChild(taskItem);
+      });
+    })
+    .catch(error => {
+      console.error(error);
+      alert('Error loading daily tasks');
+    });
 
-            tasks.forEach(task => {
-                const li = document.createElement("li");
-                li.textContent = `${task.text} - Due: ${task.dueDate}`;
-                tasksList.appendChild(li);
-            });
-        })
-        .catch(error => {
-            console.error(error);
-            alert('Error loading tasks');
-        });
+  // Fetch scheduled tasks
+  fetch('/tasks?type=scheduled')
+    .then(response => response.json())
+    .then(tasks => {
+      const scheduledTasksList = document.getElementById('scheduled-tasks-list');
+      scheduledTasksList.innerHTML = '';
+      tasks.forEach(task => {
+        const taskItem = document.createElement('li');
+        taskItem.textContent = `${task.text} - Due: ${task.dueDate || 'No due date'}`;
+        scheduledTasksList.appendChild(taskItem);
+      });
+    })
+    .catch(error => {
+      console.error(error);
+      alert('Error loading scheduled tasks');
+    });
 }
 
 // Open the modal for adding a task
@@ -471,5 +483,42 @@ function updateTask(id, updatedData) {
       alert('Error updating task');
     });
 }
+
+document.getElementById('save-task-button').addEventListener('click', () => {
+  const taskNameInput = document.getElementById('task-name-input');
+  const taskDateInput = document.getElementById('task-date-input');
+  const modalTitle = document.getElementById('modal-title').textContent;
+
+  const type = modalTitle.includes('Daily') ? 'daily' : 'scheduled';
+
+  const taskData = {
+    text: taskNameInput.value,
+    type, // 'daily' or 'scheduled'
+    dueDate: type === 'scheduled' ? taskDateInput.value : null,
+  };
+
+  fetch('/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(taskData),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to add task');
+      }
+      return response.json();
+    })
+    .then(task => {
+      // Reload tasks
+      loadTasks();
+      closeModal();
+    })
+    .catch(error => {
+      console.error(error);
+      alert('Error adding task');
+    });
+});
 
 // ...existing code...

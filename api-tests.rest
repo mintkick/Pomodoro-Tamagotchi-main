@@ -1,0 +1,68 @@
+### Get User Information
+GET http://localhost:3000/user
+Content-Type: application/json
+
+###
+
+### Login
+POST http://localhost:3000/login
+Content-Type: application/json
+{
+  "username": "your-username",
+  "password": "your-password"
+}
+
+###
+
+### Logout
+GET http://localhost:3000/logout
+Content-Type: application/json
+
+###
+
+### Get All Tasks
+GET http://localhost:3000/tasks
+Content-Type: application/json
+
+###
+
+### Get Daily Tasks
+GET http://localhost:3000/tasks?type=daily
+Content-Type: application/json
+
+###
+
+### Get Scheduled Tasks
+GET http://localhost:3000/tasks?type=scheduled
+Content-Type: application/json
+
+###
+
+### Create a New Task
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+  "title": "Test Task",
+  "type": "daily",
+  "description": "Task to test create",
+  "completed": false
+}
+
+###
+
+### Update a Task
+PUT http://localhost:3000/tasks/:674e1d1857b86353ec5f3974
+Content-Type: application/json
+
+{
+  "title": "Updated Task Title",
+  "description": "Updated task description",
+  "completed": true
+}
+
+###
+
+### Delete a Task
+DELETE http://localhost:3000/tasks/{taskId}
+Content-Type: application/json

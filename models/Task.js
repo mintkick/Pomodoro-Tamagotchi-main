@@ -1,38 +1,26 @@
-const db = require('../database').client; // Import the MongoDB client
+const db = require('../database').client;
 const { ObjectId } = require('mongodb');
 
-// models/Task.js
-// Remove Mongoose code
-// const mongoose = require('mongoose');
-
-// Remove Mongoose schema
-// const taskSchema = {
-//   userId: { type: String, required: true },
-//   dueDate: { type: Date }, // Add dueDate if needed
-//   frequency: { type: String }, // Add frequency if needed
-// };
-//   frequency: { type: String }, // Add frequency if needed
-// };
-
-// const Task = mongoose.model('Task', taskSchema);
 const tasksCollection = db.db('tasks').collection('tasks');
 
 module.exports = {
-  getTasks: async () => {
-    return await tasksCollection.find({}).toArray(); // Removed userId filter
+  getTasks: async (filter = {}) => {
+    return await tasksCollection.find(filter).toArray();
   },
   createTask: async (task) => {
+    // Ensure the task includes a 'type' field ('daily' or 'scheduled')
     const result = await tasksCollection.insertOne(task);
-    return result.ops[0];
+    return { _id: result.insertedId, ...task };
   },
   deleteTask: async (id) => {
-    return await tasksCollection.deleteOne({ _id: ObjectId(id) }); // Removed userId filter
+    return await tasksCollection.deleteOne({ _id: ObjectId(id) });
   },
   updateTask: async (id, updatedData) => {
-    return await tasksCollection.findOneAndUpdate(
+    const result = await tasksCollection.findOneAndUpdate(
       { _id: ObjectId(id) },
       { $set: updatedData },
-      { returnOriginal: false }
+      { returnDocument: 'after' } // Use 'returnOriginal: false' if using an older MongoDB driver
     );
+    return result.value;
   },
 };

@@ -222,6 +222,40 @@
       };
 
       // Remove Google login button event listener if present
+
+      // Handle tab switching
+      document.getElementById('daily-tasks-tab').addEventListener('click', () => {
+        document.getElementById('daily-tasks-content').style.display = 'block';
+        document.getElementById('scheduled-tasks-content').style.display = 'none';
+      });
+
+      document.getElementById('scheduled-tasks-tab').addEventListener('click', () => {
+        document.getElementById('daily-tasks-content').style.display = 'none';
+        document.getElementById('scheduled-tasks-content').style.display = 'block';
+      });
+
+      // Handle adding tasks
+      document.getElementById('add-daily-task-button').addEventListener('click', () => {
+        document.getElementById('modal-title').textContent = 'Add Daily Task';
+        document.getElementById('task-date-input').style.display = 'none';
+        openModal();
+      });
+
+      document.getElementById('add-scheduled-task-button').addEventListener('click', () => {
+        document.getElementById('modal-title').textContent = 'Add Scheduled Task';
+        document.getElementById('task-date-input').style.display = 'block';
+        openModal();
+      });
+
+      function openModal() {
+        document.getElementById('task-modal').style.display = 'block';
+      }
+
+      function closeModal() {
+        document.getElementById('task-modal').style.display = 'none';
+      }
+
+      document.querySelector('.close-button').addEventListener('click', closeModal);
     </script>
   </body>
 </html>
