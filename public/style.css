@@ -92,11 +92,12 @@ main {
 }
 
 #gameCanvas {
-  width: 150px;
+  width: 300px;
   height: auto;
   border-radius: 10px;
   border: 2px solid black;
-  
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .pet-name {
@@ -303,13 +304,6 @@ span.close-button:hover {
 }
 
 /* Pet Section Styling */
-
-.gameCanvas {
-  width: 50%;
-  height: 200px;
-}
-
-
 
 
 /* Textured Box styling */

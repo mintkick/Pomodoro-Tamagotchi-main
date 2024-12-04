@@ -27,6 +27,43 @@ window.onload = () => {
     });
 };
 
+const { MongoClient } = require("mongodb");
+
+const uri = "mongodb://localhost:3000";
+const client = new MongoClient(uri);
+
+async function main() {
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB");
+    const db = client.db("Tamadoro");
+    const collection = db.collection("users");
+
+    // Add a user
+    const user = {
+      userID: new ObjectId(),
+      email: "example@example.com",
+      password: "hashed_password",
+      name: "John Doe",
+    };
+    const result = await collection.insertOne(user);
+    console.log("User added:", result.insertedId);
+
+    // Find a user by email
+    const foundUser = await collection.findOne({
+      email: "example@example.com",
+    });
+    console.log("User found:", foundUser);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await client.close();
+  }
+}
+
+main();
+
+
 function loadTasks() {
   fetch('/tasks')
     .then(response => {
