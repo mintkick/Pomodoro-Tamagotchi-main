@@ -7,7 +7,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  background-color: #e0e6ef;
   color: #333;
   display: flex;
   flex-direction: column;
@@ -15,11 +15,15 @@ body {
   height: 100vh;
 }
 
+.login-logout button {
+  width: 100%;
+}
+
 /* Header Section */
 header {
   text-align: center;
   padding: 10px;
-  background-color: #fff;
+  background-color: #F4B860;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   /* display: grid;
@@ -52,8 +56,8 @@ nav h1 {
   text-align: center;
 }
 
-#timer-demo {
-  background-color: aquamarine;
+#timer {
+  background-color: #89C383;
   width: 100px;
   display: flex;
   margin-left: 100px;
@@ -65,7 +69,7 @@ nav h1 {
   padding: 10px;
 }
 
-#timer-demo a {
+#timer a {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 20px;
   color: black;
@@ -87,10 +91,12 @@ main {
   margin-bottom: 20px;
 }
 
-.pet-image {
+#gameCanvas {
   width: 150px;
   height: auto;
   border-radius: 10px;
+  border: 2px solid black;
+  
 }
 
 .pet-name {
@@ -174,23 +180,23 @@ span.close-button:hover {
   padding: 15px 20px 15px 20px;
 }
 
-.list-area h3 {
+.tasks-content h3 {
   font-style: italic;
 }
 
-.list-area ul {
+.tasks-content ul {
   text-decoration: none;
   margin: 5px, 10px;
   list-style: none;
 }
 
-.list-area ul li {
+.tasks-content ul li {
   margin: 10px 0px;
   display: flex;
 }
 
-.list-area ul li:hover {
-  background-color: #aec6cf;
+.tasks-content ul li:hover {
+  background-color: #d9f3f1;
 }
 
 .list-area ul li input[type="checkbox"] {
@@ -262,26 +268,6 @@ span.close-button:hover {
   height: 30px;
 }
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #ddd;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-}
-
-.sidebar a {
-  text-decoration: none;
-}
-
-.sidebar img {
-  width: 80%;
-  height: auto;
-}
 
 /* Responsive Design (Tablet and Desktop) */
 @media (min-width: 600px) {
@@ -317,6 +303,14 @@ span.close-button:hover {
 }
 
 /* Pet Section Styling */
+
+.gameCanvas {
+  width: 50%;
+  height: 200px;
+}
+
+
+
 
 /* Textured Box styling */
 .box {
