@@ -466,3 +466,12 @@ span.close-button:hover {
   float: right;
   cursor: pointer;
 }
+
+#login-btn{
+  background-color: #c1e1c1;
+  color: gray;
+  padding: 5px 10px;
+  border: 2px solid #c1e1c1;
+  cursor: pointer;
+  width: 100%;
+}
