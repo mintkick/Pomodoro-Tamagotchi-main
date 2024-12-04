@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient } from 'mongodb';
 
 const uri = "mongodb://localhost:3000";
 const client = new MongoClient(uri);
@@ -29,7 +29,7 @@ window.onload = () => {
         document.getElementById("userName").textContent = user.name;
         document.getElementById("userProfilePicture").src = user.picture;
         document.getElementById("userProfilePicture").style.display = "block";
-        
+
         console.log("starting saveData");
         saveData(user);
       } else {
