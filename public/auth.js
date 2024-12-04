@@ -36,6 +36,9 @@ window.onload = () => {
     .catch(error => {
       console.error('Error fetching user data:', error);
     });
+
+    saveData();
+
 };
 
 const { MongoClient } = require("mongodb");
@@ -43,7 +46,7 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:3000";
 const client = new MongoClient(uri);
 
-async function main() {
+async function saveData() {
   try {
     await client.connect();
     console.log("Connected to MongoDB");
@@ -51,12 +54,12 @@ async function main() {
     const collection = db.collection("users");
 
     // Add a user
-    const user = {
-      userID: new ObjectId(),
-      email: "example@example.com",
-      password: "hashed_password",
-      name: "John Doe",
-    };
+    // const user = {
+    //   userID: new ObjectId(),
+    //   email: "example@example.com",
+    //   password: "hashed_password",
+    //   name: "John Doe",
+    // };
     const result = await collection.insertOne(user);
     console.log("User added:", result.insertedId);
 
