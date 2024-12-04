@@ -11,6 +11,41 @@
       canvas {
         border: 1px solid #f0f; /* Optional: to visualize the canvas borders */
       }
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+      }
+
+      .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close-button:hover,
+      .close-button:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
     </style>
   </head>
   <header>
@@ -57,126 +92,39 @@
   </header>
   <body>
     <!-- Main Container -->
+  <body>
+    <header>
+      <nav>
+        <div id="user-details">
+          <div id="login-logout">
+            <div class="input">
+              <button id="login-btn" class="auth-button" style="display: block;">
+                Log In
+              </button>
+            </div>
+            <div class="input">
+              <button id="logout-btn" class="auth-button" style="display: none;">
+                Log Out
+              </button>
+            </div>
+            <div>
+              <img id="userProfilePicture" alt="Profile Picture" style="display: none;" />
+            </div>
+          </div>
+          <div class="input">
+            <span id="userName"></span>
+          </div>
+        </div>
+        <h1>Tamadoro</h1>
+        <div id="timer-demo">
+          <a href="timer/timer.html">Timer Demo</a>
+        </div>
+      </nav>
+    </header>
     <main>
-      <!-- Pet Section -->
-      <!-- Adam and Teia's Zone -->
       <section class="pet-section">
-        <!-- <img src="img/tama-pet.webp" alt="Tama Pet" class="pet-image"> -->
-        <!-- <canvas id="gameCanvas" width="800" height="600"></canvas> -->
-        <!-- <script src="test_code/canvas.js"></script> -->
-
-        <p class="pet-name"><strong>Tama's Name</strong></p>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-        >
-          Feed
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('idle')"
-        >
-          Idle
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('happy')"
-        >
-          Happy
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('sad')"
-        >
-          Sad
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('sleepy')"
-        >
-          Sleepy
-        </button>
-
-        <!-- Unnote this to try a different animation.-->
-        <div id="animation">
-          <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
-          <canvas id="gameCanvas" width="800" height="600"></canvas>
-          <script src="canvas2.js"></script>
-        </div>
-
-        <div class="box">
-          <div class="column">
-            <p>----- Health -----</p>
-            <p>----- Happiness -----</p>
-            <p>----- Level -----</p>
-          </div>
-          <div class="column">
-            <p>----- # of Pats Given -----</p>
-            <p>----- # of Food Capsules -----</p>
-            <p>----- Experience -----</p>
-          </div>
-        </div>
-
-        <!-- WORK IN PROGRESS HEALTH BAR -->
-
-        <div class="health-bar" id="healthBar"></div>
-
-        <script>
-          const maxHealth = 20; // Maximum health represented by the bar length
-          let currentHealth = 15; // Change this to set current health level
-
-          function renderHealthBar(health, max) {
-            const fullChar = "X";
-            const emptyChar = "0";
-
-            // Calculate the health bar segments
-            const filled = fullChar.repeat(health);
-            const empty = emptyChar.repeat(max - health);
-
-            // Display the health bar
-            document.getElementById(
-              "healthBar"
-            ).textContent = `[${filled}${empty}] ${health}/${max}`;
-          }
-
-          // Initial rendering of the health bar
-          renderHealthBar(currentHealth, maxHealth);
-        </script>
-
-        <!-- <script src="test_code/script2.js"></script> -->
+        <canvas id="petCanvas" width="400" height="400"></canvas>
+        <!-- Additional pet controls can go here -->
       </section>
 
       <!-- Task List Section -->
@@ -216,6 +164,16 @@
             <button onclick="openModal('daily')">Add Daily Task</button>
             <button onclick="resetDailyTasks()">Reset Daily Tasks</button>
           </div>
+      <section class="task-section">
+        <button onclick="openModal()">Add Task</button>
+        <!-- Modal for Adding Tasks -->
+        <div id="task-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Add Task</h3>
+            <input type="text" id="task-input" placeholder="Enter task" required />
+            <button onclick="submitTask()">Add Task</button>
+          </div>
         </div>
 
         <!-- Section for Tasks with Due Dates -->
@@ -241,6 +199,7 @@
             <button onclick="submitTask()">Add Task</button>
           </div>
         </div>
+        <ul id="task-list"></ul>
       </section>
     </main>
 
@@ -254,9 +213,38 @@
       <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
 
       <!-- Link to your JavaScript file -->
+      <a href="timer/timer.html"><img src="img/clock-icon.png" alt="Clock" /></a>
+      <a href="#"><img src="img/settings-icon.png" alt="Settings" /></a>
     </nav>
     <script src="tasks.js"></script>
     <script src="script.js"></script>
+
+    <script src="auth.js" type="module"></script>
+    <script>
+      // Example Pet Script (You can expand this based on your pet functionality)
+      const canvas = document.getElementById('petCanvas');
+      const ctx = canvas.getContext('2d');
+
+      // Simple Pet Drawing
+      function drawPet() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#FFD700';
+        ctx.beginPath();
+        ctx.arc(200, 200, 50, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.arc(185, 185, 5, 0, Math.PI * 2);
+        ctx.arc(215, 185, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(200, 210, 20, 0, Math.PI);
+        ctx.stroke();
+      }
+
+      drawPet();
+    </script>
     <header>
       <nav>
         <div id="user-details">

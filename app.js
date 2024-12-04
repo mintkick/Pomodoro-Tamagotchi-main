@@ -1,7 +1,7 @@
 const express = require('express');
 const { auth } = require('express-openid-connect');
-const Task = require('./models/Task'); // Import Task model
-const db = require('./database'); // Import database.js
+const mongoose = require('mongoose');
+const Task = require('./models/Task'); // Updated path
 require('dotenv').config();
 
 const app = express();
@@ -14,29 +14,24 @@ const config = {
   baseURL: process.env.BASE_URL,
   clientID: process.env.CLIENT_ID,
   issuerBaseURL: process.env.ISSUER_BASE_URL,
+  authorizationParams: {
+    // Add the scope to include profile and email
+    scope: 'openid profile email',
+  },
 };
 
+// auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
-// Serve static files from the public directory
-app.use(express.static('public'));
+// Middleware to parse JSON bodies
+app.use(express.json());
 
-app.use(express.json()); // Add JSON parsing middleware
+// Connect to MongoDB using Mongoose
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Could not connect to MongoDB', err));
 
-db.connectDB(); // Initialize database connection
-
-// Middleware to check authentication
-function ensureAuthenticated(req, res, next) {
-  if (req.oidc.isAuthenticated()) {
-    return next();
-  }
-  res.status(401).json({ error: 'Unauthorized' });
-}
-
-// req.isAuthenticated is provided from the auth router
-app.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
+// API Routes
 
 // Route to fetch user information
 app.get('/user', (req, res) => {
@@ -47,67 +42,65 @@ app.get('/user', (req, res) => {
   }
 });
 
-// CRUD Routes for Tasks
-app.get('/tasks', ensureAuthenticated, async (req, res) => {
+// Fetch tasks for the logged-in user
+app.get('/tasks', async (req, res) => {
+  if (!req.oidc.isAuthenticated()) {
+    return res.status(401).json({ error: 'Not authenticated' });
+  }
+
   try {
-    const tasks = await Task.getTasks(req.oidc.user.sub);
+    const tasks = await Task.find({ userId: req.oidc.user.sub });
     res.json(tasks);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.post('/tasks', ensureAuthenticated, async (req, res) => {
-  const { text, dueDate, frequency } = req.body;
-  if (!text) {
-    return res.status(400).json({ error: 'Task text is required' });
+// Add a new task for the logged-in user
+app.post('/tasks', async (req, res) => {
+  if (!req.oidc.isAuthenticated()) {
+    return res.status(401).json({ error: 'Not authenticated' });
   }
+
   try {
-    const newTask = {
+    const task = new Task({
       userId: req.oidc.user.sub,
-      text,
-      dueDate: dueDate || null,
-      frequency: frequency || 'daily',
+      text: req.body.text,
       completed: false,
-    };
-    const savedTask = await Task.createTask(newTask);
-    res.status(201).json(savedTask);
+    });
+    await task.save();
+    res.status(201).json(task);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.delete('/tasks/:id', ensureAuthenticated, async (req, res) => {
+// Delete a task for the logged-in user
+app.delete('/tasks/:id', async (req, res) => {
+  if (!req.oidc.isAuthenticated()) {
+    return res.status(401).json({ error: 'Not authenticated' });
+  }
+
   try {
-    const result = await Task.deleteTask(req.params.id, req.oidc.user.sub);
-    if (result.deletedCount === 0) {
-      return res.status(404).json({ error: 'Task not found' });
-    }
-    res.json({ message: 'Task deleted' });
+    const result = await Task.deleteOne({ _id: req.params.id, userId: req.oidc.user.sub });
+    res.json(result);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.put('/tasks/:id', ensureAuthenticated, async (req, res) => {
-  const { text, completed, dueDate, frequency } = req.body;
-  try {
-    const updatedData = {};
-    if (text !== undefined) updatedData.text = text;
-    if (completed !== undefined) updatedData.completed = completed;
-    if (dueDate !== undefined) updatedData.dueDate = dueDate;
-    if (frequency !== undefined) updatedData.frequency = frequency;
+// Serve static files **after** API routes
+app.use(express.static('public'));
 
-    const updatedTask = await Task.updateTask(req.params.id, req.oidc.user.sub, updatedData);
-    if (!updatedTask.value) {
-      return res.status(404).json({ error: 'Task not found' });
-    }
-    res.json(updatedTask.value);
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
-  }
+// Fallback route for undefined endpoints
+app.use((req, res) => {
+  res.status(404).send('404: Page not found');
 });
 
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
