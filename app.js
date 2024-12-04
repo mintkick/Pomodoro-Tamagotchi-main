@@ -46,11 +46,9 @@ app.get('/user', (req, res) => {
 
 // CRUD Routes for Tasks
 app.get('/tasks', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+  // Removed authorization check
   try {
-    const tasks = await Task.getTasks(req.oidc.user.sub);
+    const tasks = await Task.getTasks(); // No longer passing userId
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -58,22 +56,19 @@ app.get('/tasks', async (req, res) => {
 });
 
 app.post('/tasks', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+  // Removed authorization check
   const { text, dueDate, frequency } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Task text is required' });
   }
   try {
     const newTask = {
-      userId: req.oidc.user.sub,
       text,
       dueDate: dueDate || null,
       frequency: frequency || 'daily',
       completed: false,
     };
-    const savedTask = await Task.createTask(newTask);
+    const savedTask = await Task.createTask(newTask); // Removed userId
     res.status(201).json(savedTask);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -81,11 +76,9 @@ app.post('/tasks', async (req, res) => {
 });
 
 app.delete('/tasks/:id', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+  // Removed authorization check
   try {
-    const result = await Task.deleteTask(req.params.id, req.oidc.user.sub);
+    const result = await Task.deleteTask(req.params.id); // Removed userId
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: 'Task not found' });
     }
@@ -96,9 +89,7 @@ app.delete('/tasks/:id', async (req, res) => {
 });
 
 app.put('/tasks/:id', async (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+  // Removed authorization check
   const { text, completed, dueDate, frequency } = req.body;
   try {
     const updatedData = {};
@@ -107,7 +98,7 @@ app.put('/tasks/:id', async (req, res) => {
     if (dueDate !== undefined) updatedData.dueDate = dueDate;
     if (frequency !== undefined) updatedData.frequency = frequency;
 
-    const updatedTask = await Task.updateTask(req.params.id, req.oidc.user.sub, updatedData);
+    const updatedTask = await Task.updateTask(req.params.id, updatedData); // Removed userId
     if (!updatedTask.value) {
       return res.status(404).json({ error: 'Task not found' });
     }

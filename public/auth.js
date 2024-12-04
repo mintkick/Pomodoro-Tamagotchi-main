@@ -16,14 +16,13 @@ window.onload = () => {
         document.getElementById('userName').textContent = user.name;
         document.getElementById('userProfilePicture').src = user.picture;
         document.getElementById('userProfilePicture').style.display = 'block';
-        // Ensure tasks are loaded for any authenticated user
-        loadTasks();
       } else {
         document.getElementById('login-btn').style.display = 'block';
         document.getElementById('logout-btn').style.display = 'none';
         document.getElementById('userName').textContent = '';
         document.getElementById('userProfilePicture').style.display = 'none';
       }
+      loadTasks(); // Always load tasks
     });
 };
 
