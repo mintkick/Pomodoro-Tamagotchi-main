@@ -170,15 +170,15 @@ document.addEventListener('DOMContentLoaded', function() {
   dailyTasksTab.addEventListener('click', function() {
     dailyTasksContent.style.display = 'block';
     scheduledTasksContent.style.display = 'none';
-    dailyTasksTab.classList.add('active-tab');
-    scheduledTasksTab.classList.remove('active-tab');
+    dailyTasksTab.classList.add('clicked');
+    scheduledTasksTab.classList.remove('clicked');
   });
 
   scheduledTasksTab.addEventListener('click', function() {
     dailyTasksContent.style.display = 'none';
     scheduledTasksContent.style.display = 'block';
-    scheduledTasksTab.classList.add('active-tab');
-    dailyTasksTab.classList.remove('active-tab');
+    scheduledTasksTab.classList.add('clicked');
+    dailyTasksTab.classList.remove('clicked');
   });
 
   const taskModal = document.getElementById('task-modal');
