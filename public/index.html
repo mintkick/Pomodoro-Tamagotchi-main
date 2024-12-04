@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tamadoro</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-      canvas {
-        border: 1px solid #f0f; /* Optional: to visualize the canvas borders */
-      }
-    </style>
+    
   </head>
   <body>
     <header>
@@ -26,11 +22,11 @@
                 Log Out
               </button>
             </div>
-            <div class="input">
+            <!-- <div class="input">
               <button id="google-login-btn" class="auth-button" style="display: none;">
                 Log In with Google
               </button>
-            </div>
+            </div> -->
             <div>
               <img id="userProfilePicture" alt="Profile Picture" style="display: none;" />
             </div>
@@ -40,8 +36,8 @@
           </div>
         </div>
         <h1>Tamadoro</h1>
-        <div id="timer-demo">
-          <a href="timer/timer.html">Timer Demo</a>
+        <div id="timer">
+          <a href="timer/timer.html"> Pomodoro Timer</a>
         </div>
       </nav>
     </header>
@@ -122,7 +118,7 @@
         <!-- Unnote this to try a different animation.-->
         <div id="animation">
           <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
-          <canvas id="gameCanvas" width="800" height="600"></canvas>
+          <canvas id="gameCanvas" ></canvas>
           <script src="canvas2.js"></script>
         </div>
 
@@ -183,7 +179,7 @@
         </div>
         <div id="scheduled-tasks-content" class="tasks-content" style="display: none;">
           <ul id="scheduled-tasks-list">
-            <!-- Scheduled tasks will be listed here -->
+            <!-- Scheduled tasks will bew listed here -->
           </ul>
           <button id="add-scheduled-task-button">Add Scheduled Task</button>
         </div>
@@ -200,14 +196,6 @@
         <button id="save-task-button">Save Task</button>
       </div>
     </div>
-
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar">
-      <a href="#"><img src="img/inbox-icon.png" alt="Inbox" /></a>
-      <a href="#"><img src="img/search-icon.png" alt="Search" /></a>
-      <a href="timer/timer.html"><img src="img/clock-icon.png" alt="Clock" /></a>
-      <a href="#"><img src="img/inbox-icon.png" alt="Settings" /></a>
-    </nav>
 
     <script src="auth.js" type="module"></script>
     <script src="tasks.js"></script>
