@@ -1,25 +1,21 @@
 ### Get User Profile
 GET http://localhost:3000/user
-Content-Type: application/json
 
 ### Get Auth Status
 GET http://localhost:3000/auth-status
-Content-Type: application/json
 
 ### Get All Tasks
 GET http://localhost:3000/tasks
-Content-Type: application/json
 
 ### Get Tasks by Type
 GET http://localhost:3000/tasks?type=daily
-Content-Type: application/json
 
 ### Create New Task
 POST http://localhost:3000/tasks
 Content-Type: application/json
 
 {
-    "title": "Test Task",
+    "text": "Test Task",
     "description": "This is a test task",
     "type": "daily",
     "frequency": "daily"
@@ -36,4 +32,3 @@ Content-Type: application/json
 
 ### Delete Task (replace {id} with actual task id)
 DELETE http://localhost:3000/tasks/{id}
-Content-Type: application/json
