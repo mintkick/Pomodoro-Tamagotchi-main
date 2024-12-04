@@ -54,27 +54,16 @@ function loadDailyTasks() {
 
 // Load tasks with due dates into the tasks list
 function loadTasks() {
-    fetch('/tasks')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch tasks');
-            }
-            return response.json();
-        })
-        .then(tasks => {
-            const tasksList = document.getElementById("tasks-list");
-            tasksList.innerHTML = ""; // Clear existing tasks
-
-            tasks.forEach(task => {
-                const li = document.createElement("li");
-                li.textContent = `${task.text} - Due: ${task.dueDate}`;
-                tasksList.appendChild(li);
-            });
-        })
-        .catch(error => {
-            console.error(error);
-            alert('Error loading tasks');
-        });
+    const userKey = getUserKey();
+    if (userKey) {
+        const savedTasks = JSON.parse(localStorage.getItem(userKey));
+        if (savedTasks) {
+            dailyTasks = savedTasks.dailyTasks || [];
+            tasks = savedTasks.tasks || [];
+        }
+    }
+    renderDailyTasks();
+    renderScheduledTasks();
 }
 
 // Open the modal for adding a task
@@ -134,6 +123,7 @@ function submitTask(index = null) {
         }
     }
     
+    saveTasks();
     closeModal(); // Close the modal after adding/editing the task
 }
 
@@ -336,6 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
       scheduledTasks.splice(index, 1);
       renderScheduledTasks();
     }
+    saveTasks();
   }
 
   // ...existing code...
@@ -368,6 +359,7 @@ function deleteTask(index, type) {
         tasks.splice(index, 1);
         loadTasks();
     }
+    saveTasks();
 }
 
 // Render Daily Tasks with Edit and Delete options
@@ -470,6 +462,31 @@ function updateTask(id, updatedData) {
       console.error(error);
       alert('Error updating task');
     });
+}
+
+function getUserKey() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  return user ? `tasks_${user.sub}` : null;
+}
+
+function saveTasks() {
+  const userKey = getUserKey();
+  if (userKey) {
+    localStorage.setItem(userKey, JSON.stringify({ dailyTasks, tasks }));
+  }
+}
+
+function loadTasks() {
+  const userKey = getUserKey();
+  if (userKey) {
+    const savedTasks = JSON.parse(localStorage.getItem(userKey));
+    if (savedTasks) {
+      dailyTasks = savedTasks.dailyTasks || [];
+      tasks = savedTasks.tasks || [];
+    }
+  }
+  renderDailyTasks();
+  renderScheduledTasks();
 }
 
 // ...existing code...

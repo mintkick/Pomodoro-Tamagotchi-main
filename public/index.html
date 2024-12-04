@@ -205,6 +205,7 @@
           .then(response => response.json())
           .then(user => {
             if (user) {
+              localStorage.setItem('user', JSON.stringify(user));
               document.getElementById('login-btn').style.display = 'none';
               document.getElementById('logout-btn').style.display = 'block';
               document.getElementById('google-login-btn').style.display = 'none';
@@ -213,6 +214,7 @@
               document.getElementById('userProfilePicture').style.display = 'block';
               loadTasks();
             } else {
+              localStorage.removeItem('user');
               document.getElementById('login-btn').style.display = 'block';
               document.getElementById('google-login-btn').style.display = 'block';
               document.getElementById('logout-btn').style.display = 'none';
@@ -222,7 +224,9 @@
           });
       };
 
-      document.getElementById('google-login-btn').addEventListener('click', () => {window.location.href = '/login?connection=google-oauth2'});
+      document.getElementById('google-login-btn').addEventListener('click', () => {
+        window.location.href = '/login?connection=google-oauth2';
+      });
     </script>
   </body>
 </html>
