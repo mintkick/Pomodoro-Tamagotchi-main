@@ -398,6 +398,11 @@ span.close-button:hover {
 
 .task-tabs {
   display: flex;
+  background-color: #c1e1c1;
+  border-top-left-radius: 25%;
+  border-top-right-radius: 25%;
+
+
 }
 
 .task-tabs button {
