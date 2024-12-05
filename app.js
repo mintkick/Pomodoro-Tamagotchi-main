@@ -3,6 +3,7 @@ const { auth } = require('express-openid-connect');
 const Task = require('./models/Task'); // Import Task model
 const user = require('./models/user')
 const db = require('./database'); // Import database.js
+
 require('dotenv').config();
 
 const app = express();
@@ -47,7 +48,8 @@ app.get('/user', (req, res) => {
 
 app.post('/user', async(req, res) => {
   const userData = await user.saveUserData(req.body)
-  res.json(userData)
+  res.cookie("userId", userData.userID);
+  res.json(userData);
 })
 
 
