@@ -1,11 +1,22 @@
+const database = require('../database'); 
+const { ObjectId } = require('mongodb');
+// console.log(client)
+
+
 async function saveUserData(userdata){
-    console.log("entered saveData");
+    console.log("entered saveData" );
   try {
-    await client.connect();
+    await database.connectDB();
     console.log("Connected to MongoDB");
-    const db = client.db("Tamadoro");
+    const db = database.client.db("Tamadoro");
     const collection = db.collection("users");
 
+    // Check if the user exists, if so, don't create the user
+    const foundUser = await checkUserExists(userdata.email, collection) 
+    if (foundUser){
+      return foundUser;
+    }
+    
     // Add a user
     const user = {
       userID: new ObjectId(),
@@ -16,44 +27,24 @@ async function saveUserData(userdata){
 
     const result = await collection.insertOne(user);
     console.log("User added:", result.insertedId);
+    return user
 
-    // Find a user by email
-    const foundUser = await collection.findOne({
-      email: "example@example.com",
-    });
-    console.log("User found:", foundUser);
+    
   } catch (err) {
     console.error(err);
   } finally {
-    await client.close();
+    await database.client.close();
   }
 }
 
-// console.log("entered saveData");
-//   try {
-//     await client.connect();
-//     console.log("Connected to MongoDB");
-//     const db = client.db("Tamadoro");
-//     const collection = db.collection("users");
 
-//     // Add a user
-//     const user = {
-//       userID: new ObjectId(),
-//       email: userdata.email,
-//       family_name: userdata.family_name,
-//       given_name: userdata.given_name,
-//     };
+async function checkUserExists(email, collection){
+  
+  const foundUser = await collection.findOne({
+    email,
+  });
+  console.log(foundUser)
+  return foundUser;
+}
 
-//     const result = await collection.insertOne(user);
-//     console.log("User added:", result.insertedId);
-
-//     // Find a user by email
-//     const foundUser = await collection.findOne({
-//       email: "example@example.com",
-//     });
-//     console.log("User found:", foundUser);
-//   } catch (err) {
-//     console.error(err);
-//   } finally {
-//     await client.close();
-//   }
+module.exports = {saveUserData}

@@ -10,7 +10,7 @@ document.getElementById("logout-btn").addEventListener("click", () => {
   window.location.href = "/logout";
 });
 
-window.onload = () => {
+window.addEventListener('load', () => {
   console.log("Page loaded - Fetching user data...");
 
   fetch("/user")
@@ -26,27 +26,41 @@ window.onload = () => {
         document.getElementById("userName").textContent = user.name;
         document.getElementById("userProfilePicture").src = user.picture;
         document.getElementById("userProfilePicture").style.display = "block";
+        document.querySelector("main").style.display = "block";
 
         console.log("starting saveData");
         saveData(user);
+        loadTasks(); // Always load tasks
       } else {
         document.getElementById("login-btn").style.display = "block";
         document.getElementById("logout-btn").style.display = "none";
         document.getElementById("userName").textContent = "";
         document.getElementById("userProfilePicture").style.display = "none";
+        document.querySelector("#login_message").style.display = "flex";
       }
-      loadTasks(); // Always load tasks
     })
     .catch((error) => {
       console.error("Error fetching user data:", error);
     });
-};
+})
 
-async function saveData(userdata) {
-  
+async function saveData(userData) {
+  window.user = await fetch('/user', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData)
+
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Failed to fetch user information");
+    }
+    return response.json();
+  });
 }
-
-main();
 
 function loadTasks() {
   fetch("/tasks")
@@ -73,39 +87,4 @@ function loadTasks() {
     });
 }
 
-function openModal() {
-  document.getElementById("task-modal").style.display = "block";
-}
 
-function closeModal() {
-  document.getElementById("task-modal").style.display = "none";
-}
-
-function submitTask() {
-  const taskText = document.getElementById("task-input").value;
-  fetch("/tasks", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ text: taskText }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to add task");
-      }
-      return response.json();
-    })
-    .then((task) => {
-      const taskList = document.getElementById("task-list");
-      const taskItem = document.createElement("li");
-      taskItem.textContent = task.text;
-      taskList.appendChild(taskItem);
-      document.getElementById("task-input").value = "";
-      closeModal();
-    })
-    .catch((error) => {
-      console.error(error);
-      alert("Error adding task");
-    });
-}

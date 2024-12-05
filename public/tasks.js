@@ -33,7 +33,7 @@ function updateTab(section) {
 
 // Load daily tasks into the daily tasks list
 function loadDailyTasks() {
-    const dailyList = document.getElementById("daily-ttasks-list");
+    const dailyList = document.getElementById("daily-tasks-list");
     dailyList.innerHTML = ""; // Clear existing tasks
 
     dailyTasks.forEach(task => {
@@ -62,7 +62,7 @@ function loadTasks() {
             return response.json();
         })
         .then(tasks => {
-            const tasksList = document.getElementById("tasks-list");
+            const tasksList = document.getElementById("scheduled-tasks-list");
             tasksList.innerHTML = ""; // Clear existing tasks
 
             tasks.forEach(task => {
@@ -103,7 +103,7 @@ function clearModalInputs() {
 }
 
 // Add a new task from the modal
-function submitTask(index = null) {
+function renderSubmittedTask(index = null) {
     const taskInput = document.getElementById("task-input").value.trim();
     const dateInput = document.getElementById("task-date-input").value;
 
@@ -153,10 +153,10 @@ window.onclick = function(event) {
 }
 
 // Initial load of tasks when the page is ready
-document.addEventListener("DOMContentLoaded", function() {
-    loadDailyTasks();
-    loadTasks();
-});
+// document.addEventListener("DOMContentLoaded", function() {
+//     loadDailyTasks();
+//     loadTasks();
+// });
 
 document.addEventListener('DOMContentLoaded', function() {
   const dailyTasks = [];
@@ -469,6 +469,45 @@ function updateTask(id, updatedData) {
     .catch(error => {
       console.error(error);
       alert('Error updating task');
+    });
+}
+
+
+
+function openModal() {
+  document.getElementById("task-modal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("task-modal").style.display = "none";
+}
+
+function submitTask() {
+  const taskText = document.getElementById("task-input").value;
+  fetch("/tasks", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ text: taskText }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to add task");
+      }
+      return response.json();
+    })
+    .then((task) => {
+      const taskList = document.getElementById("task-list");
+      const taskItem = document.createElement("li");
+      taskItem.textContent = task.text;
+      taskList.appendChild(taskItem);
+      document.getElementById("task-input").value = "";
+      closeModal();
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Error adding task");
     });
 }
 
