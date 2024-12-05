@@ -1,7 +1,4 @@
-import { MongoClient } from 'mongodb';
 
-const uri = "mongodb://localhost:3000";
-const client = new MongoClient(uri);
 // Log button clicks
 document.getElementById("login-btn").addEventListener("click", () => {
   console.log("Login button clicked - Redirecting to login page");
@@ -46,34 +43,7 @@ window.onload = () => {
 };
 
 async function saveData(userdata) {
-  console.log("entered saveData");
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB");
-    const db = client.db("Tamadoro");
-    const collection = db.collection("users");
-
-    // Add a user
-    const user = {
-      userID: new ObjectId(),
-      email: userdata.email,
-      family_name: userdata.family_name,
-      given_name: userdata.given_name,
-    };
-
-    const result = await collection.insertOne(user);
-    console.log("User added:", result.insertedId);
-
-    // Find a user by email
-    const foundUser = await collection.findOne({
-      email: "example@example.com",
-    });
-    console.log("User found:", foundUser);
-  } catch (err) {
-    console.error(err);
-  } finally {
-    await client.close();
-  }
+  
 }
 
 main();

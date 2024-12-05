@@ -44,6 +44,11 @@ app.get('/user', (req, res) => {
   }
 });
 
+app.post('/user', (req, res) => {
+  
+})
+
+
 // CRUD Routes for Tasks
 app.get('/tasks', async (req, res) => {
   // Removed authorization check
