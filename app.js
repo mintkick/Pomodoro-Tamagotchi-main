@@ -125,3 +125,9 @@ app.put('/tasks/:id', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// This version works with the following changes:
+// - The Task model is imported from models/task.service.js
+// - The Task model is used to interact with the database
+// - The user ID is stored in a cookie
+// - The user ID is used to filter tasks by user
