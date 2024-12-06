@@ -57,12 +57,10 @@ app.post('/user', async(req, res) => {
 
 // CRUD Routes for Tasks
 app.get('/tasks', async (req, res) => {
-  // Removed authorization check
-  console.log("entered get request");
   try {
     const userId = req.cookies.userId;
     console.log(userId)
-    const tasks = await Task.getTasks(userId); // No longer passing userId
+    const tasks = await Task.getTasks(userId); // Gets tasks from database
     res.json(tasks);
   } catch (err) {
     console.log(err)
@@ -71,23 +69,19 @@ app.get('/tasks', async (req, res) => {
 });
 
 app.post('/tasks', async (req, res) => {
-  // Removed authorization check
-  const { text, dueDate, frequency } = req.body;
+  const { text, dueDate, type } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Task text is required' });
-  }
-  if (dueDate == null){
-    console.log("No Due Date")
   }
   try {
     const newTask = {
       userId: req.cookies.userId,
       text,
-      dueDate: dueDate,
-      frequency: frequency || 'daily',
+      dueDate,
+      type, // 'daily' or 'scheduled'
       completed: false,
     };
-    const savedTask = await Task.createTask(newTask); // Removed userId
+    const savedTask = await Task.createTask(newTask);
     res.status(201).json(savedTask);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
