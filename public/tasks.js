@@ -233,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
         newTask = {"text": taskName}
         renderDailyTasks();
         updateTask(newTask);
+        // submitTask(newTask);
       } else {
         const taskDate = taskDateInput.value;
         console.log(taskDate)
@@ -250,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       // ...existing code for adding new tasks...
       if (currentTaskType === 'daily') {
-        const task = { text: taskName, date: null }
+        const task = { text: taskName, date: null, type: 'daily' }
         dailyTasks.push(task);
         renderDailyTasks();
         submitTask(task);
@@ -260,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
           alert('Please select a date.');
           return;
         }
-        const task = { text: taskName, date: taskDate }
+        const task = { text: taskName, date: taskDate, type: 'scheduled' }
         scheduledTasks.push(task);
         renderScheduledTasks();
         submitTask(task)
@@ -405,6 +406,7 @@ function renderDailyTasks() {
     dailyTasks.forEach(function(task, index) {
         const li = document.createElement('li');
         li.textContent = task.text;
+        li.classList.add('daily-task-item');
 
         const buttonContainer = document.createElement('div');
 
@@ -527,13 +529,13 @@ function submitTask(task) {
       return response.json();
     })
     .then((task) => {
-      const taskList = document.getElementById("scheduled-task-list"); // fix later
-      const taskItem = document.createElement("li");
-      taskItem.textContent = task.text;
-      console.log(taskItem);
-      taskList.appendChild(taskItem);
-      document.getElementById("task-input").value = "";
-      closeModal();
+      // const taskList = document.getElementById("scheduled-task-list"); // fix later
+      // const taskItem = document.createElement("li");
+      // taskItem.textContent = task.text;
+      // console.log(taskItem);
+      // taskList.appendChild(taskItem);
+      // document.getElementById("task-input").value = "";
+      // closeModal();
     })
     .catch((error) => {
       console.error(error);

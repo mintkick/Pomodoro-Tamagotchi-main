@@ -72,7 +72,7 @@ app.get('/tasks', async (req, res) => {
 
 app.post('/tasks', async (req, res) => {
   // Removed authorization check
-  const { text, dueDate, frequency } = req.body;
+  const { text, dueDate, type } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Task text is required' });
   }
@@ -83,12 +83,13 @@ app.post('/tasks', async (req, res) => {
     const newTask = {
       userId: req.cookies.userId,
       text,
-      dueDate: dueDate,
-      frequency: frequency || 'daily',
+      dueDate,
+      type,
       completed: false,
     };
     const savedTask = await Task.createTask(newTask); // Removed userId
     res.status(201).json(savedTask);
+    console.log(savedTask);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
