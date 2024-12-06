@@ -400,63 +400,63 @@ document.addEventListener('DOMContentLoaded', function() {
 // }
 
 // Render Daily Tasks with Edit and Delete options
-function renderDailyTasks() {
-    const dailyTasksList = document.getElementById('daily-tasks-list');
-    dailyTasksList.innerHTML = '';
-    dailyTasks.forEach(function(task, index) {
-        const li = document.createElement('li');
-        li.textContent = task.text;
-        li.classList.add('daily-task-item');
+// function renderDailyTasks() {
+//     const dailyTasksList = document.getElementById('daily-tasks-list');
+//     dailyTasksList.innerHTML = '';
+//     dailyTasks.forEach(function(task, index) {
+//         const li = document.createElement('li');
+//         li.textContent = task.text;
+//         li.classList.add('daily-task-item');
 
-        const buttonContainer = document.createElement('div');
+//         const buttonContainer = document.createElement('div');
 
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.onclick = function() {
-            editTask(index, 'daily');
-        };
+//         const editButton = document.createElement('button');
+//         editButton.textContent = 'Edit';
+//         editButton.onclick = function() {
+//             editTask(index, 'daily');
+//         };
 
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = function() {
-            deleteTaskOnScreen(index, 'daily');
-        };
+//         const deleteButton = document.createElement('button');
+//         deleteButton.textContent = 'Delete';
+//         deleteButton.onclick = function() {
+//             deleteTaskOnScreen(index, 'daily');
+//         };
 
-        buttonContainer.appendChild(editButton);
-        buttonContainer.appendChild(deleteButton);
-        li.appendChild(buttonContainer);
-        dailyTasksList.appendChild(li);
-    });
-}
+//         buttonContainer.appendChild(editButton);
+//         buttonContainer.appendChild(deleteButton);
+//         li.appendChild(buttonContainer);
+//         dailyTasksList.appendChild(li);
+//     });
+// }
 
 // Render Scheduled Tasks with Edit and Delete options
-function renderScheduledTasks() {
-    const scheduledTasksList = document.getElementById('scheduled-tasks-list');
-    scheduledTasksList.innerHTML = '';
-    tasks.forEach(function(task, index) {
-        const li = document.createElement('li');
-        li.textContent = `${task.text} - Due: ${task.dueDate}`;
+// function renderScheduledTasks() {
+//     const scheduledTasksList = document.getElementById('scheduled-tasks-list');
+//     scheduledTasksList.innerHTML = '';
+//     tasks.forEach(function(task, index) {
+//         const li = document.createElement('li');
+//         li.textContent = `${task.text} - Due: ${task.dueDate}`;
 
-        const buttonContainer = document.createElement('div');
+//         const buttonContainer = document.createElement('div');
 
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.onclick = function() {
-            editTask(index, 'scheduled');
-        };
+//         const editButton = document.createElement('button');
+//         editButton.textContent = 'Edit';
+//         editButton.onclick = function() {
+//             editTask(index, 'scheduled');
+//         };
 
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = function() {
-            deleteTaskOnScreen(index, 'scheduled');
-        };
+//         const deleteButton = document.createElement('button');
+//         deleteButton.textContent = 'Delete';
+//         deleteButton.onclick = function() {
+//             deleteTaskOnScreen(index, 'scheduled');
+//         };
 
-        buttonContainer.appendChild(editButton);
-        buttonContainer.appendChild(deleteButton);
-        li.appendChild(buttonContainer);
-        scheduledTasksList.appendChild(li);
-    });
-}
+//         buttonContainer.appendChild(editButton);
+//         buttonContainer.appendChild(deleteButton);
+//         li.appendChild(buttonContainer);
+//         scheduledTasksList.appendChild(li);
+//     });
+// }
 
 // Closing Task section JavaScript
 
