@@ -23,7 +23,7 @@ class Pet {
       document.addEventListener('DOMContentLoaded', () => {
         this.initEventListeners();
       });
-   
+
   
       Pet.instance = this; 
       return this;
