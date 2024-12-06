@@ -9,5 +9,24 @@ env/
 test_code/index.hmtl
 test_code/index1.hmtl
 config.js
+my_practice.js
 # styles.css
 # styles1.css
+test_code/pet.html
+test_code/pet.css
+test_code/pet.js
+test_code/BRAVE_Virtual Pet with KAPLAY.md
+
+public/jump_game.html
+
+# Ignor all .env files
+.env
+
+# Ignore all .DS_Store files
+.DS_Store
+
+# Ignore all .git files
+.git
+
+# ignore node_modules
+node_modules/
