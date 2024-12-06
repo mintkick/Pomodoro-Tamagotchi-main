@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Bar</title>
+    <script src="https://unpkg.com/kaplay@3001/dist/kaplay.js"></script>
+  </head>
+  <body>
+    <!-- HTML HEALTH BAR -->
+    <!-- <progress id="health" value="100" max="100"></progress>
+    <script>
+      let health = document.getElementById("health");
+      health.value -= 10;
+    </script> -->
+
+    <!-- HEARTS -->
+    <!-- Check out the get() function -->
+
+    <script>
+      // Initialize context and load assets
+      kaplay();
+      loadSprite("heart", "sprites/meat-o.png");
+
+      // Define health bar components
+      const healthBar = add([
+        // sprite("heart"),
+        health(3),
+        pos(10, 10),
+        // area(),
+        // body(),
+        // color(RED),
+      ]);
+
+      healthBar.setMaxHP(5);
+
+      // Update health bar
+      function updateHealthBar(health) {
+        // healthBar.area.fillAmount = health / 150;
+      }
+
+      // Animate health bar (optional)
+      function animateHealthBar(i) {
+        // Animate color or scale based on player's health
+        // color(RED);
+
+        // loop(1, () => {
+        i = ++i % 2;
+        return i;
+        // });
+        wait(1, animateHealthBar(i)); // never runs
+      }
+
+      // Integrate with player health
+      function updatePlayerHealth() {
+        // Update player's health
+        // var health = 50; //player.health;
+        // updateHealthBar(health);
+
+        for (var i = 0; i < healthBar.maxHP(); i++) {
+          if (i + 1 <= healthBar.hp()) {
+            add([
+              // healthBar.sprite, doesn't work
+              sprite("heart"),
+              pos(160 + i * 32, 10 + (i % 2) * 32),
+              // pos(160 + i * 32, 10 + animateHealthBar(i) * 32),
+              // area(), // area() and body() give collision, prevent stacking
+              body(),
+              anchor("topright"),
+              // color(RED),
+            ]);
+          } else {
+            add([
+              // healthBar.sprite, doesn't work
+              sprite("heart"),
+              pos(160 + i * 32, 10 + (i % 2) * 32),
+              // pos(160 + i * 32, 10 + animateHealthBar(i) * 32),
+              // area(),
+              body(),
+              anchor("topright"),
+              color(BLACK),
+            ]);
+          }
+          // drawSprite({ // doesn't work
+          //   sprite: "heart",
+          //   pos: vec2(10 + i * 32, 10),
+          // });
+          // animateHealthBar(i);
+        }
+      }
+
+      updatePlayerHealth();
+      // animateHealthBar();
+    </script>
+  </body>
+</html>
