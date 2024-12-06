@@ -83,6 +83,7 @@ app.post('/tasks', async (req, res) => {
     };
     const savedTask = await Task.createTask(newTask);
     res.status(201).json(savedTask);
+    console.log(savedTask);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
