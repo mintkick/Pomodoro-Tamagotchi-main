@@ -20,5 +20,5 @@ Animation Resourses:
 
 Website Resources:
 - [How to - Remove a Class](https://www.w3schools.com/howto/howto_js_remove_class.asp)
-- [Stack overflow: How can I check on whihc element the event was triggered?](https://stackoverflow.com/questions/10648768/how-can-i-check-on-which-element-the-event-was-triggered
-)
+- [Stack overflow: How can I check on whihc element the event was triggered?](https://stackoverflow.com/questions/10648768/how-can-i-check-on-which-element-the-event-was-triggered)
+- [Connect authenication to database](https://www.youtube.com/watch?v=qWy9ylc3f9U)

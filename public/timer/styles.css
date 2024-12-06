@@ -92,7 +92,7 @@ button {
 #buttons {
     gap: 30px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-self: center;
 }
 
@@ -104,6 +104,11 @@ button {
 h1, h2, h3{
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
+}
+
+header{
+    display:grid;
+    grid-template-columns:50px  calc(100%-50px);
 }
 
 header h1 {
@@ -124,8 +129,21 @@ header h1 {
         justify-self: center;
     }
 
-    form{
+    .form{
         width: 300px;
         justify-self: center;
     }
+
+    #work-options{
+        height: 35px;
+    }
+
+    .label{
+        display:none;
+    }
+    #buttons > button{
+        height: 35px;
+        font-size: 18px;
+    }
+
 }
