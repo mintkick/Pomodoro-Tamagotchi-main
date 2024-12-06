@@ -53,8 +53,9 @@ function loadDailyTasks() {
 }
 
 // Load tasks with due dates into the tasks list
-function loadTasks() {
-    fetch('/tasks')
+async function loadTasks() {
+    console.log("starting loadTasks")
+    await fetch('/tasks')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to fetch tasks');
@@ -236,16 +237,20 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       // ...existing code for adding new tasks...
       if (currentTaskType === 'daily') {
-        dailyTasks.push({ name: taskName });
+        const task = { text: taskName }
+        dailyTasks.push(task);
         renderDailyTasks();
+        submitTask(task);
       } else {
         const taskDate = taskDateInput.value;
         if (taskDate === '') {
           alert('Please select a date.');
           return;
         }
-        scheduledTasks.push({ name: taskName, date: taskDate });
+        const task = { text: taskName, date: taskDate }
+        scheduledTasks.push(task);
         renderScheduledTasks();
+        submitTask(task)
       }
     }
 
@@ -272,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const deleteButton = document.createElement('button');
       deleteButton.textContent = 'Delete';
       deleteButton.onclick = function() {
-        deleteTask(index, 'daily');
+        deleteTaskOnScreen(index, 'daily');
       };
 
       buttonContainer.appendChild(editButton);
@@ -300,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const deleteButton = document.createElement('button');
       deleteButton.textContent = 'Delete';
       deleteButton.onclick = function() {
-        deleteTask(index, 'scheduled');
+        deleteTaskOnScreen(index, 'scheduled');
       };
 
       buttonContainer.appendChild(editButton);
@@ -328,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
     taskModal.style.display = 'block';
   }
 
-  function deleteTask(index, type) {
+  function deleteTaskOnScreen(index, type) {
     if (type === 'daily') {
       dailyTasks.splice(index, 1);
       renderDailyTasks();
@@ -360,15 +365,15 @@ function editTask(index, type) {
 }
 
 // Delete an existing task
-function deleteTask(index, type) {
-    if (type === 'daily') {
-        dailyTasks.splice(index, 1);
-        loadDailyTasks();
-    } else {
-        tasks.splice(index, 1);
-        loadTasks();
-    }
-}
+// function deleteTask(index, type) {
+//     if (type === 'daily') {
+//         dailyTasks.splice(index, 1);
+//         loadDailyTasks();
+//     } else {
+//         tasks.splice(index, 1);
+//         loadTasks();
+//     }
+// }
 
 // Render Daily Tasks with Edit and Delete options
 function renderDailyTasks() {
@@ -389,7 +394,7 @@ function renderDailyTasks() {
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.onclick = function() {
-            deleteTask(index, 'daily');
+            deleteTaskOnScreen(index, 'daily');
         };
 
         buttonContainer.appendChild(editButton);
@@ -418,7 +423,7 @@ function renderScheduledTasks() {
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.onclick = function() {
-            deleteTask(index, 'scheduled');
+            deleteTaskOnScreen(index, 'scheduled');
         };
 
         buttonContainer.appendChild(editButton);
@@ -482,14 +487,15 @@ function closeModal() {
   document.getElementById("task-modal").style.display = "none";
 }
 
-function submitTask() {
-  const taskText = document.getElementById("task-input").value;
+function submitTask(task) {
+  // const taskText = document.getElementById("task-input").value;
+
   fetch("/tasks", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ text: taskText }),
+    body: JSON.stringify(task),
   })
     .then((response) => {
       if (!response.ok) {

@@ -6,9 +6,10 @@ const { ObjectId } = require('mongodb');
 async function saveUserData(userdata){
     console.log("entered saveData" );
   try {
-    await database.connectDB();
+    // await database.connectDB();
     console.log("Connected to MongoDB");
-    const db = database.client.db("Tamadoro");
+    const client = await database.getClient();
+    const db = client.db("Tamadoro");
     const collection = db.collection("users");
 
     // Check if the user exists, if so, don't create the user
@@ -33,7 +34,7 @@ async function saveUserData(userdata){
   } catch (err) {
     console.error(err);
   } finally {
-    await database.client.close();
+    // await database.client.close();
   }
 }
 

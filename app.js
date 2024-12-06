@@ -1,12 +1,13 @@
 const express = require('express');
 const { auth } = require('express-openid-connect');
-const Task = require('./models/Task'); // Import Task model
-const user = require('./models/user')
+const Task = require('./models/task.service'); // Import Task model
+const user = require('./models/user.service')
 const db = require('./database'); // Import database.js
-
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const app = express();
+app.use(cookieParser());
 const PORT = process.env.PORT || 3000;
 
 const config = {
@@ -49,6 +50,7 @@ app.get('/user', (req, res) => {
 app.post('/user', async(req, res) => {
   const userData = await user.saveUserData(req.body)
   res.cookie("userId", userData.userID);
+
   res.json(userData);
 })
 
@@ -56,11 +58,15 @@ app.post('/user', async(req, res) => {
 // CRUD Routes for Tasks
 app.get('/tasks', async (req, res) => {
   // Removed authorization check
+  console.log("entered get request");
   try {
-    const tasks = await Task.getTasks(); // No longer passing userId
+    const userId = req.cookies.userId;
+    console.log(userId)
+    const tasks = await Task.getTasks(userId); // No longer passing userId
     res.json(tasks);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.log(err)
+    res.status(500).json({ error: 'Server error in getting Task' });
   }
 });
 
@@ -72,6 +78,7 @@ app.post('/tasks', async (req, res) => {
   }
   try {
     const newTask = {
+      userId: req.cookies.userId,
       text,
       dueDate: dueDate || null,
       frequency: frequency || 'daily',

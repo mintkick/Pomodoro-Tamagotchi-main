@@ -1,6 +1,6 @@
 # Things to do
 
-## User Cookie
+## User Cookie - Done
  - [] The post /user should set a cookie called userId
 
 Look for this code:
@@ -8,7 +8,7 @@ app.post('/user'
 
 app.setCookie('userId', userData.userID)
 
-## Get Tasks
+## Get Tasks 
 
 Look for this code:
 const tasks = await Task.getTasks(); // No longer passing userId
@@ -21,3 +21,8 @@ const tasks = await Task.getTasks(userId);
 ## Creating tasks
 Get the user cookie for userId
 add that to the task that you are about to save to the database, so we can look it up later
+
+make alterations to work with daily tasks and scheduled tasks
+
+
+## CSS

@@ -28,7 +28,7 @@ window.addEventListener('load', () => {
         document.getElementById("userProfilePicture").style.display = "block";
         document.querySelector("main").style.display = "block";
 
-        console.log("starting saveData");
+        // console.log("starting saveData");
         saveData(user);
         loadTasks(); // Always load tasks
       } else {

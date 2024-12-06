@@ -12,6 +12,8 @@ Animation Resourses:
 
 - [animation example](https://codepen.io/rachelnabors/pen/rxpmJL/?editors=0110)
 
+[node.js cookie Parser module](https://www.geeksforgeeks.org/http-cookies-in-node-js/)
+
 
 
 
