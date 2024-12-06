@@ -149,7 +149,8 @@ function renderSubmittedTask(index = null) {
 function resetDailyTasks() {
     alert("Daily tasks have been reset!");
     dailyTasks = []; // Clear all daily tasks
-    loadDailyTasks(); // Reload the daily tasks
+    // loadDailyTasks(); // Reload the daily tasks
+    renderDailyTasks()
 }
 
 // Close the modal if the user clicks outside of it
@@ -276,7 +277,17 @@ document.addEventListener('DOMContentLoaded', function() {
     dailyTasksList.innerHTML = '';
     dailyTasks.forEach(function(task, index) {
       const li = document.createElement('li');
-      li.textContent = task.name;
+      // li.textContent = task.name;
+      // new changes
+      const p = document.createElement("p"); 
+      p.textContent = task.name;
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = `item ${task.id}`;
+
+      li.appendChild(checkbox);
+      li.appendChild(p);
 
       const buttonContainer = document.createElement('div');
 

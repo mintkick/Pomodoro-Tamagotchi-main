@@ -1,0 +1,60 @@
+Section Handling Functions
+
+showSection(section): This function controls the visibility of the "daily" and "tasks" sections based on the provided argument (section).
+ It utilizes DOM manipulation to show the selected section and hide the other.
+
+updateTab(section): This function updates the visual styling of the "daily tasks" and "scheduled tasks" tabs based on the active section.
+ It adds a "clicked" class to the active tab and removes it from the inactive one.
+
+Daily Task Functions
+
+loadDailyTasks(): This function populates the "daily tasks" list by iterating through the dailyTasks array and creating list
+ items (li) for each task. The function also adds a checkbox and the task text content to each list item.
+
+renderDailyTasks(): This function is a refactored version of loadDailyTasks with additional functionalities. 
+It clears the existing tasks list, iterates through dailyTasks, creates list items with task text, and adds edit and delete buttons
+ for each task.
+
+Scheduled Task Functions
+
+loadTasks(): This function fetches tasks data from an API endpoint (/tasks) using asynchronous functions (async and await). 
+It checks for successful responses and parses the JSON data to populate the "scheduled tasks" list. 
+It also includes error handling for failed requests.
+
+renderScheduledTasks(): Similar to renderDailyTasks, this function clears the existing tasks list, iterates through tasks, creates list 
+items with task text and due date, and adds edit and delete buttons for each task.
+
+Task Modal Functions
+
+openModal(taskType): This function opens the task modal and sets the modal title based on the provided taskType ("daily" or "scheduled"). 
+It also controls the visibility of the date input field depending on the task type.
+
+closeModal(): This function simply hides the task modal.
+
+clearModalInputs(): This function clears the text input and date input fields (if applicable) within the task modal.
+
+renderSubmittedTask(index = null): This function handles adding or editing tasks. It checks for a provided index to determine if it's
+ an edit or a new task. It validates user input and updates the corresponding task data (dailyTasks or tasks) before calling 
+ renderDailyTasks or loadTasks to refresh the lists.
+
+Other Functions
+
+resetDailyTasks(): This function resets the dailyTasks array to an empty list, essentially clearing all daily tasks. 
+It then calls loadDailyTasks to reload the empty list.
+
+deleteTask(id) (commented out): This function likely utilizes the Fetch API to send a DELETE request to an API endpoint 
+(/tasks/${id}) to delete a specific task. It also includes error handling.
+
+updateTask(id, updatedData) (commented out): Similar to deleteTask, this function sends a PUT request with updated task data (updatedData)
+ to the API endpoint (/tasks/${id}) to update an existing task. Error handling is also included.
+
+submitTask(task): This function uses the Fetch API to send a POST request with the new task data (task) to the API endpoint (/tasks) 
+to create a new task. It then updates the UI by adding the new task to the list and closes the modal.
+
+Event Listeners (commented out)
+
+The commented-out section contains event listeners for various functionalities like handling clicks on task tabs, adding daily and scheduled
+ tasks, editing tasks, and deleting tasks on screen. These functionalities are likely implemented elsewhere in the code.
+
+Overall, this code snippet manages daily and scheduled tasks with UI manipulation, interacts with an API for data retrieval and 
+manipulation, and provides functionalities for adding, editing, and deleting tasks.
