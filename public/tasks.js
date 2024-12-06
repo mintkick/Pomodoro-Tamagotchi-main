@@ -38,25 +38,25 @@ function updateTab(section) {
 }
 
 // Load daily tasks into the daily tasks list
-function loadDailyTasks() {
-    const dailyList = document.getElementById("daily-tasks-list");
-    dailyList.innerHTML = ""; // Clear existing tasks
+// function loadDailyTasks() {
+//     const dailyList = document.getElementById("daily-tasks-list");
+//     dailyList.innerHTML = ""; // Clear existing tasks
 
-    dailyTasks.forEach(task => {
-        const li = document.createElement("li");
-        const p = document.createElement("p");
+//     dailyTasks.forEach(task => {
+//         const li = document.createElement("li");
+//         const p = document.createElement("p");
 
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.id = `item ${task.id}`;
+//         const checkbox = document.createElement("input");
+//         checkbox.type = "checkbox";
+//         checkbox.id = `item ${task.id}`;
 
-        p.textContent = task.text;
-        li.appendChild(checkbox);
-        li.appendChild(p);
+//         p.textContent = task.text;
+//         li.appendChild(checkbox);
+//         li.appendChild(p);
 
-        dailyList.appendChild(li);
-    });
-}
+//         dailyList.appendChild(li);
+//     });
+// }
 
 // Load tasks with due dates into the tasks list
 async function loadTasks() {
@@ -100,40 +100,40 @@ function clearModalInputs() {
 }
 
 // Add a new task from the modal
-function renderSubmittedTask(index = null) {
-    const taskInput = document.getElementById("task-input").value.trim();
-    const dateInput = document.getElementById("task-date-input").value;
+// function renderSubmittedTask(index = null) {
+//     const taskInput = document.getElementById("task-input").value.trim();
+//     const dateInput = document.getElementById("task-date-input").value;
 
-    if (isDailyTask) {
-        if (taskInput) {
-            if (index !== null) {
-                dailyTasks[index].text = taskInput;
-            } else {
-                dailyTasks.push({ id: Date.now(), text: taskInput, frequency: "daily" });
-                console.log("Daily tasks:", dailyTasks);
-            }
-            renderDailyTasks();
-        } else {
-            alert("Please enter a daily task name.");
-            return;
-        }
-    } else {
-        if (taskInput && dateInput) {
-            if (index !== null) {
-                tasks[index].text = taskInput;
-                tasks[index].dueDate = dateInput;
-            } else {
-                tasks.push({ id: Date.now(), text: taskInput, dueDate: dateInput });
-            }
-            loadTasks();
-        } else {
-            alert("Please enter a task name and due date.");
-            return;
-        }
-    }
+//     if (isDailyTask) {
+//         if (taskInput) {
+//             if (index !== null) {
+//                 dailyTasks[index].text = taskInput;
+//             } else {
+//                 dailyTasks.push({ id: Date.now(), text: taskInput, frequency: "daily" });
+//                 console.log("Daily tasks:", dailyTasks);
+//             }
+//             renderDailyTasks();
+//         } else {
+//             alert("Please enter a daily task name.");
+//             return;
+//         }
+//     } else {
+//         if (taskInput && dateInput) {
+//             if (index !== null) {
+//                 tasks[index].text = taskInput;
+//                 tasks[index].dueDate = dateInput;
+//             } else {
+//                 tasks.push({ id: Date.now(), text: taskInput, dueDate: dateInput });
+//             }
+//             loadTasks();
+//         } else {
+//             alert("Please enter a task name and due date.");
+//             return;
+//         }
+//     }
     
-    closeModal(); // Close the modal after adding/editing the task
-}
+//     closeModal(); // Close the modal after adding/editing the task
+// }
 
 // Reset daily tasks
 function resetDailyTasks() {
@@ -214,34 +214,38 @@ document.addEventListener('DOMContentLoaded', function() {
             type: currentTaskType,
             dueDate: currentTaskType === 'scheduled' ? taskDate : null
         };
+        submitTask(taskData);
+        // renderDailyTasks();
+        // renderScheduledTasks();
+        loadTasks();
 
-        try {
-            const response = await fetch("/tasks", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(taskData),
-            });
+    //     try {
+    //         const response = await fetch("/tasks", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify(taskData),
+    //         });
 
-            if (!response.ok) {
-                throw new Error("Failed to add task");
-            }
+    //         if (!response.ok) {
+    //             throw new Error("Failed to add task");
+    //         }
 
-            const savedTask = await response.json();
-            allTasks.push(savedTask);
+    //         const savedTask = await response.json();
+    //         allTasks.push(savedTask);
             
-            if (currentTaskType === 'daily') {
-                renderDailyTasks();
-            } else {
-                renderScheduledTasks();
-            }
+    //         if (currentTaskType === 'daily') {
+    //             renderDailyTasks();
+    //         } else {
+    //             renderScheduledTasks();
+    //         }
             
-            closeModal();
-        } catch (error) {
-            console.error(error);
-            alert("Error adding task");
-        }
+    //         closeModal();
+    //     } catch (error) {
+    //         console.error(error);
+    //         alert("Error adding task");
+    //     }
     });
 
     closeButton.addEventListener('click', () => {
@@ -256,16 +260,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function editTask(taskId, type) {
     // Find the task in allTasks array
-    const task = allTasks.find(t => t.id === taskId);
-    if (!task) return;
+    console.log(taskId);
+    const taskIndex = allTasks.findIndex((t) => t.id === taskId);
+    if (taskIndex === -1) return;
     
     // Set up the modal for editing
-    currentTaskType = type;
-    document.getElementById('task-name-input').value = task.text;
-    document.getElementById('task-date-input').value = task.dueDate || '';
-    document.getElementById('task-date-input').style.display = type === 'daily' ? 'none' : 'block';
-    document.getElementById('modal-title').textContent = `Edit ${type === 'daily' ? 'Daily' : 'Scheduled'} Task`;
-    
+    urrentTaskType = type;
+    document.getElementById("task-name-input").value = allTasks[taskIndex].text;
+    document.getElementById("task-date-input").value =
+      allTasks[taskIndex].dueDate || "";
+    document.getElementById("task-date-input").style.display =
+      type === "daily" ? "none" : "block";
+    document.getElementById("modal-title").textContent = `Edit ${
+      type === "daily" ? "Daily" : "Scheduled"
+    } Task`;
+
     // Update the save button to handle edit
     const saveButton = document.getElementById('save-task-button');
     saveButton.onclick = async () => {
@@ -274,27 +283,12 @@ async function editTask(taskId, type) {
             type: type,
             dueDate: type === 'scheduled' ? document.getElementById('task-date-input').value : null
         };
-
-        try {
-            const response = await fetch(`/tasks/${taskId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedData),
-            });
-
-            if (!response.ok) throw new Error('Failed to update task');
-            
-            // Update local data
-            await loadTasks(); // Reload all tasks
-            closeModal();
-        } catch (error) {
-            console.error('Error updating task:', error);
-            alert('Error updating task');
-        }
+        
+      updateTask(taskId, updatedData);
+  // deleteTask(taskId);
+  // submitTask(updatedData);
     };
-
+  
     // Show the modal
     document.getElementById('task-modal').style.display = 'block';
 }
@@ -310,7 +304,7 @@ async function deleteTask(taskId, type) {
         if (!response.ok) throw new Error('Failed to delete task');
         
         // Update local data
-        allTasks = allTasks.filter(task => task.id !== taskId);
+       allTasks = allTasks.filter((task) => task.id !== taskId);
         
         // Re-render the appropriate list
         if (type === 'daily') {
@@ -364,28 +358,30 @@ function renderScheduledTasks() {
 
 // Closing Task section JavaScript
 
-async function updateTask(id, updatedData) {
-  await fetch(`/tasks/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(updatedData),
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to update task');
-      }
-      return response.json();
-    })
-    .then(() => {
-      loadTasks(); // Reload tasks after update
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Error updating task');
-    });
-}
+// async function updateTask(id, updatedData) {
+//   await fetch(`/tasks/${id}`, {
+//     method: 'PUT',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//       body: JSON.stringify(updatedData),
+//   })
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error('Failed to update task');
+//       }
+//       return response.json();
+//     })
+//     .then(() => {
+//       console.log("attempt to load tasks")
+//       loadTasks(); // Reload tasks after update
+//       console.log("tasks loaded")
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       alert('Error updating task');
+//     });
+// }
 
 function openModal() {
   document.getElementById("task-modal").style.display = "block";
