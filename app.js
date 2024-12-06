@@ -76,11 +76,14 @@ app.post('/tasks', async (req, res) => {
   if (!text) {
     return res.status(400).json({ error: 'Task text is required' });
   }
+  if (dueDate == null){
+    console.log("No Due Date")
+  }
   try {
     const newTask = {
       userId: req.cookies.userId,
       text,
-      dueDate: dueDate || null,
+      dueDate: dueDate,
       frequency: frequency || 'daily',
       completed: false,
     };
