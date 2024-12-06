@@ -6,24 +6,26 @@
     <title>Countdown Timer</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="styles.css">
-
 </head>
 <header>
     <div
       id="timer-demo"
       style="
-        background-color: none;
+        background-color: aquamarine;
         width: 100px;
         display: flex;
+        margin-left: 100px;
         text-align: center;
         justify-self: center;
         justify-content: center;
         border-radius: 10px;
+        margin-top: 20px;
+        margin-bottom: -20px;
         padding: 10px;
       "
     >
       <a
-        href="..\index.html"
+        href="..\frontend.html"
         style="
           font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
             sans-serif;
@@ -42,7 +44,7 @@
     <div class="timer">
         <div class="tasks">
             <h1>Pomodoro Timer</h1>
-            <p id="timer-display">00:00</p>
+            <p id="timer-display">00:00:00</p>
             <p id="flow"></p>
         </div>
         <div class="clock">
@@ -95,11 +97,9 @@
     <div id="buttons">
         <button type="button" id="start-button">Start</button>
         <button type="button" id="reset-button">Reset</button>
-        <button type="button" id="finished-button">Finished</button>
-        <button type="button" id="exit-button">Exit</button>
+        <button type="button" id="exit-button">Finished!</button>
     </div>
-    <script src="script.js" type="module"></script>
-    <script src="../Pet.js" type="module"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>

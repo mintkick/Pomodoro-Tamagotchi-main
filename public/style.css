@@ -94,20 +94,6 @@ main {
 }
 
 /* Pet Section */
-
-#emotion-ex {
-  display: flex;
-  gap: 10px;
-}
-
-.emotion-display {
-  border-radius: 10px;
-  width: 100px;
-  font-weight: bold;
-  color: black;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
 .pet-section {
   text-align: center;
   margin-bottom: 20px;
@@ -131,22 +117,6 @@ main {
 .pet-stats {
   font-size: 1em;
   color: #777;
-}
-
-#animation {
-  padding: 20px;
-}
-
-#care-buttons {
-  display: flex;
-  gap: 20px;
-  box-sizing: border-box;
-  padding: 10px;
-  width: 75%;
-}
-
-#care-buttons button {
-  border-radius: 50px;
 }
 
 /* Task Section */
@@ -315,12 +285,9 @@ span.close-button:hover {
     justify-content: space-between;
     padding: 20px;
   }
-  
+
   .pet-section {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
   .task-section {

@@ -1,4 +1,3 @@
-import pet  from '../Pet.js'; 
 document.addEventListener("DOMContentLoaded", function () {
     const timerDisplay = document.getElementById("timer-display");
 
@@ -101,27 +100,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 pomoCompleted.textContent = pomoSessions;
                 flow = "You just completed one session!";
                 flowCounter.textContent = flow;
-                pet.addFood()
+                flow = "⬤";
                 startTimer()
             }
         }
         timerInterval = setInterval(updateTimer, 1000)
     }
 
-    // Allow user to finish timer
-    const finishButton = document.getElementById('finished-button');
-    finishButton.addEventListener('click', function() {
+    // Allow user to exit timer
+    const exitButton = document.getElementById('exit-button');
+    exitButton.addEventListener('click', function() {
         timeLeft = 0;});
     // Allow user to reset timer
     const resetButton = document.getElementById('reset-button');
     resetButton.addEventListener('click', function() {
         flow = "⬤";
         startTimer();});
-    // Allow user to end timer
-    const exitButton = document.getElementById('exit-button')
-    exitButton. addEventListener('click', function() {
-        location.reload()
-    });
 
     document.getElementById("start-button").addEventListener("click", startTimer);
 });
