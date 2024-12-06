@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>testing</title>
+    <script src="https://unpkg.com/kaplay@3001/dist/kaplay.js"></script>
+  </head>
+  <body>
+    <script>
+      kaplay();
+
+      loadBean(); // Load default sprite "bean"
+      // var randX = rand(0,)
+      const BOUNDARY_L = 0;
+      const BOUNDARY_R = width();
+      const BOUNDARY_T = 0;
+      const BOUNDARY_B = height();
+
+      scene("test", (score) => {
+        add([rect(32, 32), pos(64, 64), color(255, 128, 0)]);
+        add([text(score), pos(12, 12), color(128, 0, 128)]);
+        // loop(1, () => {
+        //   // i = ++i % 2;
+        // });
+      });
+
+      scene("pet", () => {
+        add([rect(width(), height()), color(BLUE)]);
+        add([text("pet's room")]);
+
+        const player = add([
+          // list of components
+          sprite("bean"),
+          pos(80, 40),
+          area(),
+          body(),
+        ]);
+
+        var randX = rand(BOUNDARY_L, BOUNDARY_R);
+        var randY = rand(BOUNDARY_T, BOUNDARY_B);
+        // var randPos = (rand(BOUNDARY_L, BOUNDARY_R), rand(BOUNDARY_T, BOUNDARY_B)); // tuple
+
+        function movePlayer() {
+          add([text(randX), pos(200)]);
+          add([text(randY), pos(300)]);
+          // do a while()? while() is broken?!?
+          if (player.pos != (randX, randY)) {
+            player.move(randX, randY, 100);
+            // add([text(player.pos), pos(100)]);
+          }
+          add([text(player.pos), pos(100)]);
+        }
+        movePlayer();
+      });
+
+      // go("test", 100);
+      go("pet");
+    </script>
+
+    <script>
+      // JUNK TESTS //
+
+      // var hp = 50;
+
+      // scene("test", (score) => {
+      //   add([rect(32, 32), pos(64, 64), color(255, 128, 0)]);
+      //   add([text(score), pos(12, 12), color(128, 0, 128)]);
+      //   // health bar
+      //   add([rect(32 + hp, 32), pos(0, 256), color(255, 0, 0)]);
+      // });
+      // go("test", 100);
+
+      // // while (hp > 0) {
+      // // }
+
+      // onUpdate(() => {
+      //   loop(0.2, () => {
+      //     if (hp > 0) {
+      //       hp = hp - 15;
+      //     }
+      //   });
+      // });
+
+      //       drawLine({
+      //     p1: vec2(0),
+      //     p2: mousePos(),
+      //     width: 4,
+      //     color: rgb(0, 0, 255),
+      // })
+    </script>
+  </body>
+</html>
