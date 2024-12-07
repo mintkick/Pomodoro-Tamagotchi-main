@@ -54,7 +54,7 @@ class Pet {
 
     async listTasks() {
       await fetch(`/pet`)
-      
+
           .then((response) => {
               if (!response.ok) {
                   throw new Error("Failed to get pet");
@@ -86,7 +86,7 @@ class Pet {
       this.updateStatus(
         `${this.name} enjoyed playing! Satiation decreased to ${this.satiated}.`
       );
-      setEmotion("happy");
+      setEmotion("happy"); // make the pet happy because it was played with
       this.saveState();
     } else {
       this.updateStatus(`${this.name} is too hungry to play!`);
