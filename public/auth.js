@@ -30,8 +30,7 @@ window.addEventListener('load', () => {
 
         // console.log("starting saveData");
         saveData(user);
-        loadDailyTasks();
-        loadTasks(); // Always load tasks
+        // loadTasks(); // Always load tasks
       } else {
         document.getElementById("login-btn").style.display = "block";
         document.getElementById("logout-btn").style.display = "none";
