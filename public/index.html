@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tamadoro</title>
     <link rel="stylesheet" href="style.css" />
-    
   </head>
   <body>
     <header>
@@ -13,12 +12,12 @@
         <div id="user-details">
           <div id="login-logout">
             <div class="input">
-              <button id="login-btn" class="auth-button" style="display: block;">
+              <button id="login-btn" class="auth-button" style="display: block">
                 Log In
               </button>
             </div>
             <div class="input">
-              <button id="logout-btn" class="auth-button" style="display: none;">
+              <button id="logout-btn" class="auth-button" style="display: none">
                 Log Out
               </button>
             </div>
@@ -28,7 +27,11 @@
               </button>
             </div> -->
             <div>
-              <img id="userProfilePicture" alt="Profile Picture" style="display: none;" />
+              <img
+                id="userProfilePicture"
+                alt="Profile Picture"
+                style="display: none"
+              />
             </div>
           </div>
           <div class="input">
@@ -37,7 +40,7 @@
         </div>
         <h1>Tamadoro</h1>
         <div id="timer">
-          <a href="timer/timer.html"> Pomodoro Timer</a>
+          <a href="timer/timer.html">Pomodoro</a>
         </div>
       </nav>
     </header>
@@ -54,21 +57,19 @@
         <div id="status">Welcome!</div>
         <script src="Pet.js" type="module"></script>
         <script type="module">
-          import pet from './Pet.js';
-          document.getElementById('pet-name').textContent = pet.getName();
-          </script>
+          import pet from "./Pet.js";
+          document.getElementById("pet-name").textContent = pet.getName();
+        </script>
         <!--/testing-->
         <!-- <img src="img/tama-pet.webp" alt="Tama Pet" class="pet-image"> -->
         <!-- <canvas id="gameCanvas" width="800" height="600"></canvas> -->
         <!-- <script src="test_code/canvas.js"></script> -->
-        
-        <p class="pet-name"><strong>Tama's Name</strong></p>
-        
+
         <!-- Unnote this to try a different animation.-->
         <div id="animation">
           <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
           <canvas id="gameCanvas" width="400" height="400"></canvas>
-          <script src="canvas2.js"></script>
+          <script src="pet_anim_canvas.js"></script>
         </div>
 
         <div id="care-buttons">
@@ -76,16 +77,15 @@
           <button id="statusBtn">Show Status</button>
           <button id="playBtn">Play</button>
         </div>
-        
+
         <div class="box">
           <div class="column">
-            <p>----- Health -----</p>
-            <p id="displayHealth">0</p>
+            <p>----- Satiation -----</p>
+            <p id="displaySat">0</p>
+          </div>
           <div class="column">
-            <p>----- # of Pats Given -----</p>
-            <p id="displayPatsGiven">0</p>
-            <p>----- # of Food Capsules -----</p>
-            <p id="displayFoodCaps">0</p>
+            <p>----- Food -----</p>
+            <p id="displayFood">0</p>
           </div>
         </div>
 
@@ -98,8 +98,8 @@
           let currentHealth = 15; // Change this to set current health level
 
           function renderHealthBar(health, max) {
-            const fullChar = "X";
-            const emptyChar = "0";
+            const fullChar = "0";
+            const emptyChar = ".";
 
             // Calculate the health bar segments
             const filled = fullChar.repeat(health);
@@ -118,45 +118,50 @@
         <!-- <script src="test_code/script2.js"></script> -->
       </section>
 
-
-
-
-
       <!-- New Tasks Section -->
       <section class="tasks-section">
         <h2>Tasks</h2>
         <div class="task-tabs">
-          <button id="daily-tasks-tab" onclick="switchTab('daily')" class="clicked">Daily Tasks</button>
-          <button id="scheduled-tasks-tab" onclick="switchTab('scheduled')">Scheduled Tasks</button>
+          <button
+            id="daily-tasks-tab"
+            onclick="switchTab('daily')"
+            class="clicked"
+          >
+            Daily Tasks
+          </button>
+          <button id="scheduled-tasks-tab" onclick="switchTab('scheduled')">
+            Scheduled Tasks
+          </button>
         </div>
         <div id="daily-tasks-content" class="tasks-content">
           <ul id="daily-tasks-list"></ul>
-          <button id="add-daily-task-button" >Add Daily Task</button>
+          <button id="add-daily-task-button">Add Daily Task</button>
         </div>
-        <div id="scheduled-tasks-content" class="tasks-content" style="display: none;">
+        <div
+          id="scheduled-tasks-content"
+          class="tasks-content"
+          style="display: none"
+        >
           <ul id="scheduled-tasks-list"></ul>
           <button id="add-scheduled-task-button">Add Scheduled Task</button>
         </div>
       </section>
 
+      <!-- Task Modal -->
+      <!-- <form action=""> -->
 
-    <!-- Task Modal -->
-    <!-- <form action=""> -->
-
-      <div id="task-modal" class="modal" style="display: none;">
+      <div id="task-modal" class="modal" style="display: none">
         <div class="modal-content">
           <span class="close-button">&times;</span>
           <h3 id="modal-title">Add Task</h3>
-          <input type="text" id="task-name-input" placeholder="Task Name">
-          <input type="date" id="task-date-input" style="display: none;">
+          <input type="text" id="task-name-input" placeholder="Task Name" />
+          <input type="date" id="task-date-input" style="display: none" />
           <button id="save-task-button">Save Task</button>
         </div>
       </div>
 
-    <!-- </form>  -->
-
+      <!-- </form>  -->
     </main>
-
 
     <script src="auth.js"></script>
     <script src="refactor/tasks.view.js"></script>

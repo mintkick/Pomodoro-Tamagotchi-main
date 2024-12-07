@@ -8,52 +8,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <header>
-    <div
-      id="timer-demo"
-      style="
-        background-color: aquamarine;
-        width: 100px;
-        display: flex;
-        margin-left: 100px;
-        text-align: center;
-        justify-self: center;
-        justify-content: center;
-        border-radius: 10px;
-        margin-top: 20px;
-        margin-bottom: -20px;
-        padding: 10px;
-      "
-    >
-      <a
-        href="..\frontend.html"
-        style="
-          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
-            sans-serif;
-          font-size: 20px;
-          color: black;
-          font-weight: bold;
-          text-align: center;
-          justify-items: center;
-        "
-        >Home</a
-      >
-    </div>
-    <h1>Tamadoro</h1>
-  </header>
+    <a href="../index.html" id="home">Home</a>
+</header>
 <body>
     <div class="timer">
-        <div class="tasks">
-            <h1>Pomodoro Timer</h1>
+        <div class="clock">
             <p id="timer-display">00:00:00</p>
             <p id="flow"></p>
-        </div>
-        <div class="clock">
-            <h1>Tasks</h1>
-            <ul>
-                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                <li>Error, esse ad dolore quia nulla architecto nemo voluptatem</li>
-                <li>Iste, perferendis tenetur!</li>
-            </ul>
         </div>
     </div>
     <div id="sessions">
@@ -99,7 +60,7 @@
         <button type="button" id="reset-button">Reset</button>
         <button type="button" id="exit-button">Finished!</button>
     </div>
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
 
 </body>
 </html>
