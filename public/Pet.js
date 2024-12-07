@@ -1,13 +1,26 @@
+import petBusiness from '../petbusiness.js'
 class Pet {
     constructor(name) {
-  
-      if (Pet.instance) {
-        return Pet.instance; 
+      userPet = petBusiness.getPet()
+      if (userPet){
+        name = userPet.name
+        satiated = userPet.satiated
+        food = userPet.food
+      }else{
+        this.name = name || 'no name';
+        this.satiated = 50; 
+        this.food = 50; //change to 0 
+        
+        userPet = {
+          name: this.name,
+          satiated: this.satiated,
+          food: this.food
+        }
+        petBusiness.createPet(userPet)  
+
       }
+    
   
-      this.name = name || 'no name';
-      this.satiated = 50; 
-      this.food = 50; //change to 0    
   
       const savedState = JSON.parse(localStorage.getItem('petState'));
       if (savedState) {

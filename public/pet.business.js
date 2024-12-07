@@ -1,21 +1,13 @@
-/**
- * Business logic file. Do not access any HTML elements or CSS
- * Do not call any functions which have access to them either
- */
 
-const business = {
-    /**
-     * Make the fetch call to the server
-     * handle the response
-     * return the new object
-     */
-    async createTask(task) {
+const petBusiness = {
+
+    async createPet(task) {
         const taskWithType = {
             ...task,
             type: currentTaskType // 'daily' or 'scheduled'
         };
         
-        fetch("/tasks", {
+        fetch("/pet", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -34,13 +26,8 @@ const business = {
             });
     },
 
-    /**
-     * Make the fetch call to the server
-     * handle the response
-     * return the new object
-     */
-    async updateTask(id, data) {
-        await fetch(`/tasks/${id}`, {
+    async updatePet(id, data) {
+        await fetch(`/pet/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -58,34 +45,8 @@ const business = {
                 alert("Error updating task");
             });
     },
-
-    /**
-     * Make the fetch call to the server
-     * handle the response
-     * return the new object
-     */
-    async deleteTask(id) {
-        await fetch(`/tasks/${id}`, {
-            method: "DELETE",
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to delete task");
-                }
-                return response.json();
-            })
-            .catch((error) => {
-                console.error('Error deleting task:', error);
-            });
-    },
-
-    /**
-     * Make the fetch call to the server
-     * handle the response
-     * return the new object
-     */
-    async listTasks() {
-        await fetch(`/tasks`)
+    async getPet() {
+        await fetch(`/pet`)
         
             .then((response) => {
                 if (!response.ok) {
@@ -100,4 +61,4 @@ const business = {
     }
 }
 
-module.exports = {business}
+export default petBusiness;

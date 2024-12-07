@@ -1,3 +1,4 @@
+
 import pet  from '../Pet.js'; 
 document.addEventListener("DOMContentLoaded", function () {
     const timerDisplay = document.getElementById("timer-display");

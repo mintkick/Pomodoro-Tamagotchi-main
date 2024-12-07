@@ -2,6 +2,7 @@ const express = require('express');
 const { auth } = require('express-openid-connect');
 const Task = require('./models/task.service'); // Import Task model
 const user = require('./models/user.service')
+const pet = require('./models/pet.service')
 const db = require('./database'); // Import database.js
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
@@ -119,6 +120,63 @@ app.put('/tasks/:id', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+
+
+app.get('/pet', async (req, res) => {
+  try {
+    const userId = req.cookies.userId;
+    console.log(userId)
+    const tasks = await pet.getPet(userId); // Gets tasks from database
+    res.json(tasks);
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ error: 'Server error in getting Task' });
+  }
+});
+
+app.post('/pet', async (req, res) => {
+  const { name, satiated, food } = req.body;
+  if (!text) {
+    return res.status(400).json({ error: 'Task text is required' });
+  }
+  try {
+    const newPet = {
+      userId: req.cookies.userId,
+      name,
+      satiated,
+      food
+    };
+    const savedPet = await pet.createPet(newTask);
+    res.status(201).json(savedTask);
+    console.log(savedTask);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.put('/pet/:id', async (req, res) => {
+  const {name, satiated, food  } = req.body;
+  try {
+    const updatedData = {id};
+    if (name !== undefined) updatedData.name = name;
+    if (satiated !== undefined) updatedData.satiated = satiated;
+    if (food !== undefined) updatedData.food = food;
+
+    const updatedTask = await pet.updatePet(req.params.id, updatedData);
+    if (!updatedTask.value) {
+      return res.status(404).json({ error: 'Pet not found', updatedTask });
+    }
+    res.json(updatedTask.value);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
