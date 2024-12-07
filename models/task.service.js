@@ -58,7 +58,7 @@ module.exports = {
 
   deleteTask: async (id) => {
     return await getCollection(async (collection) => {
-      return await collection.deleteOne({ id });
+      return await collection.deleteOne({ _id: new ObjectId(id) });
     });
   },
 
@@ -71,7 +71,7 @@ module.exports = {
       ])
       console.log('update task payload', updatedData)
       return await collection.findOneAndUpdate(
-        { id },
+        { _id: new ObjectId(id) },
         { $set: updatedData },
         { returnDocument: 'after' }
       );

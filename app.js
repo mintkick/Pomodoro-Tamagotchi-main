@@ -90,9 +90,8 @@ app.post('/tasks', async (req, res) => {
 });
 
 app.delete('/tasks/:id', async (req, res) => {
-  // Removed authorization check
   try {
-    const result = await Task.deleteTask(req.params.id); // Removed userId
+    const result = await Task.deleteTask(req.params.id);
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: 'Task not found' });
     }
@@ -103,16 +102,15 @@ app.delete('/tasks/:id', async (req, res) => {
 });
 
 app.put('/tasks/:id', async (req, res) => {
-  // Removed authorization check
-  const { text, completed, dueDate, frequency } = req.body;
+  const { text, completed, dueDate, type } = req.body;
   try {
     const updatedData = {id};
     if (text !== undefined) updatedData.text = text;
     if (completed !== undefined) updatedData.completed = completed;
     if (dueDate !== undefined) updatedData.dueDate = dueDate;
-    if (frequency !== undefined) updatedData.frequency = frequency;
+    if (type !== undefined) updatedData.type = type;
 
-    const updatedTask = await Task.updateTask(req.params.id, updatedData); // Removed userId
+    const updatedTask = await Task.updateTask(req.params.id, updatedData);
     if (!updatedTask.value) {
       return res.status(404).json({ error: 'Task not found', updatedTask });
     }
