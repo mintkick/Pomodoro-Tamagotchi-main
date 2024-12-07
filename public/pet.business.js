@@ -1,18 +1,18 @@
 
 const petBusiness = {
 
-    async createPet(task) {
-        const taskWithType = {
-            ...task,
-            type: currentTaskType // 'daily' or 'scheduled'
-        };
+    async createPet(pet) {
+        // const taskWithType = {
+        //     ...pet,
+        //     type: currentTaskType // 'daily' or 'scheduled'
+        // };
         
         fetch("/pet", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(taskWithType),
+            body: JSON.stringify(pet),
         })
             .then((response) => {
                 if (!response.ok) {
@@ -36,13 +36,13 @@ const petBusiness = {
         })
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Failed to update task");
+                    throw new Error("Failed to update pet");
                 }
                 return response.json();
             })
             .catch((error) => {
                 console.error(error);
-                alert("Error updating task");
+                alert("Error updating pet");
             });
     },
     async getPet() {
@@ -50,12 +50,12 @@ const petBusiness = {
         
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Failed list tasks");
+                    throw new Error("Failed to get pet");
                 }
                 return response.json();
             })
         .catch((error) => {
-            console.error('Error listing tasks:', error);
+            console.error('Error getting pet:', error);
         });
 
     }

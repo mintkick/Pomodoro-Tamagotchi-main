@@ -1,11 +1,11 @@
-import petBusiness from '../petbusiness.js'
+import petBusiness from '../pet.business.js'
 class Pet {
     constructor(name) {
-      userPet = petBusiness.getPet()
+      var userPet = petBusiness.getPet()
       if (userPet){
-        name = userPet.name
-        satiated = userPet.satiated
-        food = userPet.food
+        this.name = userPet.name
+        this.satiated = userPet.satiated
+        this.food = userPet.food
       }else{
         this.name = name || 'no name';
         this.satiated = 50; 
@@ -49,7 +49,6 @@ class Pet {
       };
       document.getElementById("displayFood").textContent = this.food;
       document.getElementById("displaySat").textContent = this.satiated;
-      doc
       localStorage.setItem('petState', JSON.stringify(state));
     }
   
@@ -72,7 +71,7 @@ class Pet {
     addFood() {
       this.food += 1;
       console.log(`You added 1 bowl of feed. Total bowls: ${this.food}`);
-      // this.saveState();
+      this.saveState();
     }
   
     playWithPet() {

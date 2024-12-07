@@ -100,4 +100,3 @@ const business = {
     }
 }
 
-module.exports = {business}

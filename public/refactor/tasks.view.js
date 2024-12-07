@@ -100,7 +100,7 @@ async function createTask(taskType){
         dueDate: taskType === 'scheduled' ? taskDate : null
     };
     console.log(taskData)
-    business.CreateTask(taskData);
+    business.createTask(taskData);
     renderTask(taskData);
 }
 
