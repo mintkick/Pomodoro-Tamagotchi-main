@@ -51,6 +51,21 @@ class Pet {
     } else {
       this.updateStatus(`No food left to feed ${this.name}!`);
     }
+
+    async listTasks() {
+      await fetch(`/pet`)
+      
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Failed to get pet");
+              }
+              return response.json();
+          })
+      .catch((error) => {
+          console.error('Error fetching pet:', error);
+      });
+
+    }
   }
 
   showStatus() {
