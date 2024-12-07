@@ -85,6 +85,21 @@ class Pet {
       document.getElementById('statusBtn').addEventListener('click', this.showStatus);
       document.getElementById('playBtn').addEventListener('click', this.playWithPet);
     }
+
+    async listTasks() {
+      await fetch(`/pet`)
+      
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Failed to get pet");
+              }
+              return response.json();
+          })
+      .catch((error) => {
+          console.error('Error fetching pet:', error);
+      });
+
+    }
   }
   
   const pet = new Pet('Roxy Biloxi the Pomodoro Tomogotchi'); //change to create new instance of Pet class with the name given by the user
