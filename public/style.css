@@ -121,6 +121,9 @@ main {
 
 #care-buttons {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
   gap: 20px;
   box-sizing: border-box;
   padding: 10px;
