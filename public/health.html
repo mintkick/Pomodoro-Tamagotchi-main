@@ -17,10 +17,17 @@
     <!-- HEARTS -->
     <!-- Check out the get() function -->
 
-    <script>
+    <!-- <script>
+      import pet from "./Pet.js";
+      // import ??? from 'timer/script.js'; // workSessions and/or pomoSessions
+    </script> -->
+    <script type="module">
+      import pet from "./Pet.js";
       // Initialize context and load assets
       kaplay();
       loadSprite("heart", "sprites/meat-o.png");
+
+      add([text(pet.getName())]);
 
       // Define health bar components
       const healthBar = add([
@@ -48,7 +55,7 @@
         i = ++i % 2;
         return i;
         // });
-        wait(1, animateHealthBar(i)); // never runs
+        wait(1, animateHealthBar(i)); // never runs because of return statement
       }
 
       // Integrate with player health

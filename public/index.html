@@ -46,104 +46,54 @@
     </div>
 
     <main>
-      <!-- Main Container -->
       <!-- Pet Section -->
       <!-- Adam and Teia's Zone -->
       <section class="pet-section">
+        <!--Testing for new Pet code-->
+        <h1>Play with <span id="pet-name">Loading...</span></h1>
+        <div id="status">Welcome!</div>
+        <script src="Pet.js" type="module"></script>
+        <script type="module">
+          import pet from './Pet.js';
+          document.getElementById('pet-name').textContent = pet.getName();
+          </script>
+        <!--/testing-->
         <!-- <img src="img/tama-pet.webp" alt="Tama Pet" class="pet-image"> -->
         <!-- <canvas id="gameCanvas" width="800" height="600"></canvas> -->
         <!-- <script src="test_code/canvas.js"></script> -->
-
+        
         <p class="pet-name"><strong>Tama's Name</strong></p>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-        >
-          Feed
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('idle')"
-        >
-          Idle
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('happy')"
-        >
-          Happy
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('sad')"
-        >
-          Sad
-        </button>
-        <button
-          style="
-            border-radius: 10px;
-            width: 100px;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-          "
-          id="emoButton"
-          onclick="setEmotion('sleepy')"
-        >
-          Sleepy
-        </button>
-
+        
         <!-- Unnote this to try a different animation.-->
         <div id="animation">
           <!-- <img id="animated" src="image1.jpg" alt="Animation Frame" width="300" height="300"> -->
-          <canvas id="gameCanvas" ></canvas>
+          <canvas id="gameCanvas" width="400" height="400"></canvas>
           <script src="canvas2.js"></script>
         </div>
 
+        <div id="care-buttons">
+          <button id="feedBtn" class="">Feed</button>
+          <button id="statusBtn">Show Status</button>
+          <button id="playBtn">Play</button>
+        </div>
+        
         <div class="box">
           <div class="column">
             <p>----- Health -----</p>
-            <p>----- Happiness -----</p>
-            <p>----- Level -----</p>
-          </div>
+            <p id="displayHealth">0</p>
           <div class="column">
             <p>----- # of Pats Given -----</p>
+            <p id="displayPatsGiven">0</p>
             <p>----- # of Food Capsules -----</p>
-            <p>----- Experience -----</p>
+            <p id="displayFoodCaps">0</p>
           </div>
         </div>
 
         <!-- WORK IN PROGRESS HEALTH BAR -->
 
-        <div class="health-bar" id="healthBar"></div>
+        <!-- <div class="health-bar" id="healthBar"></div> -->
 
-        <script>
+        <!-- <script>
           const maxHealth = 20; // Maximum health represented by the bar length
           let currentHealth = 15; // Change this to set current health level
 
@@ -163,7 +113,7 @@
 
           // Initial rendering of the health bar
           renderHealthBar(currentHealth, maxHealth);
-        </script>
+        </script> -->
 
         <!-- <script src="test_code/script2.js"></script> -->
       </section>
@@ -188,10 +138,11 @@
           <button id="add-scheduled-task-button">Add Scheduled Task</button>
         </div>
       </section>
-    </main>
+
 
     <!-- Task Modal -->
     <!-- <form action=""> -->
+
       <div id="task-modal" class="modal" style="display: none;">
         <div class="modal-content">
           <span class="close-button">&times;</span>
@@ -201,7 +152,11 @@
           <button id="save-task-button">Save Task</button>
         </div>
       </div>
+
     <!-- </form>  -->
+
+    </main>
+
 
     <script src="auth.js"></script>
     <script src="refactor/tasks.view.js"></script>
