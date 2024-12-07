@@ -16,8 +16,13 @@ test_code/pet.html
 test_code/pet.css
 test_code/pet.js
 test_code/BRAVE_Virtual Pet with KAPLAY.md
+# a personal reference guide for animating on webpages
+public/animations.md
 
+# code playground files for testing
 public/jump_game.html
+public/health.html
+public/pet_room.html
 
 # Ignor all .env files
 .env
