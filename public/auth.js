@@ -1,89 +1,91 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        //import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
-        import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js';
-        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js';
-        import firebaseConfig from './config.js';
-       
-         
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        //const analytics = getAnalytics(app);
-        const db = getFirestore(app);
-        const provider = new GoogleAuthProvider();
-        const auth = getAuth(app);
-        auth.language = 'en';
-        const user = auth.currentUser;
-        const googleLogout = document.getElementById("google-logout-btn");
-        const signOutMessage = document.getElementById("sign-out-message");
 
-        googleLogout.addEventListener("click", handleSignOut);
-        const googleLogin = document.getElementById("google-login-btn");
-        googleLogin.addEventListener("click", handleSignIn);
-        // Listen for changes in the user's authentication state
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, update the user profile
-                updateUserProfile(user);
+// Log button clicks
+document.getElementById("login-btn").addEventListener("click", () => {
+  console.log("Login button clicked - Redirecting to login page");
+  window.location.href = "/login";
+});
 
-                signOutMessage.innerText = '';
-                document.getElementById('google-logout-btn').style.display = 'block';
-                document.getElementById('google-login-btn').style.display = 'none';
-                document.getElementById('userProfilePicture').style.display = 'block';
-            } else {
-                document.getElementById('google-logout-btn').style.display = 'none';
-                document.getElementById('google-login-btn').style.display = 'block';
-                document.getElementById('userProfilePicture').style.display = 'none';
-                clearUserInfo();
-                displayLoginMessage();
-                console.log("No user signed in");
-            }
-        });
-        async function handleSignOut() {
-            try {
-                await signOut(auth);
-                
-                clearUserInfo();
-                displayLoginMessage();
-                signOutMessage.innerText = "You have been successfully signed out.";
-            } catch (error) {
-                signOutMessage.innerText = "An error occurred during sign-out.";
-                console.error(error);
-            }
-        }
-        function clearUserInfo() {
-            // Clear user information
-            document.getElementById("userName").textContent = '';
-            document.getElementById("userEmail").textContent = '';
-            document.getElementById("userProfilePicture").src = '';
-        }
-        async function handleSignIn() {
-            try {
-                const result = await signInWithPopup(auth, provider);
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                const user = result.user;
-                updateUserProfile(user);
-            } catch (error) {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                console.error(errorCode, errorMessage, credential);
-            }
-        }
-        function updateUserProfile(user) {
-            const userName = user.displayName;
-            const userEmail = user.email;
-            const userProfilePicture = user.photoURL;
+document.getElementById("logout-btn").addEventListener("click", () => {
+  console.log("Logout button clicked - Redirecting to logout page");
+  window.location.href = "/logout";
+});
 
-            // Update the user's name and email in the UI
-            document.getElementById("userName").textContent = `Hello, ${userName}`;
-            document.getElementById("userEmail").textContent = userEmail;
+window.addEventListener('load', () => {
+  console.log("Page loaded - Fetching user data...");
 
-            // Update the user's profile picture
-            document.getElementById("userProfilePicture").src = userProfilePicture;
+  fetch("/user")
+    .then((response) => {
+      console.log("Response status:", response.status);
+      return response.json();
+    })
+    .then((user) => {
+      console.log("User data received:", user);
+      if (user) {
+        document.getElementById("login-btn").style.display = "none";
+        document.getElementById("logout-btn").style.display = "block";
+        document.getElementById("userName").textContent = user.name;
+        document.getElementById("userProfilePicture").src = user.picture;
+        document.getElementById("userProfilePicture").style.display = "block";
+        document.querySelector("main").style.display = "block";
 
-            // Show logout button and hide login button
-            document.getElementById('google-logout-btn').style.display = 'block';
-            document.getElementById('google-login-btn').style.display = 'none';
-            document.getElementById('userProfilePicture').style.display = 'block';
-        }
+        // console.log("starting saveData");
+        saveData(user);
+        loadDailyTasks();
+        loadTasks(); // Always load tasks
+      } else {
+        document.getElementById("login-btn").style.display = "block";
+        document.getElementById("logout-btn").style.display = "none";
+        document.getElementById("userName").textContent = "";
+        document.getElementById("userProfilePicture").style.display = "none";
+        document.querySelector("#login_message").style.display = "flex";
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching user data:", error);
+    });
+})
+
+async function saveData(userData) {
+  window.user = await fetch('/user', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData)
+
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Failed to fetch user information");
+    }
+    return response.json();
+  });
+}
+
+function loadTasks() {
+  fetch("/tasks")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch tasks");
+      }
+      return response.json();
+    })
+    .then((tasks) => {
+      const taskList = document.getElementById("task-list");
+      taskList.innerHTML = "";
+      tasks.forEach((task) => {
+        const taskItem = document.createElement("li");
+        taskItem.textContent = `${task.text} - Due: ${
+          task.dueDate || "No due date"
+        }`;
+        taskList.appendChild(taskItem);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Error loading tasks");
+    });
+}
+
+

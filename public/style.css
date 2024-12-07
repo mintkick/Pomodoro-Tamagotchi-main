@@ -7,7 +7,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  background-color: #e0e6ef;
   color: #333;
   display: flex;
   flex-direction: column;
@@ -15,11 +15,15 @@ body {
   height: 100vh;
 }
 
+.login-logout button {
+  width: 100%;
+}
+
 /* Header Section */
 header {
   text-align: center;
   padding: 10px;
-  background-color: #fff;
+  background-color: #F4B860;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   /* display: grid;
@@ -52,6 +56,26 @@ nav h1 {
   text-align: center;
 }
 
+#timer {
+  background-color: #89C383;
+  width: 100px;
+  display: flex;
+  margin-left: 100px;
+  text-align: center;
+  justify-self: center;
+  border-radius: 10px;
+  /* margin-top: 20px;
+        margin-bottom: -20px; */
+  padding: 10px;
+}
+
+#timer a {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+}
+
 /* Main Content */
 main {
   flex-grow: 1;
@@ -59,32 +83,29 @@ main {
   flex-direction: column;
   align-items: center;
   padding: 15px;
+  display: none;
+}
+
+#login_message {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: none;
 }
 
 /* Pet Section */
-
-#emotion-ex {
-  display: flex;
-  gap: 10px;
-}
-
-.emotion-display {
-  border-radius: 10px;
-  width: 100px;
-  font-weight: bold;
-  color: black;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
 .pet-section {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.pet-image {
-  width: 150px;
+#gameCanvas {
+  width: 300px;
   height: auto;
   border-radius: 10px;
+  border: 2px solid black;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .pet-name {
@@ -96,10 +117,6 @@ main {
 .pet-stats {
   font-size: 1em;
   color: #777;
-}
-
-#animation {
-  padding: 20px;
 }
 
 #care-buttons {
@@ -184,23 +201,23 @@ span.close-button:hover {
   padding: 15px 20px 15px 20px;
 }
 
-.list-area h3 {
+.tasks-content h3 {
   font-style: italic;
 }
 
-.list-area ul {
+.tasks-content ul {
   text-decoration: none;
   margin: 5px, 10px;
   list-style: none;
 }
 
-.list-area ul li {
+.tasks-content ul li {
   margin: 10px 0px;
   display: flex;
 }
 
-.list-area ul li:hover {
-  background-color: #aec6cf;
+.tasks-content ul li:hover {
+  background-color: #d9f3f1;
 }
 
 .list-area ul li input[type="checkbox"] {
@@ -272,26 +289,6 @@ span.close-button:hover {
   height: 30px;
 }
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #ddd;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-}
-
-.sidebar a {
-  text-decoration: none;
-}
-
-.sidebar img {
-  width: 80%;
-  height: auto;
-}
 
 /* Responsive Design (Tablet and Desktop) */
 @media (min-width: 600px) {
@@ -300,12 +297,9 @@ span.close-button:hover {
     justify-content: space-between;
     padding: 20px;
   }
-  
+
   .pet-section {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
   .task-section {
@@ -330,6 +324,8 @@ span.close-button:hover {
 }
 
 /* Pet Section Styling */
+
+
 
 /* Textured Box styling */
 .box {
@@ -364,4 +360,132 @@ span.close-button:hover {
   color: #ff4d4d; /* Red color for health */
   text-align: center;
   margin-top: 20px;
+}
+
+#task-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Tasks Section */
+.tasks-section {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.task-tabs {
+  display: flex;
+  background-color: #c1e1c1;
+  border-top-left-radius: 25%;
+  border-top-right-radius: 25%;
+
+
+}
+
+.task-tabs button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.active-tab {
+  background-color: #aec6cf;
+}
+
+.tasks-content {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.tasks-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tasks-content li {
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tasks-content li div {
+  display: flex;
+  gap: 5px;
+}
+
+.tasks-content li button {
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #c1e1c1;
+  border: none;
+  border-radius: 4px;
+}
+
+.tasks-content li button:hover {
+  background-color: #a5c2a5;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;
+}
+
+.close-button {
+  float: right;
+  cursor: pointer;
+}
+
+#login-btn{
+  background-color: #c1e1c1;
+  color: gray;
+  padding: 5px 10px;
+  border: 2px solid #c1e1c1;
+  cursor: pointer;
+  width: 100%;
 }
