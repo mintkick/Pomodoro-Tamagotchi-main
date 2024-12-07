@@ -64,6 +64,12 @@ module.exports = {
 
   updateTask: async (id, updatedData) => {
     return await getCollection(async (collection) => {
+      console.log('update task', [
+        { id },
+        { $set: updatedData },
+        { returnDocument: 'after' }
+      ])
+      console.log('update task payload', updatedData)
       return await collection.findOneAndUpdate(
         { id },
         { $set: updatedData },

@@ -98,7 +98,7 @@ app.delete('/tasks/:id', async (req, res) => {
     }
     res.json({ message: 'Task deleted' });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Server error', err });
   }
 });
 
@@ -106,7 +106,7 @@ app.put('/tasks/:id', async (req, res) => {
   // Removed authorization check
   const { text, completed, dueDate, frequency } = req.body;
   try {
-    const updatedData = {};
+    const updatedData = {id};
     if (text !== undefined) updatedData.text = text;
     if (completed !== undefined) updatedData.completed = completed;
     if (dueDate !== undefined) updatedData.dueDate = dueDate;
@@ -114,7 +114,7 @@ app.put('/tasks/:id', async (req, res) => {
 
     const updatedTask = await Task.updateTask(req.params.id, updatedData); // Removed userId
     if (!updatedTask.value) {
-      return res.status(404).json({ error: 'Task not found' });
+      return res.status(404).json({ error: 'Task not found', updatedTask });
     }
     res.json(updatedTask.value);
   } catch (err) {

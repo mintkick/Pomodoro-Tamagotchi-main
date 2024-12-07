@@ -196,6 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     saveTaskButton.addEventListener('click', async () => {
+      
         const taskName = taskNameInput.value.trim();
         const taskDate = taskDateInput.value;
 
@@ -259,39 +260,73 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function editTask(taskId, type) {
-    // Find the task in allTasks array
-    console.log(taskId);
-    const taskIndex = allTasks.findIndex((t) => t.id === taskId);
-    if (taskIndex === -1) return;
-    
-    // Set up the modal for editing
-    urrentTaskType = type;
-    document.getElementById("task-name-input").value = allTasks[taskIndex].text;
-    document.getElementById("task-date-input").value =
-      allTasks[taskIndex].dueDate || "";
-    document.getElementById("task-date-input").style.display =
-      type === "daily" ? "none" : "block";
-    document.getElementById("modal-title").textContent = `Edit ${
-      type === "daily" ? "Daily" : "Scheduled"
-    } Task`;
+  // Find the task in allTasks array
+  const taskIndex = allTasks.findIndex((t) => t.id === taskId);
+  if (taskIndex === -1) return;
 
-    // Update the save button to handle edit
-    const saveButton = document.getElementById('save-task-button');
-    saveButton.onclick = async () => {
-        const updatedData = {
-            text: document.getElementById('task-name-input').value.trim(),
-            type: type,
-            dueDate: type === 'scheduled' ? document.getElementById('task-date-input').value : null
-        };
-        
-      updateTask(taskId, updatedData);
-  // deleteTask(taskId);
-  // submitTask(updatedData);
+  // Set up the modal for editing
+  currentTaskType = type;
+  document.getElementById("task-name-input").value = allTasks[taskIndex].text;
+  document.getElementById("task-date-input").value =
+    allTasks[taskIndex].dueDate || "";
+  document.getElementById("task-date-input").style.display =
+    type === "daily" ? "none" : "block";
+  document.getElementById("modal-title").textContent = `Edit ${
+    type === "daily" ? "Daily" : "Scheduled"
+  } Task`;
+
+  // Update the save button to handle edit
+  const saveButton = document.getElementById("save-task-button");
+  saveButton.onclick = async () => {
+    const updatedData = {
+      id: taskId, // Ensure the ID remains the same
+      text: document.getElementById("task-name-input").value.trim(),
+      type: type,
+      dueDate:
+        type === "scheduled"
+          ? document.getElementById("task-date-input").value
+          : null,
     };
-  
-    // Show the modal
-    document.getElementById('task-modal').style.display = 'block';
+    try{
+      updateTask(taskId, updatedData);
+    } catch (error) {
+        console.error("Error updating task:", error);
+        alert("Error updating task2");
+      }
+
+    // try {
+    //   const response = await fetch(`/tasks/${taskId}`, {
+    //     method: "PUT",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(updatedData),
+    //   });
+
+    //   if (!response.ok) throw new Error("Failed to update task");
+
+    //   // Update local task data
+    //   allTasks[taskIndex] = updatedData;
+
+    //   // Re-render the appropriate list
+    //   if (type === "daily") {
+    //     renderDailyTasks();
+    //   } else {
+    //     renderScheduledTasks();
+    //   }
+
+    //   // Close the modal
+    //   closeModal();
+    // } catch (error) {
+    //   console.error("Error updating task:", error);
+    //   alert("Error updating task");
+    // }
+  };
+
+  // Show the modal
+  document.getElementById("task-modal").style.display = "block";
 }
+
 
 async function deleteTask(taskId, type) {
     if (!confirm('Are you sure you want to delete this task?')) return;
@@ -358,30 +393,31 @@ function renderScheduledTasks() {
 
 // Closing Task section JavaScript
 
-// async function updateTask(id, updatedData) {
-//   await fetch(`/tasks/${id}`, {
-//     method: 'PUT',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//       body: JSON.stringify(updatedData),
-//   })
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error('Failed to update task');
-//       }
-//       return response.json();
-//     })
-//     .then(() => {
-//       console.log("attempt to load tasks")
-//       loadTasks(); // Reload tasks after update
-//       console.log("tasks loaded")
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       alert('Error updating task');
-//     });
-// }
+async function updateTask(id, updatedData) {
+  await fetch(`/tasks/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+      body: JSON.stringify(updatedData),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to update task');
+      }
+      return response.json();
+    
+    })
+    .then(() => {
+      console.log("attempt to load tasks")
+      loadTasks(); // Reload tasks after update
+      console.log("tasks loaded")
+    })
+    .catch(error => {
+      console.error(error);
+      alert('Error updating task');
+    });
+}
 
 function openModal() {
   document.getElementById("task-modal").style.display = "block";
