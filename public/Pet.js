@@ -6,7 +6,7 @@ class Pet {
       }
   
       this.name = name || 'no name';
-      this.satiated = 50; 
+      this.satiated = 50;
       this.food = 50; //change to 0    
   
       const savedState = JSON.parse(localStorage.getItem('petState'));
@@ -24,7 +24,6 @@ class Pet {
         this.initEventListeners();
       });
 
-  
       Pet.instance = this; 
       return this;
     }
@@ -34,6 +33,9 @@ class Pet {
         satiated: this.satiated,
         food: this.food,
       };
+      document.getElementById("displayFood").textContent = this.food;
+      document.getElementById("displaySat").textContent = this.satiated;
+      doc
       localStorage.setItem('petState', JSON.stringify(state));
     }
   
@@ -56,7 +58,7 @@ class Pet {
     addFood() {
       this.food += 1;
       console.log(`You added 1 bowl of feed. Total bowls: ${this.food}`);
-      this.saveState();
+      // this.saveState();
     }
   
     playWithPet() {

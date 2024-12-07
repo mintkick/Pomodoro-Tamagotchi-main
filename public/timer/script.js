@@ -1,6 +1,6 @@
 import pet  from '../Pet.js'; 
-document.addEventListener("DOMContentLoaded", function () {
-    const timerDisplay = document.getElementById("timer-display");
+document.addEventListener('DOMContentLoaded', function () {
+    const timerDisplay = document.getElementById('timer-display');
 
     //Returns a string with the time formated like a digital clock
     function formatTime(seconds) {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let timeLeft;
     let workSessions = 0;
     let pomoSessions = 0;
-    let flow = "";
+    let flow = '';
     const sessCompleted = document.getElementById('sessions-completed');
     sessCompleted.textContent = workSessions;
     const pomoCompleted = document.getElementById('pomo-sessions-completed');
@@ -46,7 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 clearInterval(timerInterval);
                 workSessions++;
+                pet.addFood()
                 console.log(workSessions);
+                console.log(pet.food)
                 sessCompleted.textContent = workSessions;
                 if (counter && form1) {
                     counter.style.display = 'block';
@@ -54,13 +56,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 if (workSessions % 4 === 0)
                 {
-                    flow += "⬤";
+                    flow += '⬤';
                     flowCounter.textContent = flow;
                     startLongBreak();
                 }
                 else
                 {
-                    flow += "⬤";
+                    flow += '⬤';
                     flowCounter.textContent = flow
                     startShortBreak();
                 }
@@ -78,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 timerDisplay.textContent = formatTime(timeLeft)
             }
             else {
-                flow += "⬤";
+                flow += '⬤';
                 flowCounter.textContent = flow
                 startTimer();
             }
@@ -95,13 +97,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (timeLeft > 0) {
                 timeLeft--;
                 timerDisplay.textContent = formatTime(timeLeft)
+                pet.addFood()
             }
             else {
                 pomoSessions++;
                 pomoCompleted.textContent = pomoSessions;
-                flow = "You just completed one session!";
+                flow = 'You just completed one session!';
                 flowCounter.textContent = flow;
-                pet.addFood()
                 startTimer()
             }
         }
@@ -109,19 +111,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Allow user to finish timer
-    const finishButton = document.getElementById('finished-button');
+    const finishButton = document.getElementById('exit-button');
     finishButton.addEventListener('click', function() {
         timeLeft = 0;});
     // Allow user to reset timer
     const resetButton = document.getElementById('reset-button');
     resetButton.addEventListener('click', function() {
-        flow = "⬤";
+        flow = '⬤';
         startTimer();});
-    // Allow user to end timer
-    const exitButton = document.getElementById('exit-button')
-    exitButton. addEventListener('click', function() {
-        location.reload()
-    });
 
-    document.getElementById("start-button").addEventListener("click", startTimer);
+    document.getElementById('start-button').addEventListener('click', startTimer);
 });
