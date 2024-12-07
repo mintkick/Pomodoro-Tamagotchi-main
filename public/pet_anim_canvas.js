@@ -3,8 +3,8 @@ const context = canvas.getContext("2d"); // 2D rendering context
 
 // // guide
 
-const spriteImage = new Image();
-spriteImage.src = "pet/duck.png";
+// const spriteImage = new Image();
+// spriteImage.src = "pet/duck.png";
 
 // spriteImage.onload = function () {
 //   context.drawImage(spriteImage, 2, 3, 14, 14, 100, 100, 64, 64); // s=src, d=dest (image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
@@ -13,35 +13,35 @@ spriteImage.src = "pet/duck.png";
 // Clear the canvas
 context.clearRect(0, 0, canvas.width, canvas.height);
 
-////////////// If you see these shapes, the JS is running, but the sprite images are in a different directory.
+// ////////////// If you see these shapes, the JS is running, but the sprite images are in a different directory.
 
-// Draw a rectangle
-context.fillStyle = "blue";
-context.fillRect(50, 50, 200, 100); // (x, y, width, height)
+// // Draw a rectangle
+// context.fillStyle = "blue";
+// context.fillRect(50, 50, 200, 100); // (x, y, width, height)
 
-// Draw a circle
-context.beginPath();
-context.arc(300, 200, 50, 0, Math.PI * 2); // (x, y, radius, startAngle, endAngle)
-context.fillStyle = "red";
-context.fill();
+// // Draw a circle
+// context.beginPath();
+// context.arc(300, 200, 50, 0, Math.PI * 2); // (x, y, radius, startAngle, endAngle)
+// context.fillStyle = "red";
+// context.fill();
 
-// animate the blue rectangle
-let x = 0;
-const speed = 2;
+// // animate the blue rectangle
+// let x = 0;
+// const speed = 2;
 
-function animate() {
-  context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+// function animate() {
+//   context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
-  // Update position
-  x += speed;
-  if (x > canvas.width) x = 0; // Loop back
+//   // Update position
+//   x += speed;
+//   if (x > canvas.width) x = 0; // Loop back
 
-  // Draw the rectangle
-  context.fillStyle = "blue";
-  context.fillRect(x, 100, 100, 50);
+//   // Draw the rectangle
+//   context.fillStyle = "blue";
+//   context.fillRect(x, 100, 100, 50);
 
-  requestAnimationFrame(animate); // Call animate again, optimized for smooth animations
-}
+//   requestAnimationFrame(animate); // Call animate again, optimized for smooth animations
+// }
 
 // animate(); // Start the animation
 
@@ -86,6 +86,11 @@ function setEmotion(emotionAssign) {
   emotion = emotionAssign;
 }
 
+// change animation states
+// function updateEmotion() {
+
+// }
+
 // FRAMES
 let frameX = 0; // what frame/sprite/section of img we're pulling from--the X position of the img source
 let frameWidth = 16;
@@ -125,3 +130,5 @@ function animate() {
 }
 
 spriteSheet.onload = animate;
+
+export default setEmotion();
