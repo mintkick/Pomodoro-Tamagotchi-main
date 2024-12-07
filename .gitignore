@@ -23,6 +23,7 @@ public/animations.md
 public/jump_game.html
 public/health.html
 public/pet_room.html
+test_code/debug_index.html
 
 # Ignor all .env files
 .env
