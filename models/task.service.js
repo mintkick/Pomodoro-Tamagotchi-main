@@ -41,27 +41,40 @@ async function getCollection(callback){
 
 module.exports = {
   getTasks: async (userId) => {
-    // Ensure userId is correctly used
     return await getCollection(async (collection) => {
-      return await collection.find({ userId }).toArray(); 
-    })
+      return await collection.find({ userId }).toArray();
+    });
   },
+
   createTask: async (task) => {
     return await getCollection(async (collection) => {
-      const result = await collection.insertOne(task);
-      // return result.ops[0];
-      return task;
-    })
-    
+      const result = await collection.insertOne({
+        ...task,
+        id: new ObjectId().toString() // Ensure each task has a unique id
+      });
+      return { ...task, id: result.insertedId };
+    });
   },
-  deleteTask: async (id, userId) => {
-    return await tasksCollection.deleteOne({ _id: ObjectId(id), userId });
+
+  deleteTask: async (id) => {
+    return await getCollection(async (collection) => {
+      return await collection.deleteOne({ _id: new ObjectId(id) });
+    });
   },
-  updateTask: async (id, userId, updatedData) => {
-    return await tasksCollection.findOneAndUpdate(
-      { _id: ObjectId(id), userId },
-      { $set: updatedData },
-      { returnOriginal: false }
-    );
-  },
+
+  updateTask: async (id, updatedData) => {
+    return await getCollection(async (collection) => {
+      console.log('update task', [
+        { id },
+        { $set: updatedData },
+        { returnDocument: 'after' }
+      ])
+      console.log('update task payload', updatedData)
+      return await collection.findOneAndUpdate(
+        { _id: new ObjectId(id) },
+        { $set: updatedData },
+        { returnDocument: 'after' }
+      );
+    });
+  }
 };

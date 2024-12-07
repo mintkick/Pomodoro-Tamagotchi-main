@@ -1,22 +1,19 @@
 # Things to do
 
-## User Cookie - DONE
- - [] The post /user should set a cookie called userId
+## Recommendations
 
-Look for this code:
-app.post('/user'
+ 1. Starting fresh on the tasks.js file (comment everything out, put it in a new file)
+ 2. Putting everything inside of functions and separate the business logic from the view logic
+     - createModal()
+     - closeModal()
+     
+     // The busines logic
+     - createTask()
+     - deleteTask()
+     - updateTask()
+     - listTasks()
+     
 
-app.setCookie('userId', userData.userID)
-
-## Get Tasks - DONE
-
-Look for this code:
-const tasks = await Task.getTasks(); // No longer passing userId
-
-we need to pass userId, so we can look it up in the cookie.
-
-const userId = app.cookie('userId')
-const tasks = await Task.getTasks(userId);
 
 ## Creating tasks
 Get the user cookie for userId

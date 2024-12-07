@@ -118,28 +118,31 @@
         <!-- <script src="test_code/script2.js"></script> -->
       </section>
 
+
+
+
+
       <!-- New Tasks Section -->
       <section class="tasks-section">
         <h2>Tasks</h2>
         <div class="task-tabs">
-          <button id="daily-tasks-tab" class="clicked">Daily Tasks</button>
-          <button id="scheduled-tasks-tab">Scheduled Tasks</button>
+          <button id="daily-tasks-tab" onclick="switchTab('daily')" class="clicked">Daily Tasks</button>
+          <button id="scheduled-tasks-tab" onclick="switchTab('scheduled')">Scheduled Tasks</button>
         </div>
         <div id="daily-tasks-content" class="tasks-content">
-          <ul id="daily-tasks-list">
-            <!-- Daily tasks will be listed here -->
-          </ul>
-          <button id="add-daily-task-button">Add Daily Task</button>
+          <ul id="daily-tasks-list"></ul>
+          <button id="add-daily-task-button" >Add Daily Task</button>
         </div>
         <div id="scheduled-tasks-content" class="tasks-content" style="display: none;">
-          <ul id="scheduled-tasks-list">
-            <!-- Scheduled tasks will bew listed here -->
-          </ul>
+          <ul id="scheduled-tasks-list"></ul>
           <button id="add-scheduled-task-button">Add Scheduled Task</button>
         </div>
       </section>
-      
-      <!-- Task Modal -->
+
+
+    <!-- Task Modal -->
+    <!-- <form action=""> -->
+
       <div id="task-modal" class="modal" style="display: none;">
         <div class="modal-content">
           <span class="close-button">&times;</span>
@@ -149,35 +152,14 @@
           <button id="save-task-button">Save Task</button>
         </div>
       </div>
+
+    <!-- </form>  -->
+
     </main>
 
+
     <script src="auth.js"></script>
-    <script src="tasks.js"></script>
-    <!-- <script>
-
-      window.onload = () => {
-        fetch('/user')
-          .then(response => response.json())
-          .then(user => {
-            if (user) {
-              document.getElementById('login-btn').style.display = 'none';
-              document.getElementById('logout-btn').style.display = 'block';
-              // document.getElementById('google-login-btn').style.display = 'none';
-              document.getElementById('userName').textContent = user.name;
-              document.getElementById('userProfilePicture').src = user.picture;
-              document.getElementById('userProfilePicture').style.display = 'block';
-              loadTasks();
-            } else {
-              document.getElementById('login-btn').style.display = 'block';
-              // document.getElementById('google-login-btn').style.display = 'block';
-              document.getElementById('logout-btn').style.display = 'none';
-              document.getElementById('userName').textContent = '';
-              document.getElementById('userProfilePicture').style.display = 'none';
-            }
-          });
-      };
-
-      // document.getElementById('google-login-btn').addEventListener('click', () => {window.location.href = '/login?connection=google-oauth2'});
-    </script> -->
+    <script src="refactor/tasks.view.js"></script>
+    
   </body>
 </html>

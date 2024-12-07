@@ -57,12 +57,10 @@ app.post('/user', async(req, res) => {
 
 // CRUD Routes for Tasks
 app.get('/tasks', async (req, res) => {
-  // Removed authorization check
-  console.log("entered get request");
   try {
     const userId = req.cookies.userId;
     console.log(userId)
-    const tasks = await Task.getTasks(userId); // No longer passing userId
+    const tasks = await Task.getTasks(userId); // Gets tasks from database
     res.json(tasks);
   } catch (err) {
     console.log(err)
@@ -71,55 +69,50 @@ app.get('/tasks', async (req, res) => {
 });
 
 app.post('/tasks', async (req, res) => {
-  // Removed authorization check
-  const { text, dueDate, frequency } = req.body;
+  const { text, dueDate, type } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Task text is required' });
-  }
-  if (dueDate == null){
-    console.log("No Due Date")
   }
   try {
     const newTask = {
       userId: req.cookies.userId,
       text,
-      dueDate: dueDate,
-      frequency: frequency || 'daily',
+      dueDate,
+      type, // 'daily' or 'scheduled'
       completed: false,
     };
-    const savedTask = await Task.createTask(newTask); // Removed userId
+    const savedTask = await Task.createTask(newTask);
     res.status(201).json(savedTask);
+    console.log(savedTask);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
 });
 
 app.delete('/tasks/:id', async (req, res) => {
-  // Removed authorization check
   try {
-    const result = await Task.deleteTask(req.params.id); // Removed userId
+    const result = await Task.deleteTask(req.params.id);
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: 'Task not found' });
     }
     res.json({ message: 'Task deleted' });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Server error', err });
   }
 });
 
 app.put('/tasks/:id', async (req, res) => {
-  // Removed authorization check
-  const { text, completed, dueDate, frequency } = req.body;
+  const { text, completed, dueDate, type } = req.body;
   try {
-    const updatedData = {};
+    const updatedData = {id};
     if (text !== undefined) updatedData.text = text;
     if (completed !== undefined) updatedData.completed = completed;
     if (dueDate !== undefined) updatedData.dueDate = dueDate;
-    if (frequency !== undefined) updatedData.frequency = frequency;
+    if (type !== undefined) updatedData.type = type;
 
-    const updatedTask = await Task.updateTask(req.params.id, updatedData); // Removed userId
+    const updatedTask = await Task.updateTask(req.params.id, updatedData);
     if (!updatedTask.value) {
-      return res.status(404).json({ error: 'Task not found' });
+      return res.status(404).json({ error: 'Task not found', updatedTask });
     }
     res.json(updatedTask.value);
   } catch (err) {
@@ -130,3 +123,9 @@ app.put('/tasks/:id', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// This version works with the following changes:
+// - The Task model is imported from models/task.service.js
+// - The Task model is used to interact with the database
+// - The user ID is stored in a cookie
+// - The user ID is used to filter tasks by user
