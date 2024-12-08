@@ -91,6 +91,7 @@ async function createTask(taskType){
         dueDate: taskType === 'scheduled' ? taskDate : null
     };
     // console.log(taskData)
+    console.log("about to save task")
     await business.createTask(taskData);
     renderTask(taskData);
 }
@@ -120,8 +121,9 @@ function updateTask(task){
 
 }
 
-function deleteTask(task){
-    
+function deleteTask(id){
+    business.deleteTask(id)
+    allTasks = allTasks.filter((task) => task.id !== id);
 }
 
 
@@ -137,7 +139,7 @@ function renderTask(task) {
     const li = document.createElement('li');
     var taskList = getElement('daily-tasks-list');
     const span = document.createElement('span');
-    console.log('task', task)
+    console.log('task', task.id)
     if (task.type === 'daily') {
         taskList = getElement('daily-tasks-list');
         span.innerHTML = task.text
@@ -247,7 +249,6 @@ function switchTab(tabIndex) {
  */
 async function init() {
     var tasks = await business.listTasks();
-    console.log(tasks[0])
     renderAllTasks(tasks)
     console.log('init tasks rendered')
     getElement('add-daily-task-button').addEventListener('click', () => openModal('create', 'daily', createTask));

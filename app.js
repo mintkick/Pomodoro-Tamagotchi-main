@@ -147,9 +147,9 @@ app.post('/pet', async (req, res) => {
       satiated,
       food
     };
-    const savedPet = await pet.createPet(newTask);
-    res.status(201).json(savedTask);
-    console.log(savedTask);
+    const savedPet = await pet.createPet(newPet);
+    res.status(201).json(newPet);
+    console.log(newPet);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }

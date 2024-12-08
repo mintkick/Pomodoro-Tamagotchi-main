@@ -68,15 +68,15 @@ const business = {
         return await fetch(`/tasks/${id}`, {
             method: "DELETE",
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to delete task");
-                }
-                return response.json();
-            })
-            .catch((error) => {
-                console.error('Error deleting task:', error);
-            });
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to delete task");
+            }
+            return response.json();
+        })
+        .catch((error) => {
+            console.error('Error deleting task:', error);
+        });
     },
 
     /**
