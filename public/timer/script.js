@@ -1,5 +1,6 @@
-
 import pet  from '../Pet.js'; 
+console.log("Script is running!");
+
 document.addEventListener('DOMContentLoaded', function () {
     const timerDisplay = document.getElementById('timer-display');
 
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //Changes time displayed on timer for work sessions
     function startTimer(){
+        console.log('timer started')
         console.log(flow);
         clearInterval(timerInterval);
         timeLeft = getTimeInSeconds('work-options');
@@ -120,6 +122,8 @@ document.addEventListener('DOMContentLoaded', function () {
     resetButton.addEventListener('click', function() {
         flow = '⬤';
         startTimer();});
-
-    document.getElementById('start-button').addEventListener('click', startTimer);
+        
+    const startButton = document.getElementById('start-button')
+    console.log(startButton)
+    startButton.addEventListener('click', startTimer);
 });
