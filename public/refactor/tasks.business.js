@@ -12,10 +12,10 @@ const business = {
     async createTask(task) {
         const taskWithType = {
             ...task,
-            type: currentTaskType // 'daily' or 'scheduled'
+            
         };
         
-        fetch("/tasks", {
+        return fetch("/tasks", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,7 +40,7 @@ const business = {
      * return the new object
      */
     async updateTask(id, data) {
-        await fetch(`/tasks/${id}`, {
+        return await fetch(`/tasks/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const business = {
      * return the new object
      */
     async deleteTask(id) {
-        await fetch(`/tasks/${id}`, {
+        return await fetch(`/tasks/${id}`, {
             method: "DELETE",
         })
             .then((response) => {
@@ -85,7 +85,7 @@ const business = {
      * return the new object
      */
     async listTasks() {
-        await fetch(`/tasks`)
+        return await fetch(`/tasks`)
         
             .then((response) => {
                 if (!response.ok) {

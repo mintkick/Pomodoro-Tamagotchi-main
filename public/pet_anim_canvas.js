@@ -131,4 +131,4 @@ function animate() {
 
 spriteSheet.onload = animate;
 
-export default setEmotion();
+// export default setEmotion();

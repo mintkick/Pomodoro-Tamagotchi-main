@@ -1,10 +1,11 @@
 import petBusiness from '../pet.business.js'
-import { setEmotion } from "./pet_anim_canvas.js";
+// import { setEmotion } from "./pet_anim_canvas.js";
 class Pet {
     constructor(name) {
       var userPet = petBusiness.getPet()
       if (userPet){
-        this.name = userPet.name
+        // this.name = userPet.name
+        userPet.name = this.name
         this.satiated = userPet.satiated
         this.food = userPet.food
       }else{
@@ -20,6 +21,8 @@ class Pet {
         petBusiness.createPet(userPet)  
 
       }
+      var petName = document.getElementById('pet-name');
+      petName.innerHTML = this.name;
     
   
   
@@ -81,6 +84,7 @@ class Pet {
         this.updateStatus(`${this.name} enjoyed playing! Satiation decreased to ${this.satiated}.`);
         this.saveState();
       } else {
+        setEmotion("happy"); // make the pet happy because it was played with
         this.updateStatus(`${this.name} is too hungry to play!`);
       }
     }

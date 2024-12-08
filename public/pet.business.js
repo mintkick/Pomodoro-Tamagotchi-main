@@ -7,7 +7,7 @@ const petBusiness = {
         //     type: currentTaskType // 'daily' or 'scheduled'
         // };
         
-        fetch("/pet", {
+        return fetch("/pet", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +27,7 @@ const petBusiness = {
     },
 
     async updatePet(id, data) {
-        await fetch(`/pet/${id}`, {
+        return await fetch(`/pet/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const petBusiness = {
             });
     },
     async getPet() {
-        await fetch(`/pet`)
+        return await fetch(`/pet`)
         
             .then((response) => {
                 if (!response.ok) {
