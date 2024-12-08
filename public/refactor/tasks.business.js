@@ -3,7 +3,7 @@
  * Do not call any functions which have access to them either
  */
 
-window.business = {
+const business = {
     /**
      * Make the fetch call to the server
      * handle the response
@@ -100,4 +100,3 @@ window.business = {
     }
 }
 
-module.exports = {business}
