@@ -10,7 +10,7 @@
 
 allTasks = [];
 
-function openModal(actionType, taskType, handleSubmitCallback) {
+function openModal(actionType, taskType, handleSubmitCallback, taskId) {
     
     // called by save button
     const modal = getElement("task-modal");
@@ -32,7 +32,13 @@ function openModal(actionType, taskType, handleSubmitCallback) {
         taskDateInput.value = '';
     }
     else if (actionType == 'update'){
-        const taskIndex = allTasks.findIndex((t) => t.id === task.id);
+        if (taskId === undefined) {
+            console.log('open modal: There is no task id')
+        }else{
+            console.log('open modal', taskId)
+
+        }
+        const taskIndex = allTasks.findIndex((t) => t.id === taskId);
     if (taskIndex === -1) return;
         modalTitle.textContent = `Update ${taskType} Task`;
         getElement("task-name-input").value = allTasks[taskIndex].text;
@@ -49,7 +55,11 @@ function openModal(actionType, taskType, handleSubmitCallback) {
     // calls either function 
     // undefines the button after the click
     saveButton.onclick = () => {
-        handleSubmitCallback(taskType)
+        if (taskId === undefined) {
+            handleSubmitCallback(taskType)
+        }else{
+            handleSubmitCallback(taskType, taskId)
+        }
         closeModal()
         saveButton.onclick = undefined
     }
@@ -92,17 +102,20 @@ async function createTask(taskType){
     };
     // console.log(taskData)
     console.log("about to save task")
-    await business.createTask(taskData);
-    renderTask(taskData);
+    var newTask = await business.createTask(taskData);
+    renderTask(newTask);
 }
 
+// updateTask2: async (taskId, actionType, taskType, handleSubmitCallback) => {
+//     return await openModal(async (actionType, taskType, updateTask(task)));
+//   }
 
-
-function updateTask(task){
-    
+async function updateTask(type, taskId){
+    console.log("attempting to update task")
 
     const updatedData = {
-        id: task.id, // Ensure the ID remains the same
+        
+        id: taskId, // Ensure the ID remains the same
         text: getElement("task-name-input").value.trim(),
         type: type,
         dueDate:
@@ -111,19 +124,32 @@ function updateTask(task){
             : null,
       };
       try{
-        business.updateTask(task.id, updatedData);
+        console.log('sending update: ', updatedData)
+        var newTask = await business.updateTask(taskId, updatedData);
       } catch (error) {
           console.error("Error updating task:", error);
-          alert("Error updating task2");
+          alert("Error updating task in view");
         }
+
+    renderTask(newTask)
     
     
 
 }
 
-function deleteTask(id){
-    business.deleteTask(id)
+async function deleteTask(id){
+    await business.deleteTask(id);
     allTasks = allTasks.filter((task) => task.id !== id);
+
+    try{
+        var existingTask = getElement(task.id)
+        
+        if (existingTask !== null){
+            existingTask.remove();
+        }
+    }catch{
+        console.log('no task with id exists')
+    }
 }
 
 
@@ -135,35 +161,74 @@ function renderTask(task) {
     // If it exists, update
     // If it doesn't, create
 
+    try{
+        var existingTask = getElement(task.id)
+        
+        if (existingTask !== null){
+            existingTask.remove();
+        }
+    }catch{
+        console.log('no task with id exists')
+    }
+
 
     const li = document.createElement('li');
+    // li.setAttribute('id', task.id)
+    li.id = task.id;
     var taskList = getElement('daily-tasks-list');
     const span = document.createElement('span');
-    console.log('task', task.id)
+    span.id = task.id;
+    // console.log('task', task.id)
     if (task.type === 'daily') {
         taskList = getElement('daily-tasks-list');
         span.innerHTML = task.text
  
     } else {
-        list = getElement('scheduled-tasks-list');
+        taskList = getElement('scheduled-tasks-list');
         span.innerHTML = task.text, task.dueDate ? ` - Due: ${task.dueDate}` : ''
+        console.log('render', task)
     }
     li.appendChild(span);
-    li.innerHTML += `
-            <div class="task-buttons">
-                <button onclick="openModal('update', '${task.type}', '${updateTask}')">Edit</button>
-                <button onclick="deleteTask('${task.id}', ${task.type})">Delete</button>
-            </div>
+    const buttons = document.createElement('div');
+
+    buttons.innerHTML = `
+                <button class="edit-button" id="${task.id}">Edit</button>
+                <button class="delete-button" id="${task.id}">Delete</button>
         `;
 
-   
-    // li.innerHTML += `
-    //         <div class="task-buttons">
-    //             <button onclick="openModal('update', '${task.type}', '${updateTask}')">Edit</button>
-    //             <button onclick="deleteTask('${task.id}', ${task.type})">Delete</button>
-    //         </div>
-    //     `;
+        // <button onclick="openModal('update', '${task.type}', '${updateTask()}')">Edit</button>
+        // <button onclick="deleteTask('${task.id}', ${task.type})">Delete</button>
+    var found = false;
+    li.appendChild(buttons)
+    
     taskList.appendChild(li);
+        
+    deletes = document.getElementsByClassName('delete-button');
+    edits = document.getElementsByClassName('edit-button');
+
+    for (const edit of edits){
+        if (edit.id == task.id){
+            console.log('button has the id and class')
+            edit.addEventListener('click', () => openModal('update', task.type, updateTask, task.id))
+            found = true;
+        }
+
+    }
+    if (found === false){
+        console.log('could not find edit button')
+    }
+    var foundDelete = false
+    for (const deleteButton of deletes){
+        if (deleteButton.id == task.id){
+            console.log('button has the id and class for delete')
+            deleteButton.addEventListener('click', () => deleteTask(task.id, task.type))
+            foundDelete = true;
+        }
+
+    }
+    if (foundDelete === false){
+        console.log('could not find delete button')
+    }
 
 }
 
@@ -172,13 +237,12 @@ function renderTask(task) {
  */
 function renderAllTasks(tasks) {
     // foreach (var task  tasks){
-    //     if (!(task in allTasks)){
-    //         allTasks.push(task)
-    //     }
-    //     console.log('all tasks:', task)
-    //     renderTask(task);
-    // }
+        //     renderTask(task);
+        // }
     for (const task of tasks){
+        if (!(task in allTasks)){
+            allTasks.push(task)
+        }
         renderTask(task)
     }
 
@@ -252,9 +316,19 @@ async function init() {
     renderAllTasks(tasks)
     console.log('init tasks rendered')
     getElement('add-daily-task-button').addEventListener('click', () => openModal('create', 'daily', createTask));
-    getElement('add-scheduled-task-button').addEventListener('click', () => openModal('update', 'scheduled', createTask));
+    getElement('add-scheduled-task-button').addEventListener('click', () => openModal('create', 'scheduled', createTask));
+    // edits = document.getElementsByClassName('edit-button');
+    // for (const edit of edits){
+    //     edit.addEventListener('click', () => openModal('update', task.type, updateTask))
+
+    // }
+    console.log(allTasks[0])
     // getElement("scheduled-tasks-tab").addEventListener("click", switchTab("scheduled",));
     // getElement("daily-tasks-tab").addEventListener("click", switchTab("daily",));
 }
 
-init()
+document.addEventListener('DOMContentLoaded', () => {
+    
+    init()
+    console.log('DOM is fully loaded!');
+  });

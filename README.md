@@ -10,8 +10,7 @@ Fateialenofoaiga Patane, Emma Shurtliff, Savanna Whittaker, Adam Whittaker
 ## Software Description
 
 Web application that incentivizes productivity through interacting with a virtual pet. Users have access to a pomodoro timer to track work sessions. Each completed session or set grants food points. These can be given to the pet to keep it from getting hungry. Playing with the pet makes it happy, but makes it hungry.
-Along with the timer and pet, there is a task list for the user to create, edit, and delete their own personal objectives. Tasks can optionally be assigned due dates.
-
+Along with the timer and pet, there is a task list for the user to create, edit, and delete their own personal objectives. Tasks are split up into daily and scheduled tasks. Scheduled tasks have the option to include a due date and daily tasks are deleted after 24 hours. 
 ## Architecture
 
 JavaScript-based, HTML & CSS for the website
@@ -28,8 +27,8 @@ JavaScript-based, HTML & CSS for the website
 - - [ ] States/animations
 - - [x] Display pet stats
 - [x] Task list
-- [x] User data stored on remote database
-- - [x] Users log in to have their progress saved
+- [ ] User data stored on remote database
+- - [x] Users log in 
 
 ### Stretch Goals
 

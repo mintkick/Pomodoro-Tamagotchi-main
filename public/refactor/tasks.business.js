@@ -40,6 +40,8 @@ const business = {
      * return the new object
      */
     async updateTask(id, data) {
+        console.log('business update', id)
+        console.log('business update', data)
         return await fetch(`/tasks/${id}`, {
             method: "PUT",
             headers: {
@@ -47,7 +49,8 @@ const business = {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => {
+        .then((response) => {
+                console.log('update business,', response)
                 if (!response.ok) {
                     throw new Error("Failed to update task");
                 }
@@ -55,7 +58,7 @@ const business = {
             })
             .catch((error) => {
                 console.error(error);
-                alert("Error updating task");
+                alert("Error updating task in business");
             });
     },
 
@@ -64,7 +67,10 @@ const business = {
      * handle the response
      * return the new object
      */
+    
+
     async deleteTask(id) {
+        console.log('about to delete: ', id)
         return await fetch(`/tasks/${id}`, {
             method: "DELETE",
         })
