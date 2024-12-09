@@ -53,15 +53,6 @@ function openModal(actionType, taskType, handleSubmitCallback) {
         closeModal()
         saveButton.onclick = undefined
     }
-
-
-
-    /**
-     * saveButton.onclick = () => {
-     *   handleSubmitCallback()
-     *   saveButton.onclick = undefined
-     * }
-     */
 }
 
 /**
@@ -99,14 +90,15 @@ async function createTask(taskType){
         type: taskType,
         dueDate: taskType === 'scheduled' ? taskDate : null
     };
-    console.log(taskData)
-    business.createTask(taskData);
+    // console.log(taskData)
+    console.log("about to save task")
+    await business.createTask(taskData);
     renderTask(taskData);
 }
 
 
 
-function updateTask(task, tasktype){
+function updateTask(task){
     
 
     const updatedData = {
@@ -129,6 +121,11 @@ function updateTask(task, tasktype){
 
 }
 
+function deleteTask(id){
+    business.deleteTask(id)
+    allTasks = allTasks.filter((task) => task.id !== id);
+}
+
 
 
 
@@ -142,6 +139,7 @@ function renderTask(task) {
     const li = document.createElement('li');
     var taskList = getElement('daily-tasks-list');
     const span = document.createElement('span');
+    console.log('task', task.id)
     if (task.type === 'daily') {
         taskList = getElement('daily-tasks-list');
         span.innerHTML = task.text
@@ -151,24 +149,20 @@ function renderTask(task) {
         span.innerHTML = task.text, task.dueDate ? ` - Due: ${task.dueDate}` : ''
     }
     li.appendChild(span);
-    // const buttons = document.createElement('div')
-    // buttons.classList.add("task-buttons");
-    // const editButton = document.createElement('button');
-    // editButton.innerHTML = "Edit"
-    // editButton.addEventListener('click', openModal('update', task.type, updateTask))
-    // const deleteButton = document.createElement('button');
-    // deleteButton.innerHTML = "Delete"
-
-    // buttons.appendChild(editButton);
-    // buttons.appendChild(deleteButton);
-
-    // li.appendChild(buttons)
     li.innerHTML += `
             <div class="task-buttons">
                 <button onclick="openModal('update', '${task.type}', '${updateTask}')">Edit</button>
                 <button onclick="deleteTask('${task.id}', ${task.type})">Delete</button>
             </div>
         `;
+
+   
+    // li.innerHTML += `
+    //         <div class="task-buttons">
+    //             <button onclick="openModal('update', '${task.type}', '${updateTask}')">Edit</button>
+    //             <button onclick="deleteTask('${task.id}', ${task.type})">Delete</button>
+    //         </div>
+    //     `;
     taskList.appendChild(li);
 
 }
@@ -177,12 +171,18 @@ function renderTask(task) {
  * Loop over each task and call renderTask
  */
 function renderAllTasks(tasks) {
-    for (var task in tasks){
-        if (!allTasks.contains(task)){
-            allTasks.append(task)
-        }
-        renderTask(task);
+    // foreach (var task  tasks){
+    //     if (!(task in allTasks)){
+    //         allTasks.push(task)
+    //     }
+    //     console.log('all tasks:', task)
+    //     renderTask(task);
+    // }
+    for (const task of tasks){
+        renderTask(task)
     }
+
+    // tasks.forEach(renderTask(task))
     console.log("tasks rendered")
 }
 
@@ -247,8 +247,10 @@ function switchTab(tabIndex) {
  *  })
  * }
  */
-function init() {
-    console.log("task.view reached")
+async function init() {
+    var tasks = await business.listTasks();
+    renderAllTasks(tasks)
+    console.log('init tasks rendered')
     getElement('add-daily-task-button').addEventListener('click', () => openModal('create', 'daily', createTask));
     getElement('add-scheduled-task-button').addEventListener('click', () => openModal('update', 'scheduled', createTask));
     // getElement("scheduled-tasks-tab").addEventListener("click", switchTab("scheduled",));

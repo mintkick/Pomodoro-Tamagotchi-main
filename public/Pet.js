@@ -1,4 +1,5 @@
 import petBusiness from "../pet.business.js";
+// import { setEmotion } from "./pet_anim_canvas.js";
 class Pet {
   constructor(name) {
     var userPet = petBusiness.getPet();
