@@ -93,6 +93,7 @@ app.post('/tasks', async (req, res) => {
 app.delete('/tasks/:id', async (req, res) => {
   try {
     const result = await Task.deleteTask(req.params.id);
+  
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: 'Task not found' });
     }

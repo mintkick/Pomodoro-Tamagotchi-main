@@ -137,9 +137,19 @@ async function updateTask(type, taskId){
 
 }
 
-function deleteTask(id){
-    business.deleteTask(id);
+async function deleteTask(id){
+    await business.deleteTask(id);
     allTasks = allTasks.filter((task) => task.id !== id);
+
+    try{
+        var existingTask = getElement(task.id)
+        
+        if (existingTask !== null){
+            existingTask.remove();
+        }
+    }catch{
+        console.log('no task with id exists')
+    }
 }
 
 
@@ -210,14 +220,14 @@ function renderTask(task) {
     var foundDelete = false
     for (const deleteButton of deletes){
         if (deleteButton.id == task.id){
-            console.log('button has the id and class')
+            console.log('button has the id and class for delete')
             deleteButton.addEventListener('click', () => deleteTask(task.id, task.type))
             foundDelete = true;
         }
 
     }
     if (foundDelete === false){
-        console.log('could not find edit button')
+        console.log('could not find delete button')
     }
 
 }

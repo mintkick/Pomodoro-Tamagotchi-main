@@ -70,6 +70,7 @@ const business = {
     
 
     async deleteTask(id) {
+        console.log('about to delete: ', id)
         return await fetch(`/tasks/${id}`, {
             method: "DELETE",
         })
