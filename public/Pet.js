@@ -1,5 +1,5 @@
 import petBusiness from "../pet.business.js";
-// import { setEmotion } from "./pet_anim_canvas.js";
+// import { setEmotion } from "./pet_anim_canvas.js"; // unneeded; in fact, breaks code
 class Pet {
   constructor(name) {
     var userPet = petBusiness.getPet();
@@ -7,6 +7,7 @@ class Pet {
       if (userPet.name == null) {
         this.name = "MISSINGNO.";
       } else {
+        // userPet.name = this.name;
         this.name = userPet.name;
       }
       this.satiated = userPet.satiated;
