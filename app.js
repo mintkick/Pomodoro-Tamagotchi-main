@@ -103,21 +103,25 @@ app.delete('/tasks/:id', async (req, res) => {
 });
 
 app.put('/tasks/:id', async (req, res) => {
+
+  console.log('app, getting info to update')
   const { text, completed, dueDate, type } = req.body;
   try {
-    const updatedData = {id};
+    const updatedData = {id: req.params.id};
     if (text !== undefined) updatedData.text = text;
     if (completed !== undefined) updatedData.completed = completed;
     if (dueDate !== undefined) updatedData.dueDate = dueDate;
     if (type !== undefined) updatedData.type = type;
 
     const updatedTask = await Task.updateTask(req.params.id, updatedData);
-    if (!updatedTask.value) {
+    console.log('app',updatedTask)
+    if (!updatedTask) {
       return res.status(404).json({ error: 'Task not found', updatedTask });
     }
-    res.json(updatedTask.value);
+    res.json(updatedTask);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.log(err)
+    res.status(500).json({ error: 'Server error', err });
   }
 });
 

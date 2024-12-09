@@ -102,8 +102,8 @@ async function createTask(taskType){
     };
     // console.log(taskData)
     console.log("about to save task")
-    await business.createTask(taskData);
-    renderTask(taskData);
+    var newTask = await business.createTask(taskData);
+    renderTask(newTask);
 }
 
 // updateTask2: async (taskId, actionType, taskType, handleSubmitCallback) => {
@@ -123,13 +123,15 @@ async function updateTask(type, taskId){
             ? getElement("task-date-input").value
             : null,
       };
-      console.log('sending update: ', updatedData)
       try{
-        await business.updateTask(taskId, updatedData);
+        console.log('sending update: ', updatedData)
+        var newTask = await business.updateTask(taskId, updatedData);
       } catch (error) {
           console.error("Error updating task:", error);
           alert("Error updating task in view");
         }
+
+    renderTask(newTask)
     
     
 
@@ -149,10 +151,23 @@ function renderTask(task) {
     // If it exists, update
     // If it doesn't, create
 
+    try{
+        var existingTask = getElement(task.id)
+        
+        if (existingTask !== null){
+            existingTask.remove();
+        }
+    }catch{
+        console.log('no task with id exists')
+    }
+
 
     const li = document.createElement('li');
+    // li.setAttribute('id', task.id)
+    li.id = task.id;
     var taskList = getElement('daily-tasks-list');
     const span = document.createElement('span');
+    span.id = task.id;
     // console.log('task', task.id)
     if (task.type === 'daily') {
         taskList = getElement('daily-tasks-list');
