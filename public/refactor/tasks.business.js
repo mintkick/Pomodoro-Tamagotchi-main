@@ -55,7 +55,7 @@ const business = {
             })
             .catch((error) => {
                 console.error(error);
-                alert("Error updating task");
+                alert("Error updating task in business");
             });
     },
 
