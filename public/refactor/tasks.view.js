@@ -123,6 +123,7 @@ async function updateTask(type, taskId){
             ? getElement("task-date-input").value
             : null,
       };
+      console.log('sending update: ', updatedData)
       try{
         await business.updateTask(taskId, updatedData);
       } catch (error) {
@@ -167,17 +168,18 @@ function renderTask(task) {
 
     buttons.innerHTML = `
                 <button class="edit-button" id="${task.id}">Edit</button>
-                <button class="delete-button">Delete</button>
+                <button class="delete-button" id="${task.id}">Delete</button>
         `;
 
         // <button onclick="openModal('update', '${task.type}', '${updateTask()}')">Edit</button>
         // <button onclick="deleteTask('${task.id}', ${task.type})">Delete</button>
-    edits = document.getElementsByClassName('edit-button');
     var found = false;
     li.appendChild(buttons)
     
     taskList.appendChild(li);
-
+        
+    deletes = document.getElementsByClassName('delete-button');
+    edits = document.getElementsByClassName('edit-button');
 
     for (const edit of edits){
         if (edit.id == task.id){
@@ -188,6 +190,18 @@ function renderTask(task) {
 
     }
     if (found === false){
+        console.log('could not find edit button')
+    }
+    var foundDelete = false
+    for (const deleteButton of deletes){
+        if (deleteButton.id == task.id){
+            console.log('button has the id and class')
+            deleteButton.addEventListener('click', () => deleteTask(task.id, task.type))
+            foundDelete = true;
+        }
+
+    }
+    if (foundDelete === false){
         console.log('could not find edit button')
     }
 
