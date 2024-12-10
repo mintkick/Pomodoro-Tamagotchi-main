@@ -1,8 +1,41 @@
 import petBusiness from "../pet.business.js";
+console.log('accessed pet.js')
 // import { setEmotion } from "./pet_anim_canvas.js"; // unneeded; in fact, breaks code
 class Pet {
   constructor(name) {
-    var userPet = petBusiness.getPet();
+    this.init()
+
+    const savedState = JSON.parse(localStorage.getItem("petState"));
+    if (savedState) {
+      this.satiated = savedState.satiated;
+      this.food = savedState.food;
+    }
+
+    this.feedPet = this.feedPet.bind(this);
+    this.showStatus = this.showStatus.bind(this);
+    this.addFood = this.addFood.bind(this);
+    this.playWithPet = this.playWithPet.bind(this);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      this.initEventListeners();
+    });
+
+    Pet.instance = this;
+    // return this;
+  }
+
+  async init(){
+
+    var userPet = undefined;
+    
+    try{
+      // var userPet = this.getPet();
+      userPet = await petBusiness.getPet()
+      
+    } catch{
+      console.log('no pet exists')
+    }
+
     if (userPet) {
       if (userPet.name == null) {
         this.name = "MISSINGNO.";
@@ -23,26 +56,12 @@ class Pet {
         satiated: this.satiated,
         food: this.food,
       };
-      petBusiness.createPet(userPet);
+      await petBusiness.createPet(userPet);
     }
-
-    const savedState = JSON.parse(localStorage.getItem("petState"));
-    if (savedState) {
-      this.satiated = savedState.satiated;
-      this.food = savedState.food;
-    }
-
-    this.feedPet = this.feedPet.bind(this);
-    this.showStatus = this.showStatus.bind(this);
-    this.addFood = this.addFood.bind(this);
-    this.playWithPet = this.playWithPet.bind(this);
-
-    document.addEventListener("DOMContentLoaded", () => {
-      this.initEventListeners();
-    });
-
-    Pet.instance = this;
-    return this;
+   
+  }
+  async getPet(){
+    return await petBusiness.getPet();
   }
 
   saveState() {

@@ -23,7 +23,7 @@ async function getCollection(callback){
 module.exports = {
   getPet: async (userId) => {
     return await getCollection(async (collection) => {
-      return await collection.find({ userId }).toArray();
+      return await collection.findOne({ userId });
     });
   },
 
@@ -46,7 +46,7 @@ module.exports = {
       ])
       console.log('update task payload', updatedData)
       return await collection.findOneAndUpdate(
-        { _id: new ObjectId(id) },
+        { id: id },
         { $set: updatedData },
         { returnDocument: 'after' }
       );

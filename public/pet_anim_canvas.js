@@ -82,7 +82,7 @@ function getEmotion() {
   return emoTable[emotion];
 }
 
-function setEmotion(emotionAssign) {
+export function setEmotion(emotionAssign) {
   emotion = emotionAssign;
 }
 

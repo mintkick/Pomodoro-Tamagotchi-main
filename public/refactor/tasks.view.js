@@ -142,9 +142,9 @@ async function deleteTask(id){
     allTasks = allTasks.filter((task) => task.id !== id);
 
     try{
-        var existingTask = getElement(task.id)
+        var existingTask = getElement(id)
         
-        if (existingTask !== null){
+        if (existingTask){
             existingTask.remove();
         }
     }catch{

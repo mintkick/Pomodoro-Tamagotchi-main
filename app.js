@@ -132,17 +132,18 @@ app.get('/pet', async (req, res) => {
   try {
     const userId = req.cookies.userId;
     console.log(userId)
-    const tasks = await pet.getPet(userId); // Gets tasks from database
-    res.json(tasks);
+    const userPet = await pet.getPet(userId); // Gets tasks from database
+    res.json(userPet);
+    console.log('app.js pet: ',userPet)
   } catch (err) {
     console.log(err)
-    res.status(500).json({ error: 'Server error in getting Task' });
+    res.status(500).json({ error: 'Server error in getting Pet', err });
   }
 });
 
 app.post('/pet', async (req, res) => {
   const { name, satiated, food } = req.body;
-  if (!text) {
+  if (!name) {
     return res.status(400).json({ error: 'Task text is required' });
   }
   try {

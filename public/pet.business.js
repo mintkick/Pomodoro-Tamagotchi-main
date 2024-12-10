@@ -48,12 +48,12 @@ const petBusiness = {
     async getPet() {
         return await fetch(`/pet`)
         
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to get pet");
-                }
-                return response.json();
-            })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to get pet");
+            }
+            return response.json();
+        })
         .catch((error) => {
             console.error('Error getting pet:', error);
         });
