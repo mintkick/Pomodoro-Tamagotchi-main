@@ -24,10 +24,10 @@ JavaScript-based, HTML & CSS for the website
 
 - [x] Pomodoro
 - [x] Virtual Pet (Tamagotchi)
-- - [ ] States/animations
+- - [X] States/animations
 - - [x] Display pet stats
 - [x] Task list
-- [ ] User data stored on remote database
+- [X] User data stored on remote database 
 - - [x] Users log in 
 
 ### Stretch Goals
@@ -63,3 +63,5 @@ Our goal with Canvas integration proved to be too complicated at first, so we de
 Involvement and teamwork was key to getting any feature to run properly. During times when our communication and meetings were limited, it was confusing to work with files made by someone else.
 
 Our initial brainstorming ideas for the pet and game aspects were very ambitious. Certainly it inspired the team to work on an impressive product, but we did have to put a lot of features into the stretch goal category.
+
+Overall, we were able to meet most of our MVP with minor bugs occuring. This was a major feat for people who were new to Javascript and Node.js. With more time, we could fully flush out the database ans fix some of our buttons so they work when clicked. Most of were also new to databases, but we were able to meeting with professors on campus who were helpful in guiding us in the right direction. 
